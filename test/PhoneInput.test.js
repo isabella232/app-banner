@@ -22,6 +22,11 @@ describe('PhoneInput', () => {
     expect(handler.calledWith('123')).to.be.true;
   })
   
+  // TODO: onkeypress
+  // TODO: placeholder
+  // TODO: error
+  // TODO: disabled
+  
   // TODO: auto change country code if user has entered something beginning with a + sign
   // TODO: allow plus sign (only in the beginning of the string)
   // TODO: cut leading zeroes when entering numbers
@@ -50,7 +55,7 @@ describe('PhoneInput', () => {
     expect(input.html()).to.contain('Russia'); // make sure countries are loaded
   })
   
-  it('calls on change when the country code is changed', () => {
+  it('calls onChange when the country code is changed', () => {
     const handler = spy();
     
     const input = mount(<PhoneInput onChange={handler} />);
@@ -63,6 +68,17 @@ describe('PhoneInput', () => {
     input.find('select').simulate('change', {target: {value: 'US'}});
     
     expect(handler.calledWith('+19206521234')).to.be.true;
+  })
+  
+  it('calls onEnter when enter is pressed', () => {
+    const handler = spy();
+    const input = mount(<PhoneInput country="RU" onEnter={handler} />);
+    input.find('input').simulate('change', {target: {value: '12345678'}});
+    
+    handler.reset();
+    input.find('input').simulate('keypress', {key: 'Enter'});
+    
+    expect(handler.calledOnce).to.be.true;
   })
   
   it('supports default country values', () => {

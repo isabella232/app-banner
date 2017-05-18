@@ -27,21 +27,32 @@ export default class PhoneInput extends React.Component {
   }
   
   onPrefixChange(e) {
+    const { onChange = () => {} } = this.props;
+    
     const country = e.target.value;
     this.setState({ country });
     
     const prefix = `+${countryCodes[country].value}`;
-    this.props.onChange(`${prefix}${this.state.number}`);
+    onChange(`${prefix}${this.state.number}`);
   }
   
   onInputChange(e) {
+    const { onChange = () => {} } = this.props;
+    
     const number = e.target.value.replace(/[^\d]/g, ''); // only allow numbers and plus sign
     this.setState({ number });
         
     // FIXME: replace number's leading zeroes -- for what?
   
     const prefix = this.state.country ? `+${countryCodes[this.state.country].value}` : "";
-    this.props.onChange(`${prefix}${number}`);
+    onChange(`${prefix}${number}`);
+  }
+  
+  onKeyPress(e) {    
+    const { onEnter = () => {} } = this.props;
+    
+    if(e.key == 'Enter')
+      onEnter();     
   }
   
   render()
@@ -61,6 +72,7 @@ export default class PhoneInput extends React.Component {
       <input 
         className="hello" 
         onChange={e => this.onInputChange(e)}
+        onKeyPress={e => this.onKeyPress(e)}
       />
     </div>
   }
