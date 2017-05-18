@@ -13,6 +13,7 @@ export default class MobileBanner extends React.Component
   
   handleDismiss(e)
   {
+    // STOP PROPAGATION
     const { onDismiss } = this.props;
     
     this.setState({ dismissed: true })

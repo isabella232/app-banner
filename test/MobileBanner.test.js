@@ -17,40 +17,38 @@ const locale = {
   view: "Take a look at this gorgeous app",
 }
 
-describe('MobileBanner', () => {  
+describe('MobileBanner', () => {
+  const handler = spy();
+  const banner = mount(<MobileBanner app={app} locale={locale} onDismiss={handler} />);
+  
   it('contains an icon and dismiss icon', () => {
-    const banner = shallow(<MobileBanner app={app} locale={locale} />);
     expect(banner.find('img')).to.have.length.of(2);
     expect(banner.find('a')).to.have.length.of(1);
   });
   
   it('clicking on href will navigate browser', () => {
-    const banner = mount(<MobileBanner app={app} locale={locale} />);
     expect(banner.find('a').prop('href')).to.eql(app.url);
   });
   
   it('contains app info', () => {
-    const banner = mount(<MobileBanner app={app} locale={locale} />);
-    
     expect(banner.find('a').find('img').prop('src')).to.eql(app.icon);
     expect(banner.text()).to.contain(app.name);
     expect(banner.text()).to.contain(app.publisher);
   })
   
-  it('clicking dismiss will call ondismiss', () => {
-    const handler = spy();
-    const banner = mount(<MobileBanner app={app} locale={locale} onDismiss={handler} />);
-    
-    const imgs = banner.find('img#dismiss').simulate('click'); // FIXME: need to remove this id
-    expect(handler.calledOnce).to.be.true;
-    
-    // FIXME add description
-    expect(banner.find('img')).to.have.length.of(0);
-  });
-  
   it('contains locale data', () => {
-    const banner = mount(<MobileBanner app={app} locale={locale} />);
     expect(banner.text()).to.contain(locale.cta);
     expect(banner.find('a').text()).to.contain(locale.view);
   })
+  
+  it('clicking dismiss will call ondismiss', () => {
+    handler.reset();
+    const imgs = banner.find('img#dismiss').simulate('click'); // FIXME: need to remove this id
+    expect(handler.calledOnce).to.be.true;
+  });
+  
+  it('after dismiss banner wont render anymore', () => {
+    expect(banner.find('img')).to.have.length.of(0);
+  })
+
 })

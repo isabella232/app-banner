@@ -1,6 +1,6 @@
 import React from 'react';
 
-import countryCodes from './country-codes';
+import countryCodes from '../lib/country-codes';
 
 const formatCountries = data => 
   Object.keys(data)
