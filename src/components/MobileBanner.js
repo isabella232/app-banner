@@ -1,12 +1,41 @@
 import React from 'react';
 
-export default function MobileBanner (props)
+export default class MobileBanner extends React.Component
 {
-  return <div>
-    <img src='dismiss.svg' />
-    Hello world
-    <a href="123">
-      <img src="//linkmaker.itunes.apple.com/assets/shared/badges/en-gb/appstore-lrg.svg" />
-    </a>
-  </div>
+  constructor(props)
+  {
+    super(props);
+    
+    this.state = {
+      dismissed: false,
+    }
+  }
+  
+  handleDismiss(e)
+  {
+    const { onDismiss } = this.props;
+    
+    this.setState({ dismissed: true })
+    onDismiss();
+  }
+  
+  render() {
+    const { url, app, locale } = this.props;
+    const { dismissed } = this.state;
+    
+    if(dismissed) {
+      return null;
+    }
+    
+    return <div>
+      <img id='dismiss' src='dismiss.svg' onClick={e => this.handleDismiss(e)} />
+      {app.name}
+      {app.publisher}
+      <a href={app.url}>
+        <img src={app.icon} />
+        {locale.cta}
+        {locale.view}
+      </a>
+    </div>
+  }
 }
