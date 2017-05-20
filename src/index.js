@@ -6,6 +6,8 @@ import docCookies from 'doc-cookies';
 import { Base64 } from 'js-base64';
 import QueryString from 'query-string';
 
+import __regeneratorRuntime__ from 'regenerator-runtime';
+
 import MobileBanner from './components/MobileBanner';
 import DesktopBanner from './components/DesktopBanner';
 import BannerWrapper from './components/BannerWrapper';
