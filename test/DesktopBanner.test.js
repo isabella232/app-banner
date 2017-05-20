@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
 import { spy } from 'sinon';
+import { describe, it } from 'mocha';
 
 import DesktopBanner from '../src/components/DesktopBanner';
 import PhoneInput from '../src/components/PhoneInput';
@@ -11,6 +12,7 @@ const locale = {
   desktop_send_link: 'Yup just send me a link',
   desktop_try: 'You can try it now',
   desktop_phone: 'Just enter your phone number and we\'ll send you a link',
+  desktop_phone_placeholder: 'Enter something here',
 };
 
 const apple = {
@@ -23,20 +25,14 @@ const google = {
   url: 'https://google.com/my-app',
 };
 
-describe('DesktopBanner', () => {
-  const onDismiss = spy();
-  const onSend = spy();
-  const banner = mount(
-    <DesktopBanner
-      onDismiss={onDismiss}
-      onSend={onSend}
-      locale={locale}
-      google={google}
-      apple={apple}
-      country="SE"
-    />
-  );
+const defaults = {
+  apple,
+  google,
+  locale,
+};
 
+describe('DesktopBanner', () => {
+  const banner = mount(<DesktopBanner {...defaults} />);
   const bannerGoogle = mount(<DesktopBanner locale={locale} google={google} />);
   const bannerApple = mount(<DesktopBanner locale={locale} apple={apple} />);
 
@@ -50,7 +46,7 @@ describe('DesktopBanner', () => {
 
   it('has locale', () => {
     for(const name in locale) {
-      expect(banner.text()).to.contain(locale[name]);
+      expect(banner.html()).to.contain(locale[name]);
     }
   });
 
@@ -82,6 +78,7 @@ describe('DesktopBanner', () => {
   });
 
   // TODO: placement
+
   // TODO: loader
   // TODO: error
   // TODO: retry
@@ -89,44 +86,75 @@ describe('DesktopBanner', () => {
   // TODO: hide after success
   // TODO: submit on enter
 
-  it('will call onSend when hit enter in input', () => {
-    onSend.reset();
-
-    banner.find('input').simulate('keypress', {key: 'Enter'});
-
-    expect(onSend.calledOnce).to.be.true;
+  it('will place a placeholder msg into input when shown', () => {
+    expect(banner.find('input').prop('placeholder')).to.eql(locale.desktop_phone_placeholder);
   });
 
-  it('will set default country for the input', () => {
-    onSend.reset();
+  describe('when sending', () => {
+    it('will call onSend when hit enter in input', () => {
+      const onSend = spy();
+      const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} />);
 
-    banner.find('input').simulate('change', {target: {value: '123456789'}});
-    banner.find('input').simulate('keypress', {key: 'Enter'});
+      bnr.find('input').simulate('keypress', { key: 'Enter' });
 
-    expect(onSend.calledWith('+46123456789')).to.be.true;
+      expect(onSend.calledOnce).to.eql(true);
+    });
+
+    it('will call onSend when clicked on send button', () => {
+      const onSend = spy();
+      const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} />);
+
+      const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_send_link));
+      expect(button).to.have.length.of(1);
+
+      button.simulate('click');
+      expect(onSend.calledOnce).to.eql(true);
+    });
+
+    it('will set default country for the input', () => {
+      const onSend = spy();
+      const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} country="SE" />);
+
+      bnr.find('input').simulate('change', { target: { value: '123456789' } });
+      bnr.find('input').simulate('keypress', { key: 'Enter' });
+
+      expect(onSend.calledWith('+46123456789')).to.eql(true);
+    });
   });
 
-  it('will call onSend when clicked on send button', () => {
-    onSend.reset();
+  describe('when dismissing', () => {
+    const onDismiss = spy();
+    const bnr = mount(<DesktopBanner onDismiss={onDismiss} {...defaults} />);
 
-    const btn = banner.find('button').filterWhere(b => b.text().includes(locale.desktop_send_link));
-    expect(btn).to.have.length.of(1);
+    it('will call onDismiss when clicked on dismiss button', () => {
+      const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_no_thanks));
+      expect(button).to.have.length.of(1);
 
-    btn.simulate('click');
-    expect(onSend.calledOnce).to.be.true;
+      button.simulate('click');
+      expect(onDismiss.calledOnce).to.eql(true);
+    });
+
+    it('wont render when dismissed', () => {
+      expect(bnr.find('img')).to.have.length.of(0);
+    });
   });
 
-  it('will call onDismiss when clicked on dismiss button', () => {
-    onDismiss.reset();
+  describe('when loading', () => {
+    const loader = spy();
+    const bannerSend = mount(<DesktopBanner onSend={loader} {...defaults} />);
 
-    const btn = banner.find('button').filterWhere(b => b.text().includes(locale.desktop_no_thanks));
-    expect(btn).to.have.length.of(1);
+    it('will call onSend', () => {
+      bannerSend.find('input').simulate('keypress', { key: 'Enter' });
 
-    btn.simulate('click');
-    expect(onDismiss.calledOnce).to.be.true;
-  });
+      expect(loader.calledOnce).to.eql(true);
+    });
 
-  it('wont render when dismissed', () => {
-    expect(banner.find('img')).to.have.length.of(0);
+    it('will disable the controls', () => {
+      expect(bannerSend.find('input').prop('disabled')).to.be.eql(true);
+    });
+
+    it('will hide the buttons', () => {
+      expect(bannerSend.find('button')).to.have.length.of(0);
+    });
   });
 });

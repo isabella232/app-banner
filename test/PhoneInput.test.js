@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 import { expect } from 'chai';
 import { spy } from 'sinon';
+import { describe, it } from 'mocha';
 
 import React from 'react';
 
@@ -13,17 +14,28 @@ describe('PhoneInput', () => {
     expect(input.find('input')).to.have.length.of(1);
   });
 
+  it('shows placeholder in input field', () => {
+    const placeholder = 'Hullo there';
+    const input = mount(<PhoneInput placeholder={placeholder} />);
+
+    expect(input.find('input').prop('placeholder')).to.eql(placeholder);
+  });
+
+  it('disabled the input when disabled', () => {
+    const input = mount(<PhoneInput disabled />);
+
+    expect(input.find('input').prop('disabled')).to.eql(true);
+  });
+
   it('calls onChange when field is changed', () => {
     const handler = spy();
     const input = mount(<PhoneInput onChange={handler} />);
 
     input.find('input').simulate('change', { target: { value: '123' } });
 
-    expect(handler.calledWith('123')).to.be.true;
+    expect(handler.calledWith('123')).to.eql(true);
   });
 
-  // TODO: onkeypress
-  // TODO: placeholder
   // TODO: error
   // TODO: disabled
 
@@ -37,11 +49,11 @@ describe('PhoneInput', () => {
 
     input.find('input').simulate('change', { target: { value: '1ab2cd3' } });
 
-    expect(handler.calledWith('123')).to.be.true;
+    expect(handler.calledWith('123')).to.eql(true);
 
     input.find('input').simulate('change', { target: { value: '+a_&%$3#***(7)5ba6yyy7' } });
 
-    expect(handler.calledWith('37567')).to.be.true;
+    expect(handler.calledWith('37567')).to.eql(true);
   });
 
   it('contains country selector', () => {
@@ -63,11 +75,11 @@ describe('PhoneInput', () => {
     input.find('select').simulate('change', { target: { value: 'RU' } });
     input.find('input').simulate('change', { target: { value: '9206521234' } });
 
-    expect(handler.calledWith('+79206521234')).to.be.true;
+    expect(handler.calledWith('+79206521234')).to.eql(true);
 
     input.find('select').simulate('change', { target: { value: 'US' } });
 
-    expect(handler.calledWith('+19206521234')).to.be.true;
+    expect(handler.calledWith('+19206521234')).to.eql(true);
   });
 
   it('calls onEnter when enter is pressed', () => {
@@ -78,7 +90,7 @@ describe('PhoneInput', () => {
     handler.reset();
     input.find('input').simulate('keypress', { key: 'Enter' });
 
-    expect(handler.calledOnce).to.be.true;
+    expect(handler.calledOnce).to.eql(true);
   });
 
   it('supports default country values', () => {
@@ -88,7 +100,7 @@ describe('PhoneInput', () => {
 
     input.find('input').simulate('change', { target: { value: '4852560000' } });
 
-    expect(handler.calledWith('+74852560000')).to.be.true;
+    expect(handler.calledWith('+74852560000')).to.eql(true);
   });
 
   it('displays current country prefix and flag', () => {

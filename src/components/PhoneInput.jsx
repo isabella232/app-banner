@@ -14,13 +14,15 @@ const formatCountries = data =>
 export default class PhoneInput extends React.Component {
 
   constructor(props) {
+    const { country } = props;
+
     super(props);
 
     this.countries = formatCountries(countryCodes);
 
     this.state = {
-      number: props.value || '',
-      country: props.country || null,
+      number: '',
+      country: country || null,
     };
   }
 
@@ -55,6 +57,7 @@ export default class PhoneInput extends React.Component {
   }
 
   render() {
+    const { placeholder, disabled } = this.props;
     const prefix = this.state.country ? `+${countryCodes[this.state.country].value}` : '';
 
     return (
@@ -69,9 +72,10 @@ export default class PhoneInput extends React.Component {
           ))}
         </select>
         <input
-          className="hello"
           onChange={e => this.onInputChange(e)}
           onKeyPress={e => this.onKeyPress(e)}
+          placeholder={placeholder}
+          disabled={disabled}
         />
       </div>
     );

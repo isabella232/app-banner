@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "mocha --require test/setup.js test/*.test.js",
-    "watch": "mocha --watch --require test/setup.js test/*.test.js",
+    "watch": "mocha --watch --compilers jsx:babel-register --require test/setup.js test/*.test.js",
     "build": "webpack",
     "start": "webpack-dev-server --content-base ./dist"
   },

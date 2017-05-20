@@ -2,14 +2,14 @@ import React from 'react';
 
 import PhoneInput from './PhoneInput';
 
-const BadgeApple = props => (
-  <a href={props.url}>
+const BadgeApple = ({ url }) => (
+  <a href={url}>
     <img alt="" src="some icon" />
   </a>
 );
 
-const BadgeGoogle = props => (
-  <a href={props.url}>
+const BadgeGoogle = ({ url }) => (
+  <a href={url}>
     <img alt="" src="some icon" />
   </a>
 );
@@ -21,6 +21,7 @@ export default class DesktopBanner extends React.Component {
     this.state = {
       dismissed: false,
       number: '',
+      loading: false,
     };
   }
 
@@ -38,12 +39,34 @@ export default class DesktopBanner extends React.Component {
   send() {
     const { onSend = () => {} } = this.props; // FIXME: shoud I rename this?
 
+    this.setState({ loading: true });
+
     onSend(this.state.number);
+  }
+
+  renderButtons() {
+    const { locale } = this.props;
+    const { loading } = this.state;
+
+    if(loading) {
+      return (
+        <div>
+          <img src="spinner.svg" alt="Loading" />
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <button onClick={() => this.dismiss()}>{locale.desktop_no_thanks}</button>
+        <button onClick={() => this.send()}>{locale.desktop_send_link}</button>
+      </div>
+    );
   }
 
   render() {
     const { google, apple, onDismiss, onSend, locale, country } = this.props;
-    const { dismissed } = this.state;
+    const { dismissed, loading } = this.state;
 
     let icon = null;
     if (google && google.icon) {
@@ -69,9 +92,10 @@ export default class DesktopBanner extends React.Component {
           onEnter={() => this.send()}
           onChange={val => this.update(val)}
           country={country}
+          placeholder={locale.desktop_phone_placeholder}
+          disabled={loading}
         />
-        <button onClick={() => this.dismiss()}>{locale.desktop_no_thanks}</button>
-        <button onClick={() => this.send()}>{locale.desktop_send_link}</button>
+        {this.renderButtons()}
       </div>
     );
   }
