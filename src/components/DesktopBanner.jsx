@@ -62,7 +62,6 @@ export default class DesktopBanner extends React.Component {
 
   render() {
     const { google, apple, onDismiss, onSend, locale, country, loading, placement } = this.props;
-    const { dismissed } = this.state;
 
     let icon = null;
     if (google && google.icon) {
@@ -70,10 +69,6 @@ export default class DesktopBanner extends React.Component {
     }
     if (apple && apple.icon) {
       icon = apple.icon;
-    }
-
-    if (dismissed) {
-      return null;
     }
 
     return (

@@ -1,10 +1,11 @@
-// import React from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
 
-import MobileBanner from './components/MobileBanner';
+import MobileBanner  from './components/MobileBanner';
+import DesktopBanner from './components/DesktopBanner';
+import BannerWrapper from './components/BannerWrapper';
 
-ReactDom.render(MobileBanner, document.querySelector('#root'));
+ReactDom.render(<div>hello</div>, document.querySelector('#root'));
 
-// TODO: build with release build + uglify-es
-// TODO: eslint
-// TODO: react -> preact?
+// TODO: release build with uglify-es and preact
+
