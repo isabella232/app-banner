@@ -1,4 +1,30 @@
 const path = require('path');
+const webpack = require('webpack');
+
+const plugins = [
+  new webpack.optimize.OccurrenceOrderPlugin(),
+];
+
+let alias = {};
+
+const DEBUG = process.env.NODE_ENV !== 'production';
+
+if (!DEBUG) {
+  plugins.push(
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.NoEmitOnErrorsPlugin()
+  );
+
+  alias = {
+    'react': 'preact-compat',
+    'react-dom': 'preact-compat',
+  };
+}
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -20,7 +46,9 @@ module.exports = {
       loader: 'style-loader!css-loader!sass-loader',
     }],
   },
+  plugins,
   resolve: {
+    alias,
     extensions: ['.js', '.jsx'],
   },
 };
