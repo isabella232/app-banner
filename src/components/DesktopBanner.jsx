@@ -2,15 +2,23 @@ import React from 'react';
 
 import PhoneInput from './PhoneInput';
 
+import spinner from '../../dist/images/spinner.svg';
+
 const BadgeApple = ({ url, locale }) => (
   <a className="app-banner__badge" href={url}>
-    <img alt={locale.get_apple} src="//linkmaker.itunes.apple.com/assets/shared/badges/en-gb/appstore-lrg.svg" />
+    <img
+      alt={locale.get_apple}
+      src="//linkmaker.itunes.apple.com/assets/shared/badges/en-gb/appstore-lrg.svg"
+    />
   </a>
 );
 
 const BadgeGoogle = ({ url, locale }) => (
   <a className="app-banner__badge" href={url}>
-    <img alt={locale.get_google} src="images/badge-gp-en.png" />
+    <img
+      alt={locale.get_google}
+      src="images/badge-gp-en.png"
+    />
   </a>
 );
 
@@ -38,7 +46,7 @@ export default class DesktopBanner extends React.Component {
     if (loading) {
       return (
         <div className="app-banner__spinner">
-          <img alt="" src="images/spinner.svg" />
+          <img alt="" src={spinner} />
         </div>
       );
     }
@@ -46,10 +54,16 @@ export default class DesktopBanner extends React.Component {
     if (success) {
       return (
         <div className="app-banner__btn-container">
-          <button className="app-banner__btn app-banner__btn--lg app-banner__btn--link" onClick={onRetry}>
+          <button
+            className="app-banner__btn app-banner__btn--lg app-banner__btn--link"
+            onClick={onRetry}
+          >
             {locale.desktop_edit}
           </button>
-          <button className="app-banner__btn app-banner__btn--lg" onClick={onDismiss}>
+          <button
+            className="app-banner__btn app-banner__btn--lg"
+            onClick={onDismiss}
+          >
             {locale.desktop_done}
           </button>
         </div>
@@ -58,10 +72,16 @@ export default class DesktopBanner extends React.Component {
 
     return (
       <div className="app-banner__btn-container">
-        <button className="app-banner__btn app-banner__btn--lg app-banner__btn--link" onClick={onDismiss}>
+        <button
+          className="app-banner__btn app-banner__btn--lg app-banner__btn--link"
+          onClick={onDismiss}
+        >
           {locale.desktop_no_thanks}
         </button>
-        <button className="app-banner__btn app-banner__btn--lg" onClick={() => this.send()}>
+        <button
+          className="app-banner__btn app-banner__btn--lg"
+          onClick={() => this.send()}
+        >
           {locale.desktop_send_link}
         </button>
       </div>

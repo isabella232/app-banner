@@ -1,10 +1,12 @@
 import React from 'react';
 
+import dismiss from '../../dist/images/dismiss.svg';
+
 const MobileBanner = ({ app, locale, onDismiss }) => (
   <div className="app-banner" id="AppBanner">
 
     <div className="app-banner__dismiss" onClick={onDismiss} role="presentation">
-      <img alt="" src="images/dismiss.svg" />
+      <img alt="" src={dismiss} />
     </div>
 
     <a href={app.url} className="app-banner__container">
