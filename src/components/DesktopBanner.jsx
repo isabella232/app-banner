@@ -19,17 +19,8 @@ export default class DesktopBanner extends React.Component {
     super(props);
 
     this.state = {
-      dismissed: false,
       number: '',
-      loading: false,
     };
-  }
-
-  dismiss() {
-    const { onDismiss } = this.props;
-
-    this.setState({ dismissed: true });
-    onDismiss();
   }
 
   update(number) {
@@ -38,20 +29,11 @@ export default class DesktopBanner extends React.Component {
 
   send() {
     const { onSend = () => {} } = this.props; // FIXME: shoud I rename this?
-
-    this.setState({ loading: true });
-
-    const loader = onSend(this.state.number);
-    if (loader) {
-      loader.then(() => {
-        this.setState({ loading: false });
-      });
-    }
+    onSend(this.state.number);
   }
 
   renderButtons() {
-    const { locale } = this.props;
-    const { loading } = this.state;
+    const { locale, loading, success, onDismiss, onRetry, onSend } = this.props;
 
     if (loading) {
       return (
@@ -61,17 +43,26 @@ export default class DesktopBanner extends React.Component {
       );
     }
 
+    if (success) {
+      return (
+        <div>
+          <button onClick={onRetry}>{locale.desktop_edit}</button>
+          <button onClick={onDismiss}>{locale.desktop_done}</button>
+        </div>
+      );
+    }
+
     return (
       <div>
-        <button onClick={() => this.dismiss()}>{locale.desktop_no_thanks}</button>
+        <button onClick={onDismiss}>{locale.desktop_no_thanks}</button>
         <button onClick={() => this.send()}>{locale.desktop_send_link}</button>
       </div>
     );
   }
 
   render() {
-    const { google, apple, onDismiss, onSend, locale, country } = this.props;
-    const { dismissed, loading } = this.state;
+    const { google, apple, onDismiss, onSend, locale, country, loading, placement } = this.props;
+    const { dismissed } = this.state;
 
     let icon = null;
     if (google && google.icon) {
@@ -86,7 +77,7 @@ export default class DesktopBanner extends React.Component {
     }
 
     return (
-      <div>
+      <div className={`app-banner-${placement}`}>
         {(google && google.icon) ? <BadgeGoogle url={google.url} /> : null}
         {(apple && apple.icon) ? <BadgeApple url={apple.url} /> : null}
 

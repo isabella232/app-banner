@@ -13,6 +13,8 @@ const locale = {
   desktop_try: 'You can try it now',
   desktop_phone: 'Just enter your phone number and we\'ll send you a link',
   desktop_phone_placeholder: 'Enter something here',
+  desktop_edit: 'Lemme edit this number',
+  desktop_done: 'Okay we done here',
 };
 
 const apple = {
@@ -45,9 +47,17 @@ describe('DesktopBanner', () => {
   });
 
   it('has locale', () => {
-    for(const name in locale) {
-      expect(banner.html()).to.contain(locale[name]);
-    }
+    const html = banner.html();
+
+    const names = [
+      'desktop_no_thanks',
+      'desktop_send_link',
+      'desktop_try',
+      'desktop_phone',
+      'desktop_phone_placeholder',
+    ];
+
+    names.forEach(name => expect(html).to.contain(locale[name]));
   });
 
   it('has icon', () => {
@@ -79,67 +89,105 @@ describe('DesktopBanner', () => {
 
   // TODO: placement
 
-  // TODO: loader
   // TODO: error
   // TODO: retry
   // TODO: success
   // TODO: hide after success
-  // TODO: submit on enter
 
   it('will place a placeholder msg into input when shown', () => {
     expect(banner.find('input').prop('placeholder')).to.eql(locale.desktop_phone_placeholder);
   });
 
-  describe('when sending', () => {
-    it('will call onSend when hit enter in input', () => {
-      const onSend = spy();
-      const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} />);
+  it('will call onSend when hit enter in input', () => {
+    const onSend = spy();
+    const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} />);
 
-      bnr.find('input').simulate('keypress', { key: 'Enter' });
+    bnr.find('input').simulate('keypress', { key: 'Enter' });
 
-      expect(onSend.calledOnce).to.eql(true);
-    });
-
-    it('will call onSend when clicked on send button', () => {
-      const onSend = spy();
-      const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} />);
-
-      const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_send_link));
-      expect(button).to.have.length.of(1);
-
-      button.simulate('click');
-      expect(onSend.calledOnce).to.eql(true);
-    });
-
-    it('will set default country for the input', () => {
-      const onSend = spy();
-      const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} country="SE" />);
-
-      bnr.find('input').simulate('change', { target: { value: '123456789' } });
-      bnr.find('input').simulate('keypress', { key: 'Enter' });
-
-      expect(onSend.calledWith('+46123456789')).to.eql(true);
-    });
+    expect(onSend.calledOnce).to.eql(true);
   });
 
-  describe('when dismissing', () => {
+  it('will call onSend when clicked on send button', () => {
+    const onSend = spy();
+    const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} />);
+
+    const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_send_link));
+    expect(button).to.have.length.of(1);
+
+    button.simulate('click');
+    expect(onSend.calledOnce).to.eql(true);
+  });
+
+  it('will set default country for the input', () => {
+    const onSend = spy();
+    const bnr = mount(<DesktopBanner onSend={onSend} {...defaults} country="SE" />);
+
+    bnr.find('input').simulate('change', { target: { value: '123456789' } });
+    bnr.find('input').simulate('keypress', { key: 'Enter' });
+
+    expect(onSend.calledWith('+46123456789')).to.eql(true);
+  });
+
+  it('will call onDismiss when clicked on dismiss button', () => {
     const onDismiss = spy();
     const bnr = mount(<DesktopBanner onDismiss={onDismiss} {...defaults} />);
 
-    it('will call onDismiss when clicked on dismiss button', () => {
-      const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_no_thanks));
-      expect(button).to.have.length.of(1);
+    const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_no_thanks));
+    expect(button).to.have.length.of(1);
 
-      button.simulate('click');
-      expect(onDismiss.calledOnce).to.eql(true);
-    });
-
-    it('wont render when dismissed', () => {
-      expect(bnr.find('img')).to.have.length.of(0);
-    });
+    button.simulate('click');
+    expect(onDismiss.calledOnce).to.eql(true);
   });
 
-  describe('when loading', () => {
+  // describe('when dismissing', () => {
+  //   const onDismiss = spy();
+  //   const bnr = mount(<DesktopBanner onDismiss={onDismiss} {...defaults} />);
+
+  //   it('wont render when dismissed', () => {
+  //     expect(bnr.find('img')).to.have.length.of(0);
+  //   });
+  // });
+
+  it('will disable controls when loading', () => {
+    const bnr = mount(<DesktopBanner loading {...defaults} />);
+    expect(bnr.find('input').prop('disabled')).to.be.eql(true);
+  });
+
+  it('will show the spinner when loading', () => {
+    const bnr = mount(<DesktopBanner loading {...defaults} />);
+    expect(bnr.find('input').prop('disabled')).to.be.eql(true);
+  });
+
+  it('will show retry buttons on success', () => {
+    const onRetry = spy();
+    const bnr = mount(<DesktopBanner success onRetry={onRetry} {...defaults} />);
+
+    const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_edit));
+    expect(button).to.have.length.of(1);
+
+    button.simulate('click');
+    expect(onRetry.calledOnce).to.eql(true);
+  });
+
+  it('will show done button on success', () => {
+    const onDismiss = spy();
+    const bnr = mount(<DesktopBanner success onDismiss={onDismiss} {...defaults} />);
+
+    const button = bnr.find('button').filterWhere(b => b.text().includes(locale.desktop_done));
+    expect(button).to.have.length.of(1);
+
+    button.simulate('click');
+    expect(onDismiss.calledOnce).to.be.eql(true);
+  });
+
+  it('supports placement property', () => {
+    const bnr = mount(<DesktopBanner placement="upside-down" {...defaults} />);
+
+    expect(bnr.html()).contains('upside-down');
+  });
+
+  /*
+    describe('when loading', () => {
     let resolve;
     const promise = new Promise((done) => {
       resolve = done;
@@ -168,7 +216,7 @@ describe('DesktopBanner', () => {
     });
 
     it('will hide the spinner and show btns after the promise is resolved', (done) => {
-      resolve();
+      resolve(false); // resolve with error
 
       promise.then(() => {
         const spinner = bannerSend.find('img').filterWhere(img => img.prop('src').includes('spinner.svg'));
@@ -179,4 +227,5 @@ describe('DesktopBanner', () => {
       });
     });
   });
+  */
 });
