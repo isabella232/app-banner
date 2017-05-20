@@ -2,7 +2,7 @@ import React from 'react';
 
 const MobileBanner = ({ url, app, locale, onDismiss }) => (
   <div>
-    <img alt="" src="dismiss.svg" onClick={onDismiss} />
+    <img alt="" src="images/dismiss.svg" onClick={onDismiss} />
     {app.name}
     {app.publisher}
     <a href={app.url}>

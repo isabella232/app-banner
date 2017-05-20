@@ -2,15 +2,15 @@ import React from 'react';
 
 import PhoneInput from './PhoneInput';
 
-const BadgeApple = ({ url }) => (
+const BadgeApple = ({ url, locale }) => (
   <a href={url}>
-    <img alt="" src="some icon" />
+    <img alt={locale.get_apple} src="//linkmaker.itunes.apple.com/assets/shared/badges/en-gb/appstore-lrg.svg" />
   </a>
 );
 
-const BadgeGoogle = ({ url }) => (
+const BadgeGoogle = ({ url, locale }) => (
   <a href={url}>
-    <img alt="" src="some icon" />
+    <img alt={locale.get_google} src="https://play.google.com/intl/ru_ru/badges/images/generic/en_badge_web_generic.png" />
   </a>
 );
 
@@ -73,8 +73,8 @@ export default class DesktopBanner extends React.Component {
 
     return (
       <div className={`app-banner-${placement}`}>
-        {(google && google.icon) ? <BadgeGoogle url={google.url} /> : null}
-        {(apple && apple.icon) ? <BadgeApple url={apple.url} /> : null}
+        {(google && google.icon) ? <BadgeGoogle url={google.url} locale={locale} /> : null}
+        {(apple && apple.icon) ? <BadgeApple url={apple.url} locale={locale} /> : null}
 
         <img src={icon} alt="" />
         {locale.desktop_try}
