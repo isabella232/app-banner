@@ -49,8 +49,24 @@ const locale = {
   desktop_send_link: 'Send link',
 };
 
-function detectOs()
-{
+// TODO: load locale
+// TODO: load app data
+// TODO: load location
+// TODO: call to send link via sms
+
+// FIXME: fix html style when mobile banner is closed
+// FIXME: value in country select list
+// FIXME: error handling when sending the number
+
+// TODO: add locales as json static files
+// TODO: add all images (except flags?) in main bundle.js
+
+// TODO: move from sass to cssinjs to avoid css class names conflicts
+// TODO: release build with uglify-es and preact
+
+// TODO: api to use as npm package
+
+function detectOs() {
   const md = new MobileDetect(window.navigator.userAgent);
   const os = md.os();
   const android = os && os.match(/android/i);
@@ -61,7 +77,7 @@ function detectOs()
     desktop: !(android || ios),
     safari: /safari/i.test(window.navigator.userAgent),
     nativeAppBar: document.querySelector('meta[name="apple-itunes-app"]'),
-  }
+  };
 }
 
 function sender(value) {
@@ -83,7 +99,7 @@ function main() {
   const os = detectOs();
 
   if (os.desktop) {
-    return render(
+    render(
       <Desktop
         google={app.google}
         apple={app.apple}
@@ -92,6 +108,8 @@ function main() {
         country="RU"
       />
     );
+
+    return;
   }
 
   render(
@@ -109,5 +127,3 @@ function main() {
 }
 
 main();
-
-// TODO: release build with uglify-es and preact
