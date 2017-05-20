@@ -45,7 +45,8 @@ describe('MobileBanner', () => {
   it('clicking dismiss will call ondismiss', () => {
     handler.reset();
 
-    banner.find({src: 'dismiss.svg'}).simulate('click'); // FIXME: need to remove this id
+    banner.find('img').filterWhere(img => /dismiss/.test(img.prop('src'))).simulate('click');
+
     expect(handler.calledOnce).to.eql(true);
   });
 });
