@@ -41,14 +41,19 @@ export default class DesktopBanner extends React.Component {
 
     this.setState({ loading: true });
 
-    onSend(this.state.number);
+    const loader = onSend(this.state.number);
+    if (loader) {
+      loader.then(() => {
+        this.setState({ loading: false });
+      });
+    }
   }
 
   renderButtons() {
     const { locale } = this.props;
     const { loading } = this.state;
 
-    if(loading) {
+    if (loading) {
       return (
         <div>
           <img src="spinner.svg" alt="Loading" />

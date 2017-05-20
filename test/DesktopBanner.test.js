@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { spy } from 'sinon';
+import sinon, { spy } from 'sinon';
 import { describe, it } from 'mocha';
 
 import DesktopBanner from '../src/components/DesktopBanner';
@@ -140,13 +140,18 @@ describe('DesktopBanner', () => {
   });
 
   describe('when loading', () => {
-    const loader = spy();
-    const bannerSend = mount(<DesktopBanner onSend={loader} {...defaults} />);
+    let resolve;
+    const promise = new Promise((done) => {
+      resolve = done;
+    });
+
+    const onSend = spy(() => promise);
+    const bannerSend = mount(<DesktopBanner onSend={onSend} {...defaults} />);
 
     it('will call onSend', () => {
       bannerSend.find('input').simulate('keypress', { key: 'Enter' });
 
-      expect(loader.calledOnce).to.eql(true);
+      expect(onSend.calledOnce).to.eql(true);
     });
 
     it('will disable the controls', () => {
@@ -155,6 +160,23 @@ describe('DesktopBanner', () => {
 
     it('will hide the buttons', () => {
       expect(bannerSend.find('button')).to.have.length.of(0);
+    });
+
+    it('will show the spinner', () => {
+      const spinner = bannerSend.find('img').filterWhere(img => img.prop('src').includes('spinner.svg'));
+      expect(spinner).to.have.length.of(1);
+    });
+
+    it('will hide the spinner and show btns after the promise is resolved', (done) => {
+      resolve();
+
+      promise.then(() => {
+        const spinner = bannerSend.find('img').filterWhere(img => img.prop('src').includes('spinner.svg'));
+        expect(spinner).to.have.length.of(0);
+
+        expect(bannerSend.find('button')).to.have.length.of(2);
+        done();
+      });
     });
   });
 });
