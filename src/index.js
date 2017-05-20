@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import MobileDetect from 'mobile-detect';
 import ElementClass from 'element-class';
+import docCookies from 'doc-cookies';
+import { Base64 } from 'js-base64';
+import QueryString from 'query-string';
 
 import MobileBanner from './components/MobileBanner';
 import DesktopBanner from './components/DesktopBanner';
@@ -11,43 +14,15 @@ import fixHeader from './lib/fix-header';
 
 import './main.scss';
 
+import locales from './lib/locales';
+
 const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
 
-const id = {
-  apple: 'id1184932325',
-  google: 'com.presencekit.eyerim',
-};
+const cookieName = 'AppBanner';
 
-const locale = {
-  get_apple: 'GET - On the App Store',
-  get_google: 'GET - On Google Play',
+// FIXME: hide if presencekit is running
 
-  view: 'View',
-  get_app: 'get the app',
-  sms_content: 'Thanks for downloading our app! Click this link to get it from Apple App store or Google Play: ',
-
-  desktop_try: 'Try our new app',
-  desktop_edit: 'Edit',
-  desktop_done: 'Done',
-  desktop_phone: 'Save some time? We can text you a download link!',
-  desktop_phone_placeholder: 'Enter your phone number',
-  desktop_no_thanks: 'No thanks',
-  desktop_send_link: 'Send link',
-};
-
-async function loadInfo(appleId, googleId) {
-  const url = `https://sendapp.link/data?apple=${appleId}&google=${googleId}`;
-  const resp = await fetch(url);
-  return resp.json();
-}
-
-// TODO: load locale
-// TODO: load app data
-// TODO: load location
-// TODO: call to send link via sms
-
-// FIXME: fix html style when mobile banner is closed
 // FIXME: value in country select list
 // FIXME: error handling when sending the number
 
@@ -58,6 +33,47 @@ async function loadInfo(appleId, googleId) {
 // TODO: release build with uglify-es and preact
 
 // TODO: api to use as npm package
+
+// TODO: make cookieName customizeable
+
+function timer(timeout) {
+  return new Promise(done => setTimeout(done, timeout));
+}
+
+function trackView() {
+  const gaUrl = `https://sendapp.link/t/${document.location.href.replace(/http(s)?:\/\//, '')}`;
+
+  const frame = document.createElement('iframe');
+  frame.width = 1;
+  frame.height = 1;
+  frame.style.width = 1;
+  frame.style.height = 1;
+  frame.style.position = 'absolute';
+  frame.style.top = '-100px';
+  frame.style.left = '-100px';
+  frame.src = gaUrl;
+
+  document.body.appendChild(frame);
+}
+
+function trackReferrer() {
+  const ref = docCookies.getItem(`${cookieName}.R`);
+
+  if (typeof ref !== 'string') {
+    const se = {
+      ref: document.referrer,
+      entry: document.location.href,
+    };
+    const data = Base64.encode(JSON.stringify(se));
+    docCookies.setItem(`${cookieName}.R`, data);
+  }
+}
+
+function getQuery() {
+  const scriptEl = document.querySelector('script#TheAppBanner');
+  const scriptUrl = scriptEl.src;
+  return QueryString.parse(scriptUrl.split('?')[1]);
+}
 
 function detectOs() {
   const md = new MobileDetect(window.navigator.userAgent);
@@ -73,8 +89,16 @@ function detectOs() {
   };
 }
 
-function sender(value) {
-  return new Promise(done => setTimeout(() => done(), 2000));
+function detectLang() {
+  return window.navigator.language.split('-').shift();
+}
+
+function getLocale(lang) {
+  if (locales[lang]) {
+    return Object.assign({}, locales.en, locales[lang]);
+  }
+
+  return locales.en;
 }
 
 function render(comp) {
@@ -83,31 +107,132 @@ function render(comp) {
   document.body.appendChild(el);
 }
 
-async function showMobileBanner() {
-  await new Promise(done => setTimeout(done, 10));
-
+function showMobileBanner() {
   ElementClass(document.querySelector('html'))
     .add('AppBannerPresent');
-  fixHeader();
+}
+
+function hideMobileBanner() {
+  ElementClass(document.querySelector('html'))
+    .remove('presenceDesktopBannerPresent');
+}
+
+function getDismissed() {
+  if (docCookies.getItem(`${cookieName}.Dismissed`)) {
+    return true;
+  }
+
+  if (window.localStorage.getItem(`${cookieName}.Dismissed`)) {
+    return true;
+  }
+
+  return false;
+}
+
+function saveDismissed() {
+  const expires = new Date();
+  expires.setDate(expires.getDate() + 7);
+  docCookies.setItem(`${cookieName}.Dismissed`, true, expires);
+
+  window.localStorage.setItem(`${cookieName}.Dismissed`, expires.getTime());
+}
+
+async function loadCountryCode() {
+  const saved = window.sessionStorage.getItem(`${cookieName}.CountryCode`);
+  if (saved) {
+    return saved;
+  }
+
+  const resp = await fetch('https://location.ombori.com/');
+  const data = await resp.json();
+
+  sessionStorage.setItem(`${cookieName}.CountryCode`, data.country);
+
+  return data.country;
+}
+
+async function sendSMS(number, app) {
+  const se = docCookies.getItem(`${cookieName}.R`);
+  const session = (se) ? JSON.parse(Base64.decode(se)) : {};
+
+  const data = {
+    number,
+    url: document.location.href,
+    session,
+    context: 'desktop',
+    secure: true,
+    apple: app.apple,
+    google: app.google, // FIXME: maybe send only ids?
+  };
+
+  const resp = await fetch('https://sendapp.link/links', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!resp.status === 200) {
+    throw new Error(`sendapp returned ${resp.status}`);
+  }
+}
+
+async function loadInfo(appleId, googleId) {
+  const url = `https://sendapp.link/data?apple=${appleId}&google=${googleId}`;
+  const resp = await fetch(url);
+  return resp.json();
+}
+
+// FIXME this should be the part of main fn
+function onDismiss() {
+  saveDismissed();
+  hideMobileBanner();
 }
 
 async function main() {
-  const loc = locale;
-  loc.cta = locale.get_apple;
+  const query = getQuery();
 
   const os = detectOs();
+  const lang = detectLang();
 
-  const app = await loadInfo(id.apple, id.google);
+  const locale = getLocale(lang);
+
+  trackView();
+  trackReferrer(); // Track the referrer and entry page so we can use that when generating links
+
+  if (getDismissed()) {
+    return; // already dismissed
+  }
+
+  // Do not show if on iOS and the native app baner is specified
+  if (os.safari && os.ios && os.nativeAppBar) {
+    return; // TODO: remove the native app banner
+  }
+
+  let app;
+  try {
+    app = await loadInfo(query.apple, query.google);
+  } catch (e) {
+    return;
+  }
+
+  if (!app) {
+    return;
+  }
 
   let comp;
   if (os.desktop) {
+    const country = await loadCountryCode();
     comp = (
       <Desktop
         google={app.google}
         apple={app.apple}
         locale={locale}
-        sender={sender}
-        country="RU"
+        sender={number => sendSMS(number, app)}
+        country={country}
+        placement={query.placement}
+        onDismiss={() => onDismiss()}
       />
     );
   }
@@ -117,7 +242,8 @@ async function main() {
     comp = (
       <Mobile
         app={app.apple}
-        locale={loc}
+        locale={locale}
+        onDismiss={() => onDismiss()}
       />
     );
   }
@@ -127,7 +253,8 @@ async function main() {
     comp = (
       <Mobile
         app={app.apple}
-        locale={loc}
+        locale={locale}
+        onDismiss={() => onDismiss()}
       />
     );
   }
@@ -135,7 +262,9 @@ async function main() {
   render(comp);
 
   if (os.android || os.ios) {
+    await timer(10);
     showMobileBanner();
+    fixHeader();
   }
 }
 

@@ -6,7 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<div id='root'>Loading...</div>
-	<script src="bundle.js"></script>
+	<script>
+    (function () {
+      var appleId = 'id1184932325';
+      var googleId = 'com.presencekit.eyerim';
+      var placement = 'bottom-left';
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.id = 'TheAppBanner';
+      s.src = '/bundle.js?&p=' + placement + '&apple=' + appleId + '&google=' + googleId;
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    })();
+  </script>
 </body>
 </html>
