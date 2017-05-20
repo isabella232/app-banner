@@ -11,25 +11,12 @@ import fixHeader from './lib/fix-header';
 
 import './main.scss';
 
-
 const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
 
-const app = {
-  apple: {
-    appId: 'id1184932325',
-    icon: 'http://is5.mzstatic.com/image/thumb/Purple117/v4/de/70/d9/de70d9c8-7f4a-e498-fcc2-e6ac4b3b0202/source/350x350bb.jpg',
-    name: 'eyerim',
-    publisher: 'EYERIM, s.r.o.',
-    url: 'https://geo.itunes.apple.com/app/id1184932325?at=1010l4',
-  },
-  google: {
-    appId: 'com.presencekit.eyerim',
-    icon: '//lh3.googleusercontent.com/67bRd3ERvJVW4SiK0H6UOJZn4XivKmKkuDMgkaqmCUPmOpaSXJVof2fC8wSEh88AlJ2P=w300',
-    name: 'eyerim',
-    publisher: 'eyerim',
-    url: 'http://play.google.com/store/apps/details?id=com.presencekit.eyerim',
-  },
+const id = {
+  apple: 'id1184932325',
+  google: 'com.presencekit.eyerim',
 };
 
 const locale = {
@@ -48,6 +35,12 @@ const locale = {
   desktop_no_thanks: 'No thanks',
   desktop_send_link: 'Send link',
 };
+
+async function loadInfo(appleId, googleId) {
+  const url = `https://sendapp.link/data?apple=${appleId}&google=${googleId}`;
+  const resp = await fetch(url);
+  return resp.json();
+}
 
 // TODO: load locale
 // TODO: load app data
@@ -81,8 +74,6 @@ function detectOs() {
 }
 
 function sender(value) {
-  console.log(value);
-
   return new Promise(done => setTimeout(() => done(), 2000));
 }
 
@@ -92,14 +83,25 @@ function render(comp) {
   document.body.appendChild(el);
 }
 
-function main() {
+async function showMobileBanner() {
+  await new Promise(done => setTimeout(done, 10));
+
+  ElementClass(document.querySelector('html'))
+    .add('AppBannerPresent');
+  fixHeader();
+}
+
+async function main() {
   const loc = locale;
   loc.cta = locale.get_apple;
 
   const os = detectOs();
 
+  const app = await loadInfo(id.apple, id.google);
+
+  let comp;
   if (os.desktop) {
-    render(
+    comp = (
       <Desktop
         google={app.google}
         apple={app.apple}
@@ -108,22 +110,33 @@ function main() {
         country="RU"
       />
     );
-
-    return;
   }
 
-  render(
-    <Mobile
-      app={app.apple}
-      locale={loc}
-    />
-  );
+  if (os.ios) {
+    locale.cta = locale.get_apple;
+    comp = (
+      <Mobile
+        app={app.apple}
+        locale={loc}
+      />
+    );
+  }
 
-  setTimeout(() => {
-    ElementClass(document.querySelector('html'))
-      .add('AppBannerPresent');
-    fixHeader();
-  }, 10);
+  if (os.android) {
+    locale.cta = locale.get_google;
+    comp = (
+      <Mobile
+        app={app.apple}
+        locale={loc}
+      />
+    );
+  }
+
+  render(comp);
+
+  if (os.android || os.ios) {
+    showMobileBanner();
+  }
 }
 
 main();
