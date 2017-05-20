@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import MobileDetect from 'mobile-detect';
+import ElementClass from 'element-class';
 
 import MobileBanner from './components/MobileBanner';
 import DesktopBanner from './components/DesktopBanner';
 import BannerWrapper from './components/BannerWrapper';
+
+import fixHeader from './lib/fix-header';
+
+import './main.scss';
+
 
 const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
@@ -42,34 +49,63 @@ const locale = {
   desktop_send_link: 'Send link',
 };
 
+function detectOs()
+{
+  const md = new MobileDetect(window.navigator.userAgent);
+  const os = md.os();
+  const android = os && os.match(/android/i);
+  const ios = os && os.match(/ios/i);
+  return {
+    android,
+    ios,
+    desktop: !(android || ios),
+    safari: /safari/i.test(window.navigator.userAgent),
+    nativeAppBar: document.querySelector('meta[name="apple-itunes-app"]'),
+  }
+}
+
 function sender(value) {
   console.log(value);
 
   return new Promise(done => setTimeout(() => done(), 2000));
 }
 
-function render(el) {
-  const loc = locale;
-  loc.cta = locale.get_apple;
-
-  // ReactDom.render(
-  //   <Mobile
-  //     app={app.apple}
-  //     locale={loc}
-  //   />, el);
-
-  ReactDom.render(
-    <Desktop
-      google={app.google}
-      apple={app.apple}
-      locale={locale}
-      sender={sender}
-      country="RU"
-    />, el);
+function render(comp) {
+  const el = document.createElement('div');
+  ReactDom.render(comp, el);
+  document.body.appendChild(el);
 }
 
 function main() {
-  render(document.querySelector('#root'));
+  const loc = locale;
+  loc.cta = locale.get_apple;
+
+  const os = detectOs();
+
+  if (os.desktop) {
+    return render(
+      <Desktop
+        google={app.google}
+        apple={app.apple}
+        locale={locale}
+        sender={sender}
+        country="RU"
+      />
+    );
+  }
+
+  render(
+    <Mobile
+      app={app.apple}
+      locale={loc}
+    />
+  );
+
+  setTimeout(() => {
+    ElementClass(document.querySelector('html'))
+      .add('AppBannerPresent');
+    fixHeader();
+  }, 10);
 }
 
 main();

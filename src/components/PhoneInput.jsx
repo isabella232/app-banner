@@ -61,17 +61,27 @@ export default class PhoneInput extends React.Component {
     const prefix = this.state.country ? `+${countryCodes[this.state.country].value}` : '';
 
     return (
-      <div>
-        {prefix}
-        <img src={`images/flags/${this.state.country}.svg`} alt={prefix} />
-        <select
-          onChange={e => this.onPrefixChange(e)}
-        >
-          {this.countries.map(({ country, label }) => (
-            <option key={country} value={country}>{label}</option>
-          ))}
-        </select>
+      <div className="app-banner__phone-input">
+        <span className="app-banner__phone-input-select-container">
+          <img
+            className="app-banner__phone-input-flag"
+            src={`images/flags/${this.state.country}.svg`}
+            alt={prefix}
+          />
+          <span className="app-banner__phone-input-select-value">
+            {prefix}
+          </span>
+          <select
+            onChange={e => this.onPrefixChange(e)}
+            className="app-banner__phone-input-select"
+          >
+            {this.countries.map(({ country, label }) => (
+              <option key={country} value={country}>{label}</option>
+            ))}
+          </select>
+        </span>
         <input
+          className="app-banner__phone-input-number"
           onChange={e => this.onInputChange(e)}
           onKeyPress={e => this.onKeyPress(e)}
           placeholder={placeholder}

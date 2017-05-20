@@ -16,6 +16,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
     "chai": "^3.5.0",
+    "css-loader": "^0.28.1",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
@@ -24,12 +25,16 @@
     "eslint-plugin-react": "^7.0.1",
     "jsdom": "^9.12.0",
     "mocha": "^3.4.1",
+    "node-sass": "^4.5.3",
     "react-test-renderer": "^15.5.4",
+    "sass-loader": "^6.0.5",
     "sinon": "^2.2.0",
+    "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "element-class": "^0.2.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   }

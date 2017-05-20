@@ -3,14 +3,14 @@ import React from 'react';
 import PhoneInput from './PhoneInput';
 
 const BadgeApple = ({ url, locale }) => (
-  <a href={url}>
+  <a className="app-banner__badge" href={url}>
     <img alt={locale.get_apple} src="//linkmaker.itunes.apple.com/assets/shared/badges/en-gb/appstore-lrg.svg" />
   </a>
 );
 
 const BadgeGoogle = ({ url, locale }) => (
-  <a href={url}>
-    <img alt={locale.get_google} src="https://play.google.com/intl/ru_ru/badges/images/generic/en_badge_web_generic.png" />
+  <a className="app-banner__badge" href={url}>
+    <img alt={locale.get_google} src="images/badge-gp-en.png" />
   </a>
 );
 
@@ -33,60 +33,97 @@ export default class DesktopBanner extends React.Component {
   }
 
   renderButtons() {
-    const { locale, loading, success, onDismiss, onRetry, onSend } = this.props;
+    const { locale, loading, success, onDismiss, onRetry } = this.props;
 
     if (loading) {
       return (
-        <div>
-          <img src="spinner.svg" alt="Loading" />
+        <div className="app-banner__spinner">
+          <img alt="" src="images/spinner.svg" />
         </div>
       );
     }
 
     if (success) {
       return (
-        <div>
-          <button onClick={onRetry}>{locale.desktop_edit}</button>
-          <button onClick={onDismiss}>{locale.desktop_done}</button>
+        <div className="app-banner__btn-container">
+          <button className="app-banner__btn app-banner__btn--lg app-banner__btn--link" onClick={onRetry}>
+            {locale.desktop_edit}
+          </button>
+          <button className="app-banner__btn app-banner__btn--lg" onClick={onDismiss}>
+            {locale.desktop_done}
+          </button>
         </div>
       );
     }
 
     return (
-      <div>
-        <button onClick={onDismiss}>{locale.desktop_no_thanks}</button>
-        <button onClick={() => this.send()}>{locale.desktop_send_link}</button>
+      <div className="app-banner__btn-container">
+        <button className="app-banner__btn app-banner__btn--lg app-banner__btn--link" onClick={onDismiss}>
+          {locale.desktop_no_thanks}
+        </button>
+        <button className="app-banner__btn app-banner__btn--lg" onClick={() => this.send()}>
+          {locale.desktop_send_link}
+        </button>
       </div>
     );
   }
 
   render() {
-    const { google, apple, onDismiss, onSend, locale, country, loading, placement } = this.props;
+    const {
+      google,
+      apple,
+      locale,
+      country,
+      loading,
+      placement = 'bottom-right',
+    } = this.props;
 
-    let icon = null;
-    if (google && google.icon) {
-      icon = google.icon;
+    let app = null;
+    if (google) {
+      app = google;
     }
-    if (apple && apple.icon) {
-      icon = apple.icon;
+    if (apple) {
+      app = apple;
     }
+
+    const className = `app-banner app-banner--desktop app-banner--${placement}`;
 
     return (
-      <div className={`app-banner-${placement}`}>
-        {(google && google.icon) ? <BadgeGoogle url={google.url} locale={locale} /> : null}
-        {(apple && apple.icon) ? <BadgeApple url={apple.url} locale={locale} /> : null}
+      <div id="AppBanner" className={className}>
+        <div className="app-banner__badge-container">
+          {(google && google.icon) ? <BadgeGoogle url={google.url} locale={locale} /> : null}
+          {(apple && apple.icon) ? <BadgeApple url={apple.url} locale={locale} /> : null}
+        </div>
 
-        <img src={icon} alt="" />
-        {locale.desktop_try}
-        {locale.desktop_phone}
-        <PhoneInput
-          onEnter={() => this.send()}
-          onChange={val => this.update(val)}
-          country={country}
-          placeholder={locale.desktop_phone_placeholder}
-          disabled={loading}
-        />
-        {this.renderButtons()}
+
+        <div className="app-banner__body">
+          <div className="app-banner__header">
+            <div className="app-banner__header-row">
+
+              <div className="app-banner__img-container">
+                <div className="app-banner__img app-banner__img--desktop">
+                  <img alt={app.name} src={app.icon} role="presentation" />
+                </div>
+              </div>
+
+              <div className="app-banner__description">
+                <span><b>{locale.desktop_try}</b></span>
+                <p>{locale.desktop_phone}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="app-banner__input-container">
+            <PhoneInput
+              onEnter={() => this.send()}
+              onChange={val => this.update(val)}
+              country={country}
+              placeholder={locale.desktop_phone_placeholder}
+              disabled={loading}
+            />
+          </div>
+          {this.renderButtons()}
+        </div>
       </div>
     );
   }
