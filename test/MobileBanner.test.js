@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
 import { spy } from 'sinon';
+import { describe, it } from 'mocha';
 
 import MobileBanner from '../src/components/MobileBanner';
 
@@ -44,11 +45,7 @@ describe('MobileBanner', () => {
   it('clicking dismiss will call ondismiss', () => {
     handler.reset();
 
-    banner.find('img#dismiss').simulate('click'); // FIXME: need to remove this id
-    expect(handler.calledOnce).to.be.true;
-  });
-
-  it('after dismiss banner wont render anymore', () => {
-    expect(banner.find('img')).to.have.length.of(0);
+    banner.find({src: 'dismiss.svg'}).simulate('click'); // FIXME: need to remove this id
+    expect(handler.calledOnce).to.eql(true);
   });
 });

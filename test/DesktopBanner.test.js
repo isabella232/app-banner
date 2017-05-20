@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
-import sinon, { spy } from 'sinon';
+import { spy } from 'sinon';
 import { describe, it } from 'mocha';
 
 import DesktopBanner from '../src/components/DesktopBanner';
@@ -87,12 +87,7 @@ describe('DesktopBanner', () => {
     expect(bannerGoogle.find('a').find({ href: google.url })).to.have.length.of(1);
   });
 
-  // TODO: placement
-
-  // TODO: error
-  // TODO: retry
-  // TODO: success
-  // TODO: hide after success
+  // TODO: show error
 
   it('will place a placeholder msg into input when shown', () => {
     expect(banner.find('input').prop('placeholder')).to.eql(locale.desktop_phone_placeholder);
@@ -139,15 +134,6 @@ describe('DesktopBanner', () => {
     expect(onDismiss.calledOnce).to.eql(true);
   });
 
-  // describe('when dismissing', () => {
-  //   const onDismiss = spy();
-  //   const bnr = mount(<DesktopBanner onDismiss={onDismiss} {...defaults} />);
-
-  //   it('wont render when dismissed', () => {
-  //     expect(bnr.find('img')).to.have.length.of(0);
-  //   });
-  // });
-
   it('will disable controls when loading', () => {
     const bnr = mount(<DesktopBanner loading {...defaults} />);
     expect(bnr.find('input').prop('disabled')).to.be.eql(true);
@@ -185,47 +171,4 @@ describe('DesktopBanner', () => {
 
     expect(bnr.html()).contains('upside-down');
   });
-
-  /*
-    describe('when loading', () => {
-    let resolve;
-    const promise = new Promise((done) => {
-      resolve = done;
-    });
-
-    const onSend = spy(() => promise);
-    const bannerSend = mount(<DesktopBanner onSend={onSend} {...defaults} />);
-
-    it('will call onSend', () => {
-      bannerSend.find('input').simulate('keypress', { key: 'Enter' });
-
-      expect(onSend.calledOnce).to.eql(true);
-    });
-
-    it('will disable the controls', () => {
-      expect(bannerSend.find('input').prop('disabled')).to.be.eql(true);
-    });
-
-    it('will hide the buttons', () => {
-      expect(bannerSend.find('button')).to.have.length.of(0);
-    });
-
-    it('will show the spinner', () => {
-      const spinner = bannerSend.find('img').filterWhere(img => img.prop('src').includes('spinner.svg'));
-      expect(spinner).to.have.length.of(1);
-    });
-
-    it('will hide the spinner and show btns after the promise is resolved', (done) => {
-      resolve(false); // resolve with error
-
-      promise.then(() => {
-        const spinner = bannerSend.find('img').filterWhere(img => img.prop('src').includes('spinner.svg'));
-        expect(spinner).to.have.length.of(0);
-
-        expect(bannerSend.find('button')).to.have.length.of(2);
-        done();
-      });
-    });
-  });
-  */
 });
