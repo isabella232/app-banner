@@ -139,21 +139,21 @@ function saveDismissed() {
   window.localStorage.setItem(`${cookieName}.Dismissed`, expires.getTime());
 }
 
-async function loadCountryCode() {
+function loadCountryCode() {
   const saved = window.sessionStorage.getItem(`${cookieName}.CountryCode`);
   if (saved) {
-    return saved;
+    return new Promise(done => done(saved));
   }
 
-  const resp = await fetch('https://location.ombori.com/');
-  const data = await resp.json();
-
-  sessionStorage.setItem(`${cookieName}.CountryCode`, data.country);
-
-  return data.country;
+  return fetch('https://location.ombori.com/')
+    .then(resp => resp.json())
+    .resp((data) => {
+      sessionStorage.setItem(`${cookieName}.CountryCode`, data.country);
+      return data.country;
+    });
 }
 
-async function sendSMS(number, app) {
+function sendSMS(number, app) {
   const se = docCookies.getItem(`${cookieName}.R`);
   const session = (se) ? JSON.parse(Base64.atob(se)) : {};
 
@@ -167,23 +167,25 @@ async function sendSMS(number, app) {
     google: app.google, // FIXME: maybe send only ids?
   };
 
-  const resp = await fetch('https://sendapp.link/links', {
+  return fetch('https://sendapp.link/links', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  });
+  }).then((resp) => {
+    if (resp.status !== 200) {
+      return new Promise().reject(`sendapp returned ${resp.status}`);
+    }
 
-  if (!resp.status === 200) {
-    throw new Error(`sendapp returned ${resp.status}`);
-  }
+    return true;
+  });
 }
 
-async function loadInfo(appleId, googleId) {
+function loadInfo(appleId, googleId) {
   const url = `https://sendapp.link/data?apple=${appleId}&google=${googleId}`;
-  const resp = await fetch(url);
-  return resp.json();
+  return fetch(url)
+    .then(resp => resp.json());
 }
 
 // FIXME this should be the part of main fn
@@ -192,13 +194,58 @@ function onDismiss() {
   hideMobileBanner();
 }
 
-async function main() {
+function getComponent(app, os, query) {
+  const lang = detectLang();
+  const locale = getLocale(lang);
+
+  if (!app) {
+    return null;
+  }
+
+  if (os.desktop) {
+    return loadCountryCode()
+      .then(country => (
+        <Desktop
+          google={app.google}
+          apple={app.apple}
+          locale={locale}
+          sender={number => sendSMS(number, app)}
+          country={country}
+          placement={query.placement}
+          onDismiss={() => onDismiss()}
+        />
+      ));
+  }
+
+  if (os.ios) {
+    locale.cta = locale.get_apple;
+    return (
+      <Mobile
+        app={app.apple}
+        locale={locale}
+        onDismiss={() => onDismiss()}
+      />
+    );
+  }
+
+  if (os.android) {
+    locale.cta = locale.get_google;
+    return (
+      <Mobile
+        app={app.google}
+        locale={locale}
+        onDismiss={() => onDismiss()}
+      />
+    );
+  }
+
+  return null;
+}
+
+function main() {
   const query = getQuery();
 
   const os = detectOs();
-  const lang = detectLang();
-
-  const locale = getLocale(lang);
 
   trackView();
   trackReferrer(); // Track the referrer and entry page so we can use that when generating links
@@ -212,66 +259,20 @@ async function main() {
     return; // TODO: remove the native app banner
   }
 
-  let app;
-  try {
-    app = await loadInfo(query.apple, query.google);
-  } catch (e) {
-    return;
-  }
+  loadInfo(query.apple, query.google)
+    .then(app => getComponent(app, os, query))
+    .then((comp) => {
+      if (comp) {
+        render(comp);
 
-  if (!app) {
-    return;
-  }
-
-  let comp;
-  if (os.desktop) {
-    const country = await loadCountryCode();
-    comp = (
-      <Desktop
-        google={app.google}
-        apple={app.apple}
-        locale={locale}
-        sender={number => sendSMS(number, app)}
-        country={country}
-        placement={query.placement}
-        onDismiss={() => onDismiss()}
-      />
-    );
-  }
-
-  if (os.ios) {
-    locale.cta = locale.get_apple;
-    comp = (
-      <Mobile
-        app={app.apple}
-        locale={locale}
-        onDismiss={() => onDismiss()}
-      />
-    );
-  }
-
-  if (os.android) {
-    locale.cta = locale.get_google;
-    comp = (
-      <Mobile
-        app={app.google}
-        locale={locale}
-        onDismiss={() => onDismiss()}
-      />
-    );
-  }
-
-  if (!comp) {
-    return;
-  }
-
-  render(comp);
-
-  if (os.android || os.ios) {
-    await timer(10);
-    showMobileBanner();
-    fixHeader();
-  }
+        if (os.android || os.ios) {
+          setTimeout(() => {
+            showMobileBanner();
+            fixHeader();
+          }, 10);
+        }
+      }
+    });
 }
 
 main();
