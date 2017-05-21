@@ -15,8 +15,6 @@ import locales from './lib/locales';
 
 import s from './main.scss';
 
-console.log(s);
-
 const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
 
@@ -29,8 +27,6 @@ const cookieName = 'AppBanner';
 
 // TODO: add locales as json static files
 // TODO: add all images (except flags?) in main bundle.js
-
-// TODO: move from sass to cssinjs to avoid css class names conflicts
 
 // TODO: api to use as npm package
 
