@@ -3,7 +3,7 @@ import React from 'react';
 import PhoneInput from './PhoneInput';
 
 import spinner from '../images/spinner.svg';
-import badgeGp from '../images/badge-gp-en.png';
+import badgeGp from '../images/gp.svg';
 
 const BadgeApple = ({ url, locale }) => (
   <a className="app-banner__badge" href={url}>
