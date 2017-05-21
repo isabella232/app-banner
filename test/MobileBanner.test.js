@@ -44,8 +44,7 @@ describe('MobileBanner', () => {
 
   it('clicking dismiss will call ondismiss', () => {
     handler.reset();
-
-    banner.find('img').filterWhere(img => /dismiss/.test(img.prop('src'))).simulate('click');
+    banner.find('div').filterWhere(div => div.prop('className').includes('dismiss')).find('img').simulate('click');
 
     expect(handler.calledOnce).to.eql(true);
   });
