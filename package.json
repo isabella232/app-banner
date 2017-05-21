@@ -6,7 +6,7 @@
     "test": "mocha --require test/setup.js test/*.test.js",
     "watch": "mocha --watch --compilers jsx:babel-register --require test/setup.js test/*.test.js",
     "build": "NODE_ENV=production webpack --colors --progress",
-    "stats": "NODE_ENV=production webpack --profile --json > stats.json",
+    "stats": "NODE_ENV=production webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json; rm stats.json",
     "start": "webpack-dev-server --content-base ./dist"
   },
   "author": "",

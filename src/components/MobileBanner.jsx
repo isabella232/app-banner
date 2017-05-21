@@ -1,6 +1,6 @@
 import React from 'react';
 
-import dismiss from '../../dist/images/dismiss.svg';
+import dismiss from '../images/dismiss.svg';
 
 const MobileBanner = ({ app, locale, onDismiss }) => (
   <div className="app-banner" id="AppBanner">

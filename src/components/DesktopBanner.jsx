@@ -2,7 +2,8 @@ import React from 'react';
 
 import PhoneInput from './PhoneInput';
 
-import spinner from '../../dist/images/spinner.svg';
+import spinner from '../images/spinner.svg';
+import badgeGp from '../images/badge-gp-en.png';
 
 const BadgeApple = ({ url, locale }) => (
   <a className="app-banner__badge" href={url}>
@@ -17,7 +18,7 @@ const BadgeGoogle = ({ url, locale }) => (
   <a className="app-banner__badge" href={url}>
     <img
       alt={locale.get_google}
-      src="images/badge-gp-en.png"
+      src={badgeGp}
     />
   </a>
 );
