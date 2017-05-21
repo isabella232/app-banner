@@ -29,15 +29,10 @@ const cookieName = 'AppBanner';
 // TODO: add all images (except flags?) in main bundle.js
 
 // TODO: move from sass to cssinjs to avoid css class names conflicts
-// TODO: release build with uglify-es and preact
 
 // TODO: api to use as npm package
 
 // TODO: make cookieName customizeable
-
-function timer(timeout) {
-  return new Promise(done => setTimeout(done, timeout));
-}
 
 function trackView() {
   const gaUrl = `https://sendapp.link/t/${document.location.href.replace(/http(s)?:\/\//, '')}`;
