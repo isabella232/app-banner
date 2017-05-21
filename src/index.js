@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import MobileDetect from 'mobile-detect';
 import ElementClass from 'element-class';
 import docCookies from 'doc-cookies';
-import { Base64 } from 'js-base64';
+import Base64 from 'min-base64';
 import QueryString from 'query-string';
 
 import MobileBanner from './components/MobileBanner';
@@ -64,7 +64,7 @@ function trackReferrer() {
       ref: document.referrer,
       entry: document.location.href,
     };
-    const data = Base64.encode(JSON.stringify(se));
+    const data = Base64.btoa(JSON.stringify(se));
     docCookies.setItem(`${cookieName}.R`, data);
   }
 }
@@ -153,7 +153,7 @@ async function loadCountryCode() {
 
 async function sendSMS(number, app) {
   const se = docCookies.getItem(`${cookieName}.R`);
-  const session = (se) ? JSON.parse(Base64.decode(se)) : {};
+  const session = (se) ? JSON.parse(Base64.atob(se)) : {};
 
   const data = {
     number,
