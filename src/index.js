@@ -116,7 +116,7 @@ function showMobileBanner() {
 
 function hideMobileBanner() {
   ElementClass(document.querySelector('html'))
-    .remove('presenceDesktopBannerPresent');
+    .remove('AppBannerPresent');
 }
 
 function getDismissed() {
@@ -254,11 +254,15 @@ async function main() {
     locale.cta = locale.get_google;
     comp = (
       <Mobile
-        app={app.apple}
+        app={app.google}
         locale={locale}
         onDismiss={() => onDismiss()}
       />
     );
+  }
+
+  if (!comp) {
+    return;
   }
 
   render(comp);
