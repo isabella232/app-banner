@@ -2,9 +2,11 @@ import React from 'react';
 
 import countryCodes from '../lib/country-codes';
 
+const countryCode = code => countryCodes[code][0];
+
 const formatCountries = data =>
   Object.keys(data)
-    .map(country => ({ country, label: data[country].label }))
+    .map(country => ({ country, label: data[country][1] }))
     .sort(({ label: a }, { label: b }) => {
       if (a < b) return -1;
       if (a > b) return 1;
@@ -32,7 +34,7 @@ export default class PhoneInput extends React.Component {
     const country = e.target.value;
     this.setState({ country });
 
-    const prefix = `+${countryCodes[country].value}`;
+    const prefix = `+${countryCode(country)}`;
     onChange(`${prefix}${this.state.number}`);
   }
 
@@ -44,7 +46,7 @@ export default class PhoneInput extends React.Component {
 
     // FIXME: replace number's leading zeroes -- for what?
 
-    const prefix = this.state.country ? `+${countryCodes[this.state.country].value}` : '';
+    const prefix = this.state.country ? `+${countryCode(this.state.country)}` : '';
     onChange(`${prefix}${number}`);
   }
 
@@ -58,7 +60,7 @@ export default class PhoneInput extends React.Component {
 
   render() {
     const { placeholder, disabled } = this.props;
-    const prefix = this.state.country ? `+${countryCodes[this.state.country].value}` : '';
+    const prefix = this.state.country ? `+${countryCode(this.state.country)}` : '';
 
     return (
       <div className="app-banner__phone-input">

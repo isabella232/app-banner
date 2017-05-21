@@ -1,976 +1,247 @@
 const data = {
-  AF: {
-    value: 93,
-    label: 'Afghanistan (‫افغانستان‬‎)',
-  },
-  AL: {
-    value: 355,
-    label: 'Albania (Shqipëri)',
-  },
-  DZ: {
-    value: 213,
-    label: 'Algeria (‫الجزائر‬‎)',
-  },
-  AS: {
-    value: 1684,
-    label: 'American Samoa',
-  },
-  AD: {
-    value: 376,
-    label: 'Andorra',
-  },
-  AO: {
-    value: 244,
-    label: 'Angola',
-  },
-  AI: {
-    value: 1264,
-    label: 'Anguilla',
-  },
-  AG: {
-    value: 1268,
-    label: 'Antigua and Barbuda',
-  },
-  AR: {
-    value: 54,
-    label: 'Argentina',
-  },
-  AM: {
-    value: 374,
-    label: 'Armenia (Հայաստան)',
-  },
-  AW: {
-    value: 297,
-    label: 'Aruba',
-  },
-  AU: {
-    value: 61,
-    label: 'Australia',
-  },
-  AT: {
-    value: 43,
-    label: 'Austria (Österreich)',
-  },
-  AZ: {
-    value: 994,
-    label: 'Azerbaijan (Azərbaycan)',
-  },
-  BS: {
-    value: 1242,
-    label: 'Bahamas',
-  },
-  BH: {
-    value: 973,
-    label: 'Bahrain (‫البحرين‬‎)',
-  },
-  BD: {
-    value: 880,
-    label: 'Bangladesh (বাংলাদেশ)',
-  },
-  BB: {
-    value: 1246,
-    label: 'Barbados',
-  },
-  BY: {
-    value: 375,
-    label: 'Belarus (Беларусь)',
-  },
-  BE: {
-    value: 32,
-    label: 'Belgium (België)',
-  },
-  BZ: {
-    value: 501,
-    label: 'Belize',
-  },
-  BJ: {
-    value: 229,
-    label: 'Benin (Bénin)',
-  },
-  BM: {
-    value: 1441,
-    label: 'Bermuda',
-  },
-  BT: {
-    value: 975,
-    label: 'Bhutan (འབྲུག)',
-  },
-  BO: {
-    value: 591,
-    label: 'Bolivia',
-  },
-  BA: {
-    value: 387,
-    label: 'Bosnia and Herzegovina (Босна и Херцеговина)',
-  },
-  BW: {
-    value: 267,
-    label: 'Botswana',
-  },
-  BR: {
-    value: 55,
-    label: 'Brazil (Brasil)',
-  },
-  IO: {
-    value: 246,
-    label: 'British Indian Ocean Territory',
-  },
-  VG: {
-    value: 1284,
-    label: 'British Virgin Islands',
-  },
-  BN: {
-    value: 673,
-    label: 'Brunei',
-  },
-  BG: {
-    value: 359,
-    label: 'Bulgaria (България)',
-  },
-  BF: {
-    value: 226,
-    label: 'Burkina Faso',
-  },
-  BI: {
-    value: 257,
-    label: 'Burundi (Uburundi)',
-  },
-  KH: {
-    value: 855,
-    label: 'Cambodia (កម្ពុជា)',
-  },
-  CM: {
-    value: 237,
-    label: 'Cameroon (Cameroun)',
-  },
-  CA: {
-    value: 1,
-    label: 'Canada',
-  },
-  CV: {
-    value: 238,
-    label: 'Cape Verde (Kabu Verdi)',
-  },
-  BQ: {
-    value: 599,
-    label: 'Caribbean Netherlands',
-  },
-  KY: {
-    value: 1345,
-    label: 'Cayman Islands',
-  },
-  CF: {
-    value: 236,
-    label: 'Central African Republic (République centrafricaine)',
-  },
-  TD: {
-    value: 235,
-    label: 'Chad (Tchad)',
-  },
-  CL: {
-    value: 56,
-    label: 'Chile',
-  },
-  CN: {
-    value: 86,
-    label: 'China (中国)',
-  },
-  CX: {
-    value: 61,
-    label: 'Christmas Island',
-  },
-  CC: {
-    value: 61,
-    label: 'Cocos (Keeling) Islands',
-  },
-  CO: {
-    value: 57,
-    label: 'Colombia',
-  },
-  KM: {
-    value: 269,
-    label: 'Comoros (‫جزر القمر‬‎)',
-  },
-  CD: {
-    value: 243,
-    label: 'Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)',
-  },
-  CG: {
-    value: 242,
-    label: 'Congo (Republic) (Congo-Brazzaville)',
-  },
-  CK: {
-    value: 682,
-    label: 'Cook Islands',
-  },
-  CR: {
-    value: 506,
-    label: 'Costa Rica',
-  },
-  CI: {
-    value: 225,
-    label: 'Côte d’Ivoire',
-  },
-  HR: {
-    value: 385,
-    label: 'Croatia (Hrvatska)',
-  },
-  CU: {
-    value: 53,
-    label: 'Cuba',
-  },
-  CW: {
-    value: 599,
-    label: 'Curaçao',
-  },
-  CY: {
-    value: 357,
-    label: 'Cyprus (Κύπρος)',
-  },
-  CZ: {
-    value: 420,
-    label: 'Czech Republic (Česká republika)',
-  },
-  DK: {
-    value: 45,
-    label: 'Denmark (Danmark)',
-  },
-  DJ: {
-    value: 253,
-    label: 'Djibouti',
-  },
-  DM: {
-    value: 1767,
-    label: 'Dominica',
-  },
-  DO: {
-    value: 1,
-    label: 'Dominican Republic (República Dominicana)',
-  },
-  EC: {
-    value: 593,
-    label: 'Ecuador',
-  },
-  EG: {
-    value: 20,
-    label: 'Egypt (‫مصر‬‎)',
-  },
-  SV: {
-    value: 503,
-    label: 'El Salvador',
-  },
-  GQ: {
-    value: 240,
-    label: 'Equatorial Guinea (Guinea Ecuatorial)',
-  },
-  ER: {
-    value: 291,
-    label: 'Eritrea',
-  },
-  EE: {
-    value: 372,
-    label: 'Estonia (Eesti)',
-  },
-  ET: {
-    value: 251,
-    label: 'Ethiopia',
-  },
-  FK: {
-    value: 500,
-    label: 'Falkland Islands (Islas Malvinas)',
-  },
-  FO: {
-    value: 298,
-    label: 'Faroe Islands (Føroyar)',
-  },
-  FJ: {
-    value: 679,
-    label: 'Fiji',
-  },
-  FI: {
-    value: 358,
-    label: 'Finland (Suomi)',
-  },
-  FR: {
-    value: 33,
-    label: 'France',
-  },
-  GF: {
-    value: 594,
-    label: 'French Guiana (Guyane française)',
-  },
-  PF: {
-    value: 689,
-    label: 'French Polynesia (Polynésie française)',
-  },
-  GA: {
-    value: 241,
-    label: 'Gabon',
-  },
-  GM: {
-    value: 220,
-    label: 'Gambia',
-  },
-  GE: {
-    value: 995,
-    label: 'Georgia (საქართველო)',
-  },
-  DE: {
-    value: 49,
-    label: 'Germany (Deutschland)',
-  },
-  GH: {
-    value: 233,
-    label: 'Ghana (Gaana)',
-  },
-  GI: {
-    value: 350,
-    label: 'Gibraltar',
-  },
-  GR: {
-    value: 30,
-    label: 'Greece (Ελλάδα)',
-  },
-  GL: {
-    value: 299,
-    label: 'Greenland (Kalaallit Nunaat)',
-  },
-  GD: {
-    value: 1473,
-    label: 'Grenada',
-  },
-  GP: {
-    value: 590,
-    label: 'Guadeloupe',
-  },
-  GU: {
-    value: 1671,
-    label: 'Guam',
-  },
-  GT: {
-    value: 502,
-    label: 'Guatemala',
-  },
-  GG: {
-    value: 44,
-    label: 'Guernsey',
-  },
-  GN: {
-    value: 224,
-    label: 'Guinea (Guinée)',
-  },
-  GW: {
-    value: 245,
-    label: 'Guinea-Bissau (Guiné Bissau)',
-  },
-  GY: {
-    value: 592,
-    label: 'Guyana',
-  },
-  HT: {
-    value: 509,
-    label: 'Haiti',
-  },
-  HN: {
-    value: 504,
-    label: 'Honduras',
-  },
-  HK: {
-    value: 852,
-    label: 'Hong Kong (香港)',
-  },
-  HU: {
-    value: 36,
-    label: 'Hungary (Magyarország)',
-  },
-  IS: {
-    value: 354,
-    label: 'Iceland (Ísland)',
-  },
-  IN: {
-    value: 91,
-    label: 'India (भारत)',
-  },
-  ID: {
-    value: 62,
-    label: 'Indonesia',
-  },
-  IR: {
-    value: 98,
-    label: 'Iran (‫ایران‬‎)',
-  },
-  IQ: {
-    value: 964,
-    label: 'Iraq (‫العراق‬‎)',
-  },
-  IE: {
-    value: 353,
-    label: 'Ireland',
-  },
-  IM: {
-    value: 44,
-    label: 'Isle of Man',
-  },
-  IL: {
-    value: 972,
-    label: 'Israel (‫ישראל‬‎)',
-  },
-  IT: {
-    value: 39,
-    label: 'Italy (Italia)',
-  },
-  JM: {
-    value: 1876,
-    label: 'Jamaica',
-  },
-  JP: {
-    value: 81,
-    label: 'Japan (日本)',
-  },
-  JE: {
-    value: 44,
-    label: 'Jersey',
-  },
-  JO: {
-    value: 962,
-    label: 'Jordan (‫الأردن‬‎)',
-  },
-  KZ: {
-    value: 7,
-    label: 'Kazakhstan (Казахстан)',
-  },
-  KE: {
-    value: 254,
-    label: 'Kenya',
-  },
-  KI: {
-    value: 686,
-    label: 'Kiribati',
-  },
-  XK: {
-    value: 383,
-    label: 'Kosovo',
-  },
-  KW: {
-    value: 965,
-    label: 'Kuwait (‫الكويت‬‎)',
-  },
-  KG: {
-    value: 996,
-    label: 'Kyrgyzstan (Кыргызстан)',
-  },
-  LA: {
-    value: 856,
-    label: 'Laos (ລາວ)',
-  },
-  LV: {
-    value: 371,
-    label: 'Latvia (Latvija)',
-  },
-  LB: {
-    value: 961,
-    label: 'Lebanon (‫لبنان‬‎)',
-  },
-  LS: {
-    value: 266,
-    label: 'Lesotho',
-  },
-  LR: {
-    value: 231,
-    label: 'Liberia',
-  },
-  LY: {
-    value: 218,
-    label: 'Libya (‫ليبيا‬‎)',
-  },
-  LI: {
-    value: 423,
-    label: 'Liechtenstein',
-  },
-  LT: {
-    value: 370,
-    label: 'Lithuania (Lietuva)',
-  },
-  LU: {
-    value: 352,
-    label: 'Luxembourg',
-  },
-  MO: {
-    value: 853,
-    label: 'Macau (澳門)',
-  },
-  MK: {
-    value: 389,
-    label: 'Macedonia (FYROM) (Македонија)',
-  },
-  MG: {
-    value: 261,
-    label: 'Madagascar (Madagasikara)',
-  },
-  MW: {
-    value: 265,
-    label: 'Malawi',
-  },
-  MY: {
-    value: 60,
-    label: 'Malaysia',
-  },
-  MV: {
-    value: 960,
-    label: 'Maldives',
-  },
-  ML: {
-    value: 223,
-    label: 'Mali',
-  },
-  MT: {
-    value: 356,
-    label: 'Malta',
-  },
-  MH: {
-    value: 692,
-    label: 'Marshall Islands',
-  },
-  MQ: {
-    value: 596,
-    label: 'Martinique',
-  },
-  MR: {
-    value: 222,
-    label: 'Mauritania (‫موريتانيا‬‎)',
-  },
-  MU: {
-    value: 230,
-    label: 'Mauritius (Moris)',
-  },
-  YT: {
-    value: 262,
-    label: 'Mayotte',
-  },
-  MX: {
-    value: 52,
-    label: 'Mexico (México)',
-  },
-  FM: {
-    value: 691,
-    label: 'Micronesia',
-  },
-  MD: {
-    value: 373,
-    label: 'Moldova (Republica Moldova)',
-  },
-  MC: {
-    value: 377,
-    label: 'Monaco',
-  },
-  MN: {
-    value: 976,
-    label: 'Mongolia (Монгол)',
-  },
-  ME: {
-    value: 382,
-    label: 'Montenegro (Crna Gora)',
-  },
-  MS: {
-    value: 1664,
-    label: 'Montserrat',
-  },
-  MA: {
-    value: 212,
-    label: 'Morocco (‫المغرب‬‎)',
-  },
-  MZ: {
-    value: 258,
-    label: 'Mozambique (Moçambique)',
-  },
-  MM: {
-    value: 95,
-    label: 'Myanmar (Burma) (မြန်မာ)',
-  },
-  NA: {
-    value: 264,
-    label: 'Namibia (Namibië)',
-  },
-  NR: {
-    value: 674,
-    label: 'Nauru',
-  },
-  NP: {
-    value: 977,
-    label: 'Nepal (नेपाल)',
-  },
-  NL: {
-    value: 31,
-    label: 'Netherlands (Nederland)',
-  },
-  NC: {
-    value: 687,
-    label: 'New Caledonia (Nouvelle-Calédonie)',
-  },
-  NZ: {
-    value: 64,
-    label: 'New Zealand',
-  },
-  NI: {
-    value: 505,
-    label: 'Nicaragua',
-  },
-  NE: {
-    value: 227,
-    label: 'Niger (Nijar)',
-  },
-  NG: {
-    value: 234,
-    label: 'Nigeria',
-  },
-  NU: {
-    value: 683,
-    label: 'Niue',
-  },
-  NF: {
-    value: 672,
-    label: 'Norfolk Island',
-  },
-  KP: {
-    value: 850,
-    label: 'North Korea (조선 민주주의 인민 공화국)',
-  },
-  MP: {
-    value: 1670,
-    label: 'Northern Mariana Islands',
-  },
-  NO: {
-    value: 47,
-    label: 'Norway (Norge)',
-  },
-  OM: {
-    value: 968,
-    label: 'Oman (‫عُمان‬‎)',
-  },
-  PK: {
-    value: 92,
-    label: 'Pakistan (‫پاکستان‬‎)',
-  },
-  PW: {
-    value: 680,
-    label: 'Palau',
-  },
-  PS: {
-    value: 970,
-    label: 'Palestine (‫فلسطين‬‎)',
-  },
-  PA: {
-    value: 507,
-    label: 'Panama (Panamá)',
-  },
-  PG: {
-    value: 675,
-    label: 'Papua New Guinea',
-  },
-  PY: {
-    value: 595,
-    label: 'Paraguay',
-  },
-  PE: {
-    value: 51,
-    label: 'Peru (Perú)',
-  },
-  PH: {
-    value: 63,
-    label: 'Philippines',
-  },
-  PL: {
-    value: 48,
-    label: 'Poland (Polska)',
-  },
-  PT: {
-    value: 351,
-    label: 'Portugal',
-  },
-  PR: {
-    value: 1,
-    label: 'Puerto Rico',
-  },
-  QA: {
-    value: 974,
-    label: 'Qatar (‫قطر‬‎)',
-  },
-  RE: {
-    value: 262,
-    label: 'Réunion (La Réunion)',
-  },
-  RO: {
-    value: 40,
-    label: 'Romania (România)',
-  },
-  RU: {
-    value: 7,
-    label: 'Russia (Россия)',
-  },
-  RW: {
-    value: 250,
-    label: 'Rwanda',
-  },
-  BL: {
-    value: 590,
-    label: 'Saint Barthélemy (Saint-Barthélemy)',
-  },
-  SH: {
-    value: 290,
-    label: 'Saint Helena',
-  },
-  KN: {
-    value: 1869,
-    label: 'Saint Kitts and Nevis',
-  },
-  LC: {
-    value: 1758,
-    label: 'Saint Lucia',
-  },
-  MF: {
-    value: 590,
-    label: 'Saint Martin (Saint-Martin (partie française))',
-  },
-  PM: {
-    value: 508,
-    label: 'Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)',
-  },
-  VC: {
-    value: 1784,
-    label: 'Saint Vincent and the Grenadines',
-  },
-  WS: {
-    value: 685,
-    label: 'Samoa',
-  },
-  SM: {
-    value: 378,
-    label: 'San Marino',
-  },
-  ST: {
-    value: 239,
-    label: 'São Tomé and Príncipe (São Tomé e Príncipe)',
-  },
-  SA: {
-    value: 966,
-    label: 'Saudi Arabia (‫المملكة العربية السعودية‬‎)',
-  },
-  SN: {
-    value: 221,
-    label: 'Senegal (Sénégal)',
-  },
-  RS: {
-    value: 381,
-    label: 'Serbia (Србија)',
-  },
-  SC: {
-    value: 248,
-    label: 'Seychelles',
-  },
-  SL: {
-    value: 232,
-    label: 'Sierra Leone',
-  },
-  SG: {
-    value: 65,
-    label: 'Singapore',
-  },
-  SX: {
-    value: 1721,
-    label: 'Sint Maarten',
-  },
-  SK: {
-    value: 421,
-    label: 'Slovakia (Slovensko)',
-  },
-  SI: {
-    value: 386,
-    label: 'Slovenia (Slovenija)',
-  },
-  SB: {
-    value: 677,
-    label: 'Solomon Islands',
-  },
-  SO: {
-    value: 252,
-    label: 'Somalia (Soomaaliya)',
-  },
-  ZA: {
-    value: 27,
-    label: 'South Africa',
-  },
-  KR: {
-    value: 82,
-    label: 'South Korea (대한민국)',
-  },
-  SS: {
-    value: 211,
-    label: 'South Sudan (‫جنوب السودان‬‎)',
-  },
-  ES: {
-    value: 34,
-    label: 'Spain (España)',
-  },
-  LK: {
-    value: 94,
-    label: 'Sri Lanka (ශ්‍රී ලංකාව)',
-  },
-  SD: {
-    value: 249,
-    label: 'Sudan (‫السودان‬‎)',
-  },
-  SR: {
-    value: 597,
-    label: 'Suriname',
-  },
-  SJ: {
-    value: 47,
-    label: 'Svalbard and Jan Mayen',
-  },
-  SZ: {
-    value: 268,
-    label: 'Swaziland',
-  },
-  SE: {
-    value: 46,
-    label: 'Sweden (Sverige)',
-  },
-  CH: {
-    value: 41,
-    label: 'Switzerland (Schweiz)',
-  },
-  SY: {
-    value: 963,
-    label: 'Syria (‫سوريا‬‎)',
-  },
-  TW: {
-    value: 886,
-    label: 'Taiwan (台灣)',
-  },
-  TJ: {
-    value: 992,
-    label: 'Tajikistan',
-  },
-  TZ: {
-    value: 255,
-    label: 'Tanzania',
-  },
-  TH: {
-    value: 66,
-    label: 'Thailand (ไทย)',
-  },
-  TL: {
-    value: 670,
-    label: 'Timor-Leste',
-  },
-  TG: {
-    value: 228,
-    label: 'Togo',
-  },
-  TK: {
-    value: 690,
-    label: 'Tokelau',
-  },
-  TO: {
-    value: 676,
-    label: 'Tonga',
-  },
-  TT: {
-    value: 1868,
-    label: 'Trinidad and Tobago',
-  },
-  TN: {
-    value: 216,
-    label: 'Tunisia (‫تونس‬‎)',
-  },
-  TR: {
-    value: 90,
-    label: 'Turkey (Türkiye)',
-  },
-  TM: {
-    value: 993,
-    label: 'Turkmenistan',
-  },
-  TC: {
-    value: 1649,
-    label: 'Turks and Caicos Islands',
-  },
-  TV: {
-    value: 688,
-    label: 'Tuvalu',
-  },
-  VI: {
-    value: 1340,
-    label: 'U.S. Virgin Islands',
-  },
-  UG: {
-    value: 256,
-    label: 'Uganda',
-  },
-  UA: {
-    value: 380,
-    label: 'Ukraine (Україна)',
-  },
-  AE: {
-    value: 971,
-    label: 'United Arab Emirates (‫الإمارات العربية المتحدة‬‎)',
-  },
-  GB: {
-    value: 44,
-    label: 'United Kingdom',
-  },
-  US: {
-    value: 1,
-    label: 'United States',
-  },
-  UY: {
-    value: 598,
-    label: 'Uruguay',
-  },
-  UZ: {
-    value: 998,
-    label: 'Uzbekistan (Oʻzbekiston)',
-  },
-  VU: {
-    value: 678,
-    label: 'Vanuatu',
-  },
-  VA: {
-    value: 39,
-    label: 'Vatican City (Città del Vaticano)',
-  },
-  VE: {
-    value: 58,
-    label: 'Venezuela',
-  },
-  VN: {
-    value: 84,
-    label: 'Vietnam (Việt Nam)',
-  },
-  WF: {
-    value: 681,
-    label: 'Wallis and Futuna',
-  },
-  EH: {
-    value: 212,
-    label: 'Western Sahara (‫الصحراء الغربية‬‎)',
-  },
-  YE: {
-    value: 967,
-    label: 'Yemen (‫اليمن‬‎)',
-  },
-  ZM: {
-    value: 260,
-    label: 'Zambia',
-  },
-  ZW: {
-    value: 263,
-    label: 'Zimbabwe',
-  },
-  AX: {
-    value: 358,
-    label: 'Åland Islands',
-  },
+  AF: [93, 'Afghanistan (‫افغانستان‬‎)'],
+  AL: [355, 'Albania (Shqipëri)'],
+  DZ: [213, 'Algeria (‫الجزائر‬‎)'],
+  AS: [1684, 'American Samoa'],
+  AD: [376, 'Andorra'],
+  AO: [244, 'Angola'],
+  AI: [1264, 'Anguilla'],
+  AG: [1268, 'Antigua and Barbuda'],
+  AR: [54, 'Argentina'],
+  AM: [374, 'Armenia (Հայաստան)'],
+  AW: [297, 'Aruba'],
+  AU: [61, 'Australia'],
+  AT: [43, 'Austria (Österreich)'],
+  AZ: [994, 'Azerbaijan (Azərbaycan)'],
+  BS: [1242, 'Bahamas'],
+  BH: [973, 'Bahrain (‫البحرين‬‎)'],
+  BD: [880, 'Bangladesh (বাংলাদেশ)'],
+  BB: [1246, 'Barbados'],
+  BY: [375, 'Belarus (Беларусь)'],
+  BE: [32, 'Belgium (België)'],
+  BZ: [501, 'Belize'],
+  BJ: [229, 'Benin (Bénin)'],
+  BM: [1441, 'Bermuda'],
+  BT: [975, 'Bhutan (འབྲུག)'],
+  BO: [591, 'Bolivia'],
+  BA: [387, 'Bosnia and Herzegovina (Босна и Херцеговина)'],
+  BW: [267, 'Botswana'],
+  BR: [55, 'Brazil (Brasil)'],
+  IO: [246, 'British Indian Ocean Territory'],
+  VG: [1284, 'British Virgin Islands'],
+  BN: [673, 'Brunei'],
+  BG: [359, 'Bulgaria (България)'],
+  BF: [226, 'Burkina Faso'],
+  BI: [257, 'Burundi (Uburundi)'],
+  KH: [855, 'Cambodia (កម្ពុជា)'],
+  CM: [237, 'Cameroon (Cameroun)'],
+  CA: [1, 'Canada'],
+  CV: [238, 'Cape Verde (Kabu Verdi)'],
+  BQ: [599, 'Caribbean Netherlands'],
+  KY: [1345, 'Cayman Islands'],
+  CF: [236, 'Central African Republic (République centrafricaine)'],
+  TD: [235, 'Chad (Tchad)'],
+  CL: [56, 'Chile'],
+  CN: [86, 'China (中国)'],
+  CX: [61, 'Christmas Island'],
+  CC: [61, 'Cocos (Keeling) Islands'],
+  CO: [57, 'Colombia'],
+  KM: [269, 'Comoros (‫جزر القمر‬‎)'],
+  CD: [243, 'Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)'],
+  CG: [242, 'Congo (Republic) (Congo-Brazzaville)'],
+  CK: [682, 'Cook Islands'],
+  CR: [506, 'Costa Rica'],
+  CI: [225, 'Côte d’Ivoire'],
+  HR: [385, 'Croatia (Hrvatska)'],
+  CU: [53, 'Cuba'],
+  CW: [599, 'Curaçao'],
+  CY: [357, 'Cyprus (Κύπρος)'],
+  CZ: [420, 'Czech Republic (Česká republika)'],
+  DK: [45, 'Denmark (Danmark)'],
+  DJ: [253, 'Djibouti'],
+  DM: [1767, 'Dominica'],
+  DO: [1, 'Dominican Republic (República Dominicana)'],
+  EC: [593, 'Ecuador'],
+  EG: [20, 'Egypt (‫مصر‬‎)'],
+  SV: [503, 'El Salvador'],
+  GQ: [240, 'Equatorial Guinea (Guinea Ecuatorial)'],
+  ER: [291, 'Eritrea'],
+  EE: [372, 'Estonia (Eesti)'],
+  ET: [251, 'Ethiopia'],
+  FK: [500, 'Falkland Islands (Islas Malvinas)'],
+  FO: [298, 'Faroe Islands (Føroyar)'],
+  FJ: [679, 'Fiji'],
+  FI: [358, 'Finland (Suomi)'],
+  FR: [33, 'France'],
+  GF: [594, 'French Guiana (Guyane française)'],
+  PF: [689, 'French Polynesia (Polynésie française)'],
+  GA: [241, 'Gabon'],
+  GM: [220, 'Gambia'],
+  GE: [995, 'Georgia (საქართველო)'],
+  DE: [49, 'Germany (Deutschland)'],
+  GH: [233, 'Ghana (Gaana)'],
+  GI: [350, 'Gibraltar'],
+  GR: [30, 'Greece (Ελλάδα)'],
+  GL: [299, 'Greenland (Kalaallit Nunaat)'],
+  GD: [1473, 'Grenada'],
+  GP: [590, 'Guadeloupe'],
+  GU: [1671, 'Guam'],
+  GT: [502, 'Guatemala'],
+  GG: [44, 'Guernsey'],
+  GN: [224, 'Guinea (Guinée)'],
+  GW: [245, 'Guinea-Bissau (Guiné Bissau)'],
+  GY: [592, 'Guyana'],
+  HT: [509, 'Haiti'],
+  HN: [504, 'Honduras'],
+  HK: [852, 'Hong Kong (香港)'],
+  HU: [36, 'Hungary (Magyarország)'],
+  IS: [354, 'Iceland (Ísland)'],
+  IN: [91, 'India (भारत)'],
+  ID: [62, 'Indonesia'],
+  IR: [98, 'Iran (‫ایران‬‎)'],
+  IQ: [964, 'Iraq (‫العراق‬‎)'],
+  IE: [353, 'Ireland'],
+  IM: [44, 'Isle of Man'],
+  IL: [972, 'Israel (‫ישראל‬‎)'],
+  IT: [39, 'Italy (Italia)'],
+  JM: [1876, 'Jamaica'],
+  JP: [81, 'Japan (日本)'],
+  JE: [44, 'Jersey'],
+  JO: [962, 'Jordan (‫الأردن‬‎)'],
+  KZ: [7, 'Kazakhstan (Казахстан)'],
+  KE: [254, 'Kenya'],
+  KI: [686, 'Kiribati'],
+  XK: [383, 'Kosovo'],
+  KW: [965, 'Kuwait (‫الكويت‬‎)'],
+  KG: [996, 'Kyrgyzstan (Кыргызстан)'],
+  LA: [856, 'Laos (ລາວ)'],
+  LV: [371, 'Latvia (Latvija)'],
+  LB: [961, 'Lebanon (‫لبنان‬‎)'],
+  LS: [266, 'Lesotho'],
+  LR: [231, 'Liberia'],
+  LY: [218, 'Libya (‫ليبيا‬‎)'],
+  LI: [423, 'Liechtenstein'],
+  LT: [370, 'Lithuania (Lietuva)'],
+  LU: [352, 'Luxembourg'],
+  MO: [853, 'Macau (澳門)'],
+  MK: [389, 'Macedonia (FYROM) (Македонија)'],
+  MG: [261, 'Madagascar (Madagasikara)'],
+  MW: [265, 'Malawi'],
+  MY: [60, 'Malaysia'],
+  MV: [960, 'Maldives'],
+  ML: [223, 'Mali'],
+  MT: [356, 'Malta'],
+  MH: [692, 'Marshall Islands'],
+  MQ: [596, 'Martinique'],
+  MR: [222, 'Mauritania (‫موريتانيا‬‎)'],
+  MU: [230, 'Mauritius (Moris)'],
+  YT: [262, 'Mayotte'],
+  MX: [52, 'Mexico (México)'],
+  FM: [691, 'Micronesia'],
+  MD: [373, 'Moldova (Republica Moldova)'],
+  MC: [377, 'Monaco'],
+  MN: [976, 'Mongolia (Монгол)'],
+  ME: [382, 'Montenegro (Crna Gora)'],
+  MS: [1664, 'Montserrat'],
+  MA: [212, 'Morocco (‫المغرب‬‎)'],
+  MZ: [258, 'Mozambique (Moçambique)'],
+  MM: [95, 'Myanmar (Burma) (မြန်မာ)'],
+  NA: [264, 'Namibia (Namibië)'],
+  NR: [674, 'Nauru'],
+  NP: [977, 'Nepal (नेपाल)'],
+  NL: [31, 'Netherlands (Nederland)'],
+  NC: [687, 'New Caledonia (Nouvelle-Calédonie)'],
+  NZ: [64, 'New Zealand'],
+  NI: [505, 'Nicaragua'],
+  NE: [227, 'Niger (Nijar)'],
+  NG: [234, 'Nigeria'],
+  NU: [683, 'Niue'],
+  NF: [672, 'Norfolk Island'],
+  KP: [850, 'North Korea (조선 민주주의 인민 공화국)'],
+  MP: [1670, 'Northern Mariana Islands'],
+  NO: [47, 'Norway (Norge)'],
+  OM: [968, 'Oman (‫عُمان‬‎)'],
+  PK: [92, 'Pakistan (‫پاکستان‬‎)'],
+  PW: [680, 'Palau'],
+  PS: [970, 'Palestine (‫فلسطين‬‎)'],
+  PA: [507, 'Panama (Panamá)'],
+  PG: [675, 'Papua New Guinea'],
+  PY: [595, 'Paraguay'],
+  PE: [51, 'Peru (Perú)'],
+  PH: [63, 'Philippines'],
+  PL: [48, 'Poland (Polska)'],
+  PT: [351, 'Portugal'],
+  PR: [1, 'Puerto Rico'],
+  QA: [974, 'Qatar (‫قطر‬‎)'],
+  RE: [262, 'Réunion (La Réunion)'],
+  RO: [40, 'Romania (România)'],
+  RU: [7, 'Russia (Россия)'],
+  RW: [250, 'Rwanda'],
+  BL: [590, 'Saint Barthélemy (Saint-Barthélemy)'],
+  SH: [290, 'Saint Helena'],
+  KN: [1869, 'Saint Kitts and Nevis'],
+  LC: [1758, 'Saint Lucia'],
+  MF: [590, 'Saint Martin (Saint-Martin (partie française))'],
+  PM: [508, 'Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)'],
+  VC: [1784, 'Saint Vincent and the Grenadines'],
+  WS: [685, 'Samoa'],
+  SM: [378, 'San Marino'],
+  ST: [239, 'São Tomé and Príncipe (São Tomé e Príncipe)'],
+  SA: [966, 'Saudi Arabia (‫المملكة العربية السعودية‬‎)'],
+  SN: [221, 'Senegal (Sénégal)'],
+  RS: [381, 'Serbia (Србија)'],
+  SC: [248, 'Seychelles'],
+  SL: [232, 'Sierra Leone'],
+  SG: [65, 'Singapore'],
+  SX: [1721, 'Sint Maarten'],
+  SK: [421, 'Slovakia (Slovensko)'],
+  SI: [386, 'Slovenia (Slovenija)'],
+  SB: [677, 'Solomon Islands'],
+  SO: [252, 'Somalia (Soomaaliya)'],
+  ZA: [27, 'South Africa'],
+  KR: [82, 'South Korea (대한민국)'],
+  SS: [211, 'South Sudan (‫جنوب السودان‬‎)'],
+  ES: [34, 'Spain (España)'],
+  LK: [94, 'Sri Lanka (ශ්‍රී ලංකාව)'],
+  SD: [249, 'Sudan (‫السودان‬‎)'],
+  SR: [597, 'Suriname'],
+  SJ: [47, 'Svalbard and Jan Mayen'],
+  SZ: [268, 'Swaziland'],
+  SE: [46, 'Sweden (Sverige)'],
+  CH: [41, 'Switzerland (Schweiz)'],
+  SY: [963, 'Syria (‫سوريا‬‎)'],
+  TW: [886, 'Taiwan (台灣)'],
+  TJ: [992, 'Tajikistan'],
+  TZ: [255, 'Tanzania'],
+  TH: [66, 'Thailand (ไทย)'],
+  TL: [670, 'Timor-Leste'],
+  TG: [228, 'Togo'],
+  TK: [690, 'Tokelau'],
+  TO: [676, 'Tonga'],
+  TT: [1868, 'Trinidad and Tobago'],
+  TN: [216, 'Tunisia (‫تونس‬‎)'],
+  TR: [90, 'Turkey (Türkiye)'],
+  TM: [993, 'Turkmenistan'],
+  TC: [1649, 'Turks and Caicos Islands'],
+  TV: [688, 'Tuvalu'],
+  VI: [1340, 'U.S. Virgin Islands'],
+  UG: [256, 'Uganda'],
+  UA: [380, 'Ukraine (Україна)'],
+  AE: [971, 'United Arab Emirates (‫الإمارات العربية المتحدة‬‎)'],
+  GB: [44, 'United Kingdom'],
+  US: [1, 'United States'],
+  UY: [598, 'Uruguay'],
+  UZ: [998, 'Uzbekistan (Oʻzbekiston)'],
+  VU: [678, 'Vanuatu'],
+  VA: [39, 'Vatican City (Città del Vaticano)'],
+  VE: [58, 'Venezuela'],
+  VN: [84, 'Vietnam (Việt Nam)'],
+  WF: [681, 'Wallis and Futuna'],
+  EH: [212, 'Western Sahara (‫الصحراء الغربية‬‎)'],
+  YE: [967, 'Yemen (‫اليمن‬‎)'],
+  ZM: [260, 'Zambia'],
+  ZW: [263, 'Zimbabwe'],
+  AX: [358, 'Åland Islands'],
 };
 
 export default data;
