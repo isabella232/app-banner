@@ -30,6 +30,7 @@ if (!DEBUG) {
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: [
+    'whatwg-fetch',
     './index',
   ],
   output: {

@@ -48,6 +48,7 @@
     "min-base64": "^2.0.0",
     "preact": "^8.1.0",
     "preact-compat": "^3.16.0",
-    "query-string": "^4.3.4"
+    "query-string": "^4.3.4",
+    "whatwg-fetch": "^2.0.3"
   }
 }
