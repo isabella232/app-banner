@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const BabiliPlugin = require('babili-webpack-plugin');
 
 const plugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
@@ -11,7 +12,7 @@ const DEBUG = process.env.NODE_ENV !== 'production';
 
 if (!DEBUG) {
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin(),
+    new BabiliPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
@@ -29,7 +30,6 @@ if (!DEBUG) {
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: [
-    //'babel-polyfill',
     './index',
   ],
   output: {
@@ -46,7 +46,7 @@ module.exports = {
       loader: 'style-loader!css-loader!sass-loader',
     }, {
       test: [/\.svg$/, /\.png$/],
-      loader: 'url-loader'
+      loader: 'url-loader',
     }],
   },
   plugins,
