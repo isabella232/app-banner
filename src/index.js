@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import MobileDetect from 'mobile-detect';
 import ElementClass from 'element-class';
 import docCookies from 'doc-cookies';
 import Base64 from 'min-base64';
@@ -76,15 +75,18 @@ function getQuery() {
 }
 
 function detectOs() {
-  const md = new MobileDetect(window.navigator.userAgent);
-  const os = md.os();
-  const android = os && os.match(/android/i);
-  const ios = os && os.match(/ios/i);
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const winphone = /windows phone/i.test(userAgent);
+  const android = /android/i.test(userAgent);
+  const ios = (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
+  const safari = /safari/i.test(userAgent);
+
   return {
     android,
     ios,
-    desktop: !(android || ios),
-    safari: /safari/i.test(window.navigator.userAgent),
+    winphone,
+    desktop: !(android || ios || winphone),
+    safari,
     nativeAppBar: document.querySelector('meta[name="apple-itunes-app"]'),
   };
 }
