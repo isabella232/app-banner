@@ -1,26 +1,27 @@
 import React from 'react';
 
 import dismiss from '../images/dismiss.svg';
+import s from '../main.scss';
 
 const MobileBanner = ({ app, locale, onDismiss }) => (
-  <div className="app-banner" id="AppBanner">
+  <div className={s.banner} id={s.AppBanner}>
 
-    <div className="app-banner__dismiss" onClick={onDismiss} role="presentation">
+    <div className={s.banner__dismiss} onClick={onDismiss} role="presentation">
       <img alt="" src={dismiss} />
     </div>
 
-    <a href={app.url} className="app-banner__container">
-      <div className="app-banner__img">
+    <a href={app.url} className={s.banner__container}>
+      <div className={s.banner__img}>
         <img alt={app.name} src={app.icon} role="presentation" />
       </div>
 
-      <div className="app-banner__info">
-        <div className="app-banner__name">{app.name}</div>
-        <div className="app-banner__publisher">{app.publisher}</div>
-        <div className="app-banner__cta">{locale.cta}</div>
+      <div className={s.banner__info}>
+        <div className={s.banner__name}>{app.name}</div>
+        <div className={s.banner__publisher}>{app.publisher}</div>
+        <div className={s.banner__cta}>{locale.cta}</div>
       </div>
 
-      <div className="app-banner__btn app-banner__btn--fixed">{locale.view}</div>
+      <div className={`${s.banner__btn} ${s.banner__btn__fixed}`}>{locale.view}</div>
     </a>
   </div>
 );

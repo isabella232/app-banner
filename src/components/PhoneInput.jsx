@@ -2,6 +2,8 @@ import React from 'react';
 
 import countryCodes from '../lib/country-codes';
 
+import s from '../main.scss';
+
 const countryCode = code => countryCodes[code][0];
 
 const formatCountries = data =>
@@ -63,19 +65,19 @@ export default class PhoneInput extends React.Component {
     const prefix = this.state.country ? `+${countryCode(this.state.country)}` : '';
 
     return (
-      <div className="app-banner__phone-input">
-        <span className="app-banner__phone-input-select-container">
+      <div className={s.banner__phone_input}>
+        <span className={s.banner__phone_input_select_container}>
           <img
-            className="app-banner__phone-input-flag"
+            className={s.banner__phone_input_flag}
             src={`images/flags/${this.state.country}.svg`}
             alt={prefix}
           />
-          <span className="app-banner__phone-input-select-value">
+          <span className={s.banner__phone_input_select_value}>
             {prefix}
           </span>
           <select
             onChange={e => this.onPrefixChange(e)}
-            className="app-banner__phone-input-select"
+            className={s.banner__phone_input_select}
           >
             {this.countries.map(({ country, label }) => (
               <option key={country} value={country}>{label}</option>
@@ -83,7 +85,7 @@ export default class PhoneInput extends React.Component {
           </select>
         </span>
         <input
-          className="app-banner__phone-input-number"
+          className={s.banner__phone_input_number}
           onChange={e => this.onInputChange(e)}
           onKeyPress={e => this.onKeyPress(e)}
           placeholder={placeholder}

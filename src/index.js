@@ -11,9 +11,11 @@ import BannerWrapper from './components/BannerWrapper';
 
 import fixHeader from './lib/fix-header';
 
-import './main.scss';
-
 import locales from './lib/locales';
+
+import s from './main.scss';
+
+console.log(s);
 
 const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
@@ -106,12 +108,12 @@ function render(comp) {
 
 function showMobileBanner() {
   ElementClass(document.querySelector('html'))
-    .add('AppBannerPresent');
+    .add(s.AppBannerPresent);
 }
 
 function hideMobileBanner() {
   ElementClass(document.querySelector('html'))
-    .remove('AppBannerPresent');
+    .remove(s.AppBannerPresent);
 }
 
 function getDismissed() {

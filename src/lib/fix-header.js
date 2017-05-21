@@ -1,5 +1,7 @@
 import elementClass from 'element-class';
 
+import s from '../main.scss';
+
 function findHeader() {
   let el = document.elementFromPoint(1, 1);
   let style;
@@ -29,7 +31,7 @@ function findHeader() {
 export default function fixFixedHeader() {
   const el = findHeader();
   if (el) {
-    elementClass(el).add('AppBannerFixedHeader');
+    elementClass(el).add(s.AppBannerFixedHeader);
   }
 }
 

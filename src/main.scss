@@ -71,7 +71,7 @@ html {
   margin-top: 0;
 }
 
-.app-banner {
+.banner {
   @extend %reset;
   display: block;
   position: fixed;
@@ -90,7 +90,7 @@ html {
   box-sizing: border-box;
   font-family: $system-fonts;
 
-  &--desktop {
+  &__desktop {
     display: inline-block;
     background-color: #ffffff;
     box-shadow: 0 0 6px 0 rgba(0,0,0,.12), 0 6px 6px 0 rgba(0,0,0,.24);
@@ -105,7 +105,7 @@ html {
     padding: 0;
   }
 
-  &--bottom-right {
+  &__bottom-right {
     top: auto;
     right: 0;
     bottom: 0;
@@ -113,7 +113,7 @@ html {
     transform-origin: bottom right;
   }
 
-  &--bottom-left {
+  &__bottom-left {
     top: auto;
     right: auto;
     bottom: 0;
@@ -121,7 +121,7 @@ html {
     transform-origin: bottom left;
   }
 
-  &--top-right {
+  &__top-right {
     top: auto;
     right: 0;
     top: 0;
@@ -129,7 +129,7 @@ html {
     transform-origin: top right;
   }
 
-  &--top-left {
+  &__top-left {
     top: auto;
     right: auto;
     top: 0;
@@ -155,7 +155,7 @@ html {
     padding-bottom: 12px;
   }
 
-  &__header-row {
+  &__header_row {
     display: table-row;
   }
 
@@ -168,11 +168,11 @@ html {
     border-radius: 4px;
     overflow: hidden;
 
-    &-container {
+    &_container {
       display: table-cell;
     }
 
-    &--desktop {
+    &__desktop {
       float: none;
     }
 
@@ -257,7 +257,7 @@ html {
     }
   }
 
-  &__badge-container {
+  &__badge_container {
     padding: 16px 8px;
     background-color: #ccc;
     border-radius: 5px 5px 0 0;
@@ -274,7 +274,7 @@ html {
     }
   }
 
-  &__input-container {
+  &__input_container {
     @extend %reset;
     position: relative;
     margin-bottom: 12px;
@@ -312,7 +312,7 @@ html {
     }
   }
 
-  &__phone-input {
+  &__phone_input {
     display: table;
     width: 100%;
     background: #FAFAFA;
@@ -322,7 +322,7 @@ html {
     font-size: 1em;
     color: #444;
 
-    &-select-container {
+    &_select_container {
       position: relative;
       display: table-cell;
       white-space: nowrap;
@@ -331,14 +331,14 @@ html {
       padding: 6px 8px 6px 8px;
     }
 
-    &-flag {
+    &_flag {
       display: inline-block;
       height: 0.75em;
       max-width: 16px;
       margin-right: .25em;
     }
 
-    &-select-value {
+    &_select_value {
       display: inline-block;
       line-height: 1;
       color: #666;
@@ -352,7 +352,7 @@ html {
       }
     }
 
-    &-select {
+    &_select {
       position: absolute;
       top: 0;
       left: 0;
@@ -362,7 +362,7 @@ html {
       opacity: 0;
     }
 
-    &-number {
+    &_number {
       position: relative;
       display: inline-block;
       width: 100%;
@@ -383,7 +383,7 @@ html {
     }
   }
 
-  &__btn-container {
+  &__btn_container {
     @extend %reset;
     text-align: right;
 
@@ -405,18 +405,18 @@ html {
     cursor: pointer;
     border: 0;
 
-    &--lg {
+    &__lg {
       padding: 10px 12px;
       line-height: 1.2;
       font-weight: 600;
     }
 
-    &--link {
+    &__link {
       background-color: transparent;
       color: #444;
     }
 
-    &--fixed {
+    &__fixed {
       position: absolute;
       right: $bannerPadding;
       top: 50%;

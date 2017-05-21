@@ -5,8 +5,10 @@ import PhoneInput from './PhoneInput';
 import spinner from '../images/spinner.svg';
 import badgeGp from '../images/gp.svg';
 
+import s from '../main.scss';
+
 const BadgeApple = ({ url, locale }) => (
-  <a className="app-banner__badge" href={url}>
+  <a className={s.banner__badge} href={url}>
     <img
       alt={locale.get_apple}
       src="//linkmaker.itunes.apple.com/assets/shared/badges/en-gb/appstore-lrg.svg"
@@ -15,7 +17,7 @@ const BadgeApple = ({ url, locale }) => (
 );
 
 const BadgeGoogle = ({ url, locale }) => (
-  <a className="app-banner__badge" href={url}>
+  <a className={s.banner__badge} href={url}>
     <img
       alt={locale.get_google}
       src={badgeGp}
@@ -46,23 +48,24 @@ export default class DesktopBanner extends React.Component {
 
     if (loading) {
       return (
-        <div className="app-banner__spinner">
+        <div className={s.banner__spinner}>
           <img alt="" src={spinner} />
         </div>
       );
     }
 
+    // FIXME: double check button styles
     if (success) {
       return (
-        <div className="app-banner__btn-container">
+        <div className={s.banner__btn_container}>
           <button
-            className="app-banner__btn app-banner__btn--lg app-banner__btn--link"
+            className={`${s.banner__btn} ${s.banner__btn__lg} ${s.banner__btn__link}`}
             onClick={onRetry}
           >
             {locale.desktop_edit}
           </button>
           <button
-            className="app-banner__btn app-banner__btn--lg"
+            className={`${s.banner__btn} ${s.banner__btn__lg}`}
             onClick={onDismiss}
           >
             {locale.desktop_done}
@@ -72,15 +75,15 @@ export default class DesktopBanner extends React.Component {
     }
 
     return (
-      <div className="app-banner__btn-container">
+      <div className={s.banner__btn_container}>
         <button
-          className="app-banner__btn app-banner__btn--lg app-banner__btn--link"
+          className={`${s.banner__btn} ${s.banner__btn__lg} ${s.banner__btn__link}`}
           onClick={onDismiss}
         >
           {locale.desktop_no_thanks}
         </button>
         <button
-          className="app-banner__btn app-banner__btn--lg"
+          className={`${s.banner__btn} ${s.banner__btn__lg}`}
           onClick={() => this.send()}
         >
           {locale.desktop_send_link}
@@ -107,34 +110,34 @@ export default class DesktopBanner extends React.Component {
       app = apple;
     }
 
-    const className = `app-banner app-banner--desktop app-banner--${placement}`;
+    const className = `${s.banner} ${s.banner__desktop} ${s[`banner__${placement}`]}`;
 
     return (
-      <div id="AppBanner" className={className}>
-        <div className="app-banner__badge-container">
+      <div id={s.AppBanner} className={className}>
+        <div className={s.banner__badge_container}>
           {(google && google.icon) ? <BadgeGoogle url={google.url} locale={locale} /> : null}
           {(apple && apple.icon) ? <BadgeApple url={apple.url} locale={locale} /> : null}
         </div>
 
 
-        <div className="app-banner__body">
-          <div className="app-banner__header">
-            <div className="app-banner__header-row">
+        <div className={s.banner__body}>
+          <div className={s.banner__header}>
+            <div className={s.banner__header_row}>
 
-              <div className="app-banner__img-container">
-                <div className="app-banner__img app-banner__img--desktop">
+              <div className={s.banner__img_container}>
+                <div className={`${s.banner__img} ${s.banner__img__desktop}`}>
                   <img alt={app.name} src={app.icon} role="presentation" />
                 </div>
               </div>
 
-              <div className="app-banner__description">
+              <div className={s.banner__description}>
                 <span><b>{locale.desktop_try}</b></span>
                 <p>{locale.desktop_phone}</p>
               </div>
             </div>
           </div>
 
-          <div className="app-banner__input-container">
+          <div className={s.banner__input_container}>
             <PhoneInput
               onEnter={() => this.send()}
               onChange={val => this.update(val)}
