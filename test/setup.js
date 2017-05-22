@@ -6,6 +6,7 @@ require.extensions['.scss'] = (module) => {
   module.exports = {
     banner__dismiss: 'banner__dismiss',
     'banner__upside-down': 'banner__upside-down',
+    banner__phone_input_error: 'banner__phone_input_error',
   };
 };
 

@@ -39,7 +39,7 @@ export default class DesktopBanner extends React.Component {
   }
 
   send() {
-    const { onSend = () => {} } = this.props; // FIXME: shoud I rename this?
+    const { onSend = () => {} } = this.props;
     onSend(this.state.number);
   }
 
@@ -54,7 +54,6 @@ export default class DesktopBanner extends React.Component {
       );
     }
 
-    // FIXME: double check button styles
     if (success) {
       return (
         <div className={s.banner__btn_container}>
@@ -99,6 +98,7 @@ export default class DesktopBanner extends React.Component {
       locale,
       country,
       loading,
+      error,
       placement = 'bottom-right',
     } = this.props;
 
@@ -144,6 +144,7 @@ export default class DesktopBanner extends React.Component {
               country={country}
               placeholder={locale.desktop_phone_placeholder}
               disabled={loading}
+              error={error}
             />
           </div>
           {this.renderButtons()}

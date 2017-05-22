@@ -171,4 +171,10 @@ describe('DesktopBanner', () => {
 
     expect(bnr.html()).contains('upside-down');
   });
+
+  // it('supports error property', () => {
+  //   const bnr = mount(<DesktopBanner error {...defaults} />);
+  //
+  //   expect(bnr.html()).contains('error');
+  // });
 });

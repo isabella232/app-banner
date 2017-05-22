@@ -167,9 +167,9 @@ function sendSMS(number, app) {
     },
     body: JSON.stringify(data),
   }).then((resp) => {
-    if (resp.status !== 200) {
+    //if (resp.status !== 200) {
       return new Promise().reject(`sendapp returned ${resp.status}`);
-    }
+    //}
 
     return true;
   });

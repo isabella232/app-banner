@@ -322,6 +322,10 @@ html {
     font-size: 1em;
     color: #444;
 
+    &_error {
+      border: 1px solid red;
+    }
+
     &_select_container {
       position: relative;
       display: table-cell;

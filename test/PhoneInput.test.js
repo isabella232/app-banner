@@ -98,6 +98,8 @@ describe('PhoneInput', () => {
 
     const input = mount(<PhoneInput country="RU" onChange={handler} />);
 
+    expect(input.find('select').prop('value')).to.eql('RU');
+
     input.find('input').simulate('change', { target: { value: '4852560000' } });
 
     expect(handler.calledWith('+74852560000')).to.eql(true);
@@ -112,4 +114,10 @@ describe('PhoneInput', () => {
     expect(icon).to.have.length.of(1);
     expect(icon.html()).to.contain('flags/RU.svg');
   });
+
+  // it('displays error', () => {
+  //   const input = mount(<PhoneInput error />);
+  //
+  //   expect(input.html()).to.contain('error');
+  // });
 });

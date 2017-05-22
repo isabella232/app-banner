@@ -32,23 +32,23 @@ export default class PhoneInput extends React.Component {
 
   onPrefixChange(e) {
     const { onChange = () => {} } = this.props;
+    const { number } = this.state;
 
     const country = e.target.value;
     this.setState({ country });
 
     const prefix = `+${countryCode(country)}`;
-    onChange(`${prefix}${this.state.number}`);
+    onChange(`${prefix}${number}`);
   }
 
   onInputChange(e) {
     const { onChange = () => {} } = this.props;
+    const { country } = this.state;
 
-    const number = e.target.value.replace(/[^\d]/g, ''); // only allow numbers and plus sign
+    const number = e.target.value.replace(/[^\d]/g, ''); // only allow numbers here
     this.setState({ number });
 
-    // FIXME: replace number's leading zeroes -- for what?
-
-    const prefix = this.state.country ? `+${countryCode(this.state.country)}` : '';
+    const prefix = country ? `+${countryCode(country)}` : '';
     onChange(`${prefix}${number}`);
   }
 
@@ -61,15 +61,18 @@ export default class PhoneInput extends React.Component {
   }
 
   render() {
-    const { placeholder, disabled } = this.props;
-    const prefix = this.state.country ? `+${countryCode(this.state.country)}` : '';
+    const { placeholder, disabled = '' } = this.props;
+    const { country } = this.state;
+    const prefix = country ? `+${countryCode(country)}` : '';
+
+    // const className = `${error ? s.banner__phone_input_error : ''} ${s.banner__phone_input}`;
 
     return (
       <div className={s.banner__phone_input}>
         <span className={s.banner__phone_input_select_container}>
           <img
             className={s.banner__phone_input_flag}
-            src={`images/flags/${this.state.country}.svg`}
+            src={`images/flags/${country}.svg`}
             alt={prefix}
           />
           <span className={s.banner__phone_input_select_value}>
@@ -78,9 +81,10 @@ export default class PhoneInput extends React.Component {
           <select
             onChange={e => this.onPrefixChange(e)}
             className={s.banner__phone_input_select}
+            value={country || ''}
           >
-            {this.countries.map(({ country, label }) => (
-              <option key={country} value={country}>{label}</option>
+            {this.countries.map(({ country: ct, label }) => (
+              <option key={ct} value={ct}>{label}</option>
             ))}
           </select>
         </span>
