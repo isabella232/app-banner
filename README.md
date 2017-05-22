@@ -4,6 +4,8 @@
 
 ![Preview](http://next.ombori.com/static/images/preview-desktop.png "App Banner Example")
 
+![Mobile](http://next.ombori.com/static/images/mobile.png "Mobile Banner Example")
+
 Easy to use, free, open-source configurable application banner for your website.
 
 ## How does it work?
@@ -19,7 +21,18 @@ Just include this snippet in your website main page.
 
 ```javascript
 <script>
-(function () {var appleId = 'id1234567890';var googleId = 'com.yourcompany.yourapp';var placement = 'bottom-left';var s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.id = 'TheAppBanner';s.src = '/main.js?&p=' + placement + '&apple=' + appleId + '&google=' + googleId;var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();
+  (function () {
+    var appleId = 'id1234567890';
+    var googleId = 'com.yourcompany.yourapp';
+    var placement = 'bottom-left';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.id = 'TheAppBanner';
+    s.src = '/main.js?&p=' + placement + '&apple=' + appleId + '&google=' + googleId;
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  })();
 </script>
 ```
 
