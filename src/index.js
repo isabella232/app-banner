@@ -90,7 +90,7 @@ function detectLang() {
 
 function getLocale(lang) {
   if (locales[lang]) {
-    return Object.assign({}, locales.en, locales[lang]);
+    return {...locales.en, ...locales[lang]};
   }
 
   return locales.en;

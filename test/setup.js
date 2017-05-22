@@ -2,8 +2,8 @@ require('babel-register');
 require.extensions['.svg'] = () => null;
 
 // FIXME: thats ugly and caused by babel inability to correctly load scss
-require.extensions['.scss'] = (module) => {
-  module.exports = {
+require.extensions['.scss'] = (m) => {
+  m.exports = {
     banner__dismiss: 'banner__dismiss',
     'banner__upside-down': 'banner__upside-down',
     banner__phone_input_error: 'banner__phone_input_error',
