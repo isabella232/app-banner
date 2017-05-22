@@ -115,9 +115,9 @@ describe('PhoneInput', () => {
     expect(icon.html()).to.contain('flags/RU.svg');
   });
 
-  // it('displays error', () => {
-  //   const input = mount(<PhoneInput error />);
-  //
-  //   expect(input.html()).to.contain('error');
-  // });
+  it('displays error', () => {
+    const input = mount(<PhoneInput error />);
+
+    expect(input.html()).to.contain('error');
+  });
 });

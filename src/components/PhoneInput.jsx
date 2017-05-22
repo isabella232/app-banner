@@ -61,14 +61,14 @@ export default class PhoneInput extends React.Component {
   }
 
   render() {
-    const { placeholder, disabled = '' } = this.props;
+    const { placeholder, error, disabled = '' } = this.props;
     const { country } = this.state;
     const prefix = country ? `+${countryCode(country)}` : '';
 
-    // const className = `${error ? s.banner__phone_input_error : ''} ${s.banner__phone_input}`;
+    const className = `${error ? s.banner__phone_input_error : ''} ${s.banner__phone_input}`;
 
     return (
-      <div className={s.banner__phone_input}>
+      <div className={className}>
         <span className={s.banner__phone_input_select_container}>
           <img
             className={s.banner__phone_input_flag}

@@ -134,7 +134,7 @@ function loadCountryCode() {
 
   return fetch('https://location.ombori.com/')
     .then(resp => resp.json())
-    .resp((data) => {
+    .then((data) => {
       sessionStorage.setItem(`${cookieName}.CountryCode`, data.country);
       return data.country;
     });
