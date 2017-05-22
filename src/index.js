@@ -6,11 +6,6 @@ import Base64 from 'min-base64';
 import QueryString from 'query-string';
 import PromisePF from 'promise-polyfill';
 
-// To add to window
-if (!window.Promise) {
-  window.Promise = PromisePF;
-}
-
 import MobileBanner from './components/MobileBanner';
 import DesktopBanner from './components/DesktopBanner';
 import BannerWrapper from './components/BannerWrapper';
@@ -25,6 +20,11 @@ const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
 
 const cookieName = 'AppBanner';
+
+// To add to window
+if (!window.Promise) {
+  window.Promise = PromisePF;
+}
 
 // FIXME: hide if presencekit is running
 
