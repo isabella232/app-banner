@@ -1,6 +1,14 @@
 require('babel-register');
 require.extensions['.svg'] = () => null;
 
+// FIXME: thats ugly and caused by babel inability to correctly load scss
+require.extensions['.scss'] = (module) => {
+  module.exports = {
+    banner__dismiss: 'banner__dismiss',
+    'banner__upside-down': 'banner__upside-down',
+  };
+};
+
 const jsdom = require('jsdom').jsdom;
 
 const exposedProperties = ['window', 'navigator', 'document'];
