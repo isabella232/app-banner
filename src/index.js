@@ -22,12 +22,6 @@ const cookieName = 'AppBanner';
 
 // FIXME: hide if presencekit is running
 
-// FIXME: value in country select list
-// FIXME: error handling when sending the number
-
-// TODO: add locales as json static files
-// TODO: add all images (except flags?) in main bundle.js
-
 // TODO: api to use as npm package
 
 // TODO: make cookieName customizeable
