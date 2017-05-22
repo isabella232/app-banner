@@ -7,10 +7,15 @@ export default Component => class BannerWrapper extends React.Component {
     this.state = {
       status: 'shown',
     };
+
+    this.timer = undefined;
   }
 
   onSuccess() {
+    const { timeout = 3000 } = this.props;
+
     this.setState({ status: 'success' });
+    this.timer = setTimeout(() => this.dismiss(), timeout);
   }
 
 
@@ -39,6 +44,14 @@ export default Component => class BannerWrapper extends React.Component {
     }
   }
 
+  retry() {
+    this.setState({ status: 'shown' });
+
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+  }
+
   render() {
     const { status } = this.state;
 
@@ -54,6 +67,7 @@ export default Component => class BannerWrapper extends React.Component {
         success={status === 'success'}
         onDismiss={() => this.dismiss()}
         onSend={value => this.send(value)}
+        onRetry={() => this.retry()}
       />
     );
   }

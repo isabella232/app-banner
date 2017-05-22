@@ -93,6 +93,38 @@ describe('Desktop banner', () => {
     }, 100);
   });
 
-  // TODO: retry
-  // TODO: auto dismiss banner after a certain interval
+  it('calls dismiss after timeout', (next) => {
+    const onDismiss = spy();
+    const promise = new Promise(done => done());
+    const banner = shallow(<Wrapped sender={() => promise} onDismiss={onDismiss} timeout={200} />);
+
+    banner.find(MyComponent).prop('onSend')('sometext');
+
+    setTimeout(() => {
+      expect(onDismiss.calledOnce).to.eql(false);
+    }, 100);
+
+    setTimeout(() => {
+      expect(onDismiss.calledOnce).to.eql(true);
+      next();
+    }, 300);
+  });
+
+  it('resets state when clicking retry', (next) => {
+    const promise = new Promise(done => done());
+    const banner = shallow(<Wrapped sender={() => promise} />);
+
+    banner.find(MyComponent).prop('onSend')('sometext');
+
+    setTimeout(() => {
+      banner.find(MyComponent).prop('onRetry')();
+    }, 100);
+
+    setTimeout(() => {
+      expect(banner.find(MyComponent).prop('error')).to.eql(false);
+      expect(banner.find(MyComponent).prop('loading')).to.eql(false);
+      expect(banner.find(MyComponent).prop('success')).to.eql(false);
+      next();
+    }, 200);
+  });
 });
