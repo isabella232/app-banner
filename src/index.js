@@ -195,6 +195,13 @@ function getComponent(app, os, query) {
     return null;
   }
 
+  // dirty fix for apple icons -- they are not https, this breaks https website security
+  if (app.apple) {
+    if (app.google) {
+      app.apple.icon = app.google.icon; // use google icon, they're always https
+    }
+  }
+
   if (os.desktop) {
     return loadCountryCode()
       .then(country => (
