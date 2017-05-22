@@ -1,27 +1,40 @@
-# AppBanner
+# Ombori App Banner
 
-## The lightweight and configurable banner for your app
+## The lightweight mobile application banner for your website
 
-Some description here explaining why application banners are awesome and why you need one.
+![Preview](http://next.ombori.com/static/images/preview-desktop.png "App Banner Example")
 
-And a picture
+Easy to use, free, open-source configurable application banner for your website.
 
-Yes, we're supporting Apple Store and Google Play
+## How does it work?
+
+When a customer visits your site, Desktop users are sent an SMS with a link to download your app.
+Mobile users are automatically directed to the appropriate app store.
+
+After a user has seen the app install banner, it won’t reappear. This ensures that the UX of your site is not degraded in any way.
 
 ## Usage
 
-- Example of usage via cdn (i.e. load the script from our server)
-- Example of usage via npm
-- Example of usage from your own server (does anyone need that?)
+Just include this snippet in your website main page.
 
-## Configuration
+```javascript
+<script>
+(function () {var appleId = 'id1234567890';var googleId = 'com.yourcompany.yourapp';var placement = 'bottom-left';var s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.id = 'TheAppBanner';s.src = '/main.js?&p=' + placement + '&apple=' + appleId + '&google=' + googleId;var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();
+</script>
+```
 
-- appleid
-- googleid
-- placement
+Alternatively you can use the App Banner via npm package
 
-and not supported yet
+```
+npm install --save app-banner
+```
 
-- cookie name
-- background
-- what else?
+```javascript
+const appBanner = require('app-banner');
+
+appBanner.create({
+  appleId: 'id1234567890',
+  googleId: 'com.youcompany.yourapp',
+  placement: 'bottom-left',
+})
+```
