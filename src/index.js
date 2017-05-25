@@ -1,4 +1,4 @@
-// this is an entry point for using app-banner as React component
+// This is an entry point for using app-banner as React component
 //
 // Usage: (in your js code)
 //

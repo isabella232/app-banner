@@ -1,7 +1,7 @@
 // This is an entry point for using app-banner as npm package
 // this will use the prebuilt version of app-banner.
 //
-// If you want to use app-banner as a React components, please use app-banner/src
+// If you want to use app-banner as a React component, please use 'app-banner/src' npm package
 //
 // Usage:
 //

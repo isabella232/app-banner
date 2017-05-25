@@ -27,6 +27,10 @@ if (!window.Promise) {
 // FIXME: hide if presencekit is running
 
 // TODO: make cookieName customizeable
+// TODO: check is position works
+// TODO: test for npm pack
+// TODO: test for React component via npm
+// TODO: unit test for this component
 
 function trackView() {
   const gaUrl = `https://sendapp.link/t/${document.location.href.replace(/http(s)?:\/\//, '')}`;
