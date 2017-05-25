@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production webpack --colors --progress --optimize-minimize --sort-modules-by size --verbose",
     "stats": "NODE_ENV=production webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json; rm stats.json",
     "start": "webpack-dev-server --content-base ./dist",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build"
   },
   "main": "index.js",
   "author": "Alexey Guskov",

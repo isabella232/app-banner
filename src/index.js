@@ -6,6 +6,10 @@
 //
 // ...
 // <div>
-//  <AppBanner googleId="com.presencekit.eyerim" appleId="id1184932325" position="bottom-left" />
+//  <AppBanner google="com.presencekit.eyerim" apple="id1184932325" position="bottom-left" />
 // </div>
 //
+
+import AppBanner from './components/AppBanner';
+
+export default AppBanner;

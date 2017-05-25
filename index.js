@@ -10,8 +10,8 @@
 // import AppBanner from 'app-banner';
 //
 // AppBanner.init({
-//   googleId: 'com.presencekit.eyerim',
-//   appleId: 'id1184932325',
+//   google: 'com.presencekit.eyerim',
+//   apple: 'id1184932325',
 //   position: 'bottom-left',
 // });
 
