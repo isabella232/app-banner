@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-// const BabiliPlugin = require('babili-webpack-plugin');
 
 const plugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
@@ -12,7 +11,6 @@ const DEBUG = process.env.NODE_ENV !== 'production';
 
 if (!DEBUG) {
   plugins.push(
-    // new BabiliPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
@@ -31,11 +29,13 @@ module.exports = {
   context: path.join(__dirname, 'src'),
   entry: [
     'whatwg-fetch',
-    './index',
+    './banner',
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'main.js',
+    libraryTarget: 'var',
+    library: 'AppBanner',
   },
   module: {
     loaders: [{
