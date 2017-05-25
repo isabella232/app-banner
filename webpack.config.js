@@ -34,7 +34,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'main.js',
-    libraryTarget: 'var',
+    libraryTarget: 'commonjs2',
     library: 'AppBanner',
   },
   module: {

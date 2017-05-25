@@ -15,11 +15,6 @@
 //   position: 'bottom-left',
 // });
 
-function init(cfg) {
-  var banner = require('./dist/main.js');
-  return banner.init(cfg);
-}
+const AppBanner = require('./dist/main.js');
 
-module.exports = {
-  init: init,
-};
+module.exports = AppBanner.default;
