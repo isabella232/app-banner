@@ -4,9 +4,9 @@ require.extensions['.svg'] = () => null;
 // FIXME: thats ugly and caused by babel inability to correctly load scss
 require.extensions['.scss'] = (m) => {
   m.exports = {
-    banner__dismiss: 'banner__dismiss',
-    'banner__upside-down': 'banner__upside-down',
-    banner__phone_input_error: 'banner__phone_input_error',
+    dismiss: 'dismiss',
+    'position__upside-down': 'position__upside-down',
+    error: 'error',
   };
 };
 

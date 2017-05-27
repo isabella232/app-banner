@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ElementClass from 'element-class';
 import docCookies from 'doc-cookies';
 import Base64 from 'min-base64';
 import PromisePF from 'promise-polyfill';
@@ -8,11 +7,7 @@ import MobileBanner from './MobileBanner';
 import DesktopBanner from './DesktopBanner';
 import BannerWrapper from './BannerWrapper';
 
-import fixHeader from '../lib/fix-header';
-
 import locales from '../lib/locales';
-
-import s from '../main.scss';
 
 const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
@@ -88,16 +83,6 @@ function getLocale(lang) {
   }
 
   return locales.en;
-}
-
-function showMobileBanner() {
-  ElementClass(document.querySelector('html'))
-    .add(s.AppBannerPresent);
-}
-
-function hideMobileBanner() {
-  ElementClass(document.querySelector('html'))
-    .remove(s.AppBannerPresent);
 }
 
 function getDismissed() {
@@ -220,10 +205,6 @@ export default class AppBanner extends Component {
             .then(country => this.setState({ country, app }));
         } else {
           this.setState({ app });
-          setTimeout(() => {
-            showMobileBanner();
-            fixHeader();
-          }, 100);
         }
       });
   }

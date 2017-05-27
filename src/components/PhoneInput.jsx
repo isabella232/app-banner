@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import countryCodes from '../lib/country-codes';
 
-import s from '../main.scss';
+import style from './css/PhoneInput.scss';
 
 const countryCode = code => countryCodes[code][0];
 
@@ -65,22 +65,22 @@ export default class PhoneInput extends Component {
     const { country } = this.state;
     const prefix = country ? `+${countryCode(country)}` : '';
 
-    const className = `${error ? s.banner__phone_input_error : ''} ${s.banner__phone_input}`;
+    const className = `${error ? style.error : ''} ${style.input}`;
 
     return (
       <div className={className}>
-        <span className={s.banner__phone_input_select_container}>
+        <span className={style.select_container}>
           <img
-            className={s.banner__phone_input_flag}
+            className={style.flag}
             src={`images/flags/${country}.svg`}
             alt={prefix}
           />
-          <span className={s.banner__phone_input_select_value}>
+          <span className={style.select_value}>
             {prefix}
           </span>
           <select
             onChange={e => this.onPrefixChange(e)}
-            className={s.banner__phone_input_select}
+            className={style.select}
             value={country || ''}
           >
             {this.countries.map(({ country: ct, label }) => (
@@ -89,7 +89,7 @@ export default class PhoneInput extends Component {
           </select>
         </span>
         <input
-          className={s.banner__phone_input_number}
+          className={style.number}
           onChange={e => this.onInputChange(e)}
           onKeyPress={e => this.onKeyPress(e)}
           placeholder={placeholder}
