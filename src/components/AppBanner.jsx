@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ElementClass from 'element-class';
 import docCookies from 'doc-cookies';
 import Base64 from 'min-base64';
@@ -175,7 +175,7 @@ function onDismiss() {
   hideMobileBanner();
 }
 
-export default class AppBanner extends React.Component {
+export default class AppBanner extends Component {
   constructor(props) {
     super(props);
 

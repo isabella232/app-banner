@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import countryCodes from '../lib/country-codes';
 
@@ -15,7 +15,7 @@ const formatCountries = data =>
       return 0;
     });
 
-export default class PhoneInput extends React.Component {
+export default class PhoneInput extends Component {
 
   constructor(props) {
     const { country } = props;

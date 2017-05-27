@@ -10,6 +10,4 @@
 // </div>
 //
 
-import AppBanner from './components/AppBanner';
-
-export default AppBanner;
+export { default } from './components/AppBanner';

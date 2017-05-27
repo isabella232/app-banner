@@ -4,9 +4,9 @@ import QueryString from 'query-string';
 
 import AppBanner from './components/AppBanner';
 
-function init(query) {
+function init(props) {
   const el = document.createElement('div');
-  ReactDom.render(<AppBanner {...query} />, el);
+  ReactDom.render(<AppBanner {...props} />, el);
   document.body.appendChild(el);
 }
 

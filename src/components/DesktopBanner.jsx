@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import PhoneInput from './PhoneInput';
 
@@ -25,7 +25,7 @@ const BadgeGoogle = ({ url, locale }) => (
   </a>
 );
 
-export default class DesktopBanner extends React.Component {
+export default class DesktopBanner extends Component {
   constructor(props) {
     super(props);
 

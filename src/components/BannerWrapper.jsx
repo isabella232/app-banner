@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default Component => class BannerWrapper extends React.Component {
+export default Wrapped => class BannerWrapper extends Component {
   constructor() {
     super();
 
@@ -60,7 +60,7 @@ export default Component => class BannerWrapper extends React.Component {
     }
 
     return (
-      <Component
+      <Wrapped
         {...this.props}
         loading={status === 'loading'}
         error={status === 'error'}
