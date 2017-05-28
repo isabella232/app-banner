@@ -1,0 +1,76 @@
+$cta-color: #4285f4;
+
+.input {
+  display: table;
+  width: 100%;
+  background: #FAFAFA;
+  border: 1px solid #DDD;
+  box-shadow: inset 0 1px 1px 0 #DDD !important;
+  border-radius: 2px;
+  font-size: 1em;
+  color: #444;
+}
+
+.error {
+  border: 1px solid #DDD;
+}
+
+.select_container {
+  position: relative;
+  display: table-cell;
+  white-space: nowrap;
+  width: 1%;
+  border-right: 1px solid #DDD;
+  padding: 6px 8px 6px 8px;
+}
+
+.flag {
+  display: inline-block;
+  height: 0.75em;
+  max-width: 16px;
+  margin-right: .25em;
+}
+
+.select_value {
+  display: inline-block;
+  line-height: 1;
+  color: #666;
+
+  &::after {
+    content: '▼';
+    display: inline-block;
+    padding: .5em 0 .5em .5em;
+    font-size: .5em;
+    vertical-align: top;
+  }
+}
+
+.number {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 6px 8px 6px 8px;
+  color: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  line-height: 1;
+  z-index: 1;
+  border-radius: 0 1px 1px 0;
+  border: 0 !important;
+  margin: 0 !important;
+
+  &:focus {
+    box-shadow: 0 0 0 1px $cta-color;
+    outline: none;
+  }
+}
+
+.select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}

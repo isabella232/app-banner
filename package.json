@@ -1,11 +1,56 @@
 {
   "name": "app-banner",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "A simple mobile application banner for you website",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require test/setup.js test/*.test.js",
+    "watch": "mocha --watch --compilers jsx:babel-register --require test/setup.js test/*.test.js",
+    "build": "NODE_ENV=production webpack --colors --progress --optimize-minimize --sort-modules-by size --verbose",
+    "stats": "NODE_ENV=production webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json; rm stats.json",
+    "start": "webpack-dev-server --content-base ./dist",
+    "prepublish": "npm run build"
   },
-  "author": "",
-  "license": "ISC"
+  "main": "index.js",
+  "author": "Alexey Guskov",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^3.5.0",
+    "css-loader": "^0.28.1",
+    "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "file-loader": "^0.11.1",
+    "jsdom": "^9.12.0",
+    "mocha": "^3.4.1",
+    "node-sass": "^4.5.3",
+    "react-test-renderer": "^15.5.4",
+    "sass-loader": "^6.0.5",
+    "sinon": "^2.2.0",
+    "style-loader": "^0.17.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.5.1",
+    "webpack-bundle-analyzer": "^2.8.2",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "doc-cookies": "^1.0.2",
+    "element-class": "^0.2.2",
+    "min-base64": "^2.0.0",
+    "preact": "^8.1.0",
+    "preact-compat": "^3.16.0",
+    "promise-polyfill": "^6.0.2",
+    "query-string": "^4.3.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "whatwg-fetch": "^2.0.3"
+  }
 }
