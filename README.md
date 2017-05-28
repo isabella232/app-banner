@@ -30,7 +30,7 @@ Just include this snippet in your website main page.
     s.type = 'text/javascript';
     s.async = true;
     s.id = 'TheAppBanner';
-    s.src = 'https://bruce.presencekit.com/main.js?&p=' + placement + '&apple=' + appleId + '&google=' + googleId;
+    s.src = 'https://bruce.presencekit.com/p/main.js?&p=' + placement + '&apple=' + appleId + '&google=' + googleId;
     var x = document.getElementsByTagName('script')[0];
     x.parentNode.insertBefore(s, x);
   })();
@@ -61,7 +61,7 @@ appBanner.init({
 
 Also you can use the App Banner as a React component
 ```
-npm install --save app-banne
+npm install --save app-banner
 ```
 
 ```javascript
@@ -69,6 +69,6 @@ import AppBanner from 'app-banner/src';
 
 ...
 <div>
-  <AppBanner google="com.presencekit.eyerim" apple="id1184932325" position="bottom-left" />
+  <AppBanner google="com.youcompany.yourapp" apple="id1234567890" position="bottom-left" />
 </div>
 ```
