@@ -1,6 +1,10 @@
 export default function findFixedHeader() {
-  let el = document.elementFromPoint(1, 1);
+  let el;
   let style;
+
+  if (document.elementFromPoint) {
+    el = document.elementFromPoint(1, 1);
+  }
 
   if (!el) {
     return false;

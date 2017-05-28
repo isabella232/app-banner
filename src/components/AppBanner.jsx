@@ -157,7 +157,6 @@ function loadInfo(appleId, googleId) {
 // FIXME this should be the part of main fn
 function onDismiss() {
   saveDismissed();
-  hideMobileBanner();
 }
 
 export default class AppBanner extends Component {
@@ -212,7 +211,7 @@ export default class AppBanner extends Component {
   render() {
     const { app, country } = this.state;
     const { os, locale } = this;
-    const { placement } = this.props;
+    const { placement, p } = this.props; // props.p is a shorthand for props.placement
 
     if (!app) {
       return null;
@@ -233,7 +232,7 @@ export default class AppBanner extends Component {
           locale={locale}
           sender={number => sendSMS(number, app)}
           country={country}
-          placement={placement}
+          placement={placement || p}
           onDismiss={() => onDismiss()}
         />
       );

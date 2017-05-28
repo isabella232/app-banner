@@ -31,7 +31,7 @@ export default class PhoneInput extends Component {
   }
 
   onPrefixChange(e) {
-    const { onChange = () => {} } = this.props;
+    const { onChange } = this.props;
     const { number } = this.state;
 
     const country = e.target.value;
@@ -42,7 +42,7 @@ export default class PhoneInput extends Component {
   }
 
   onInputChange(e) {
-    const { onChange = () => {} } = this.props;
+    const { onChange } = this.props;
     const { country } = this.state;
 
     const number = e.target.value.replace(/[^\d]/g, ''); // only allow numbers here
@@ -53,7 +53,7 @@ export default class PhoneInput extends Component {
   }
 
   onKeyPress(e) {
-    const { onEnter = () => {} } = this.props;
+    const { onEnter } = this.props;
 
     if (e.key === 'Enter') {
       onEnter();
@@ -61,7 +61,7 @@ export default class PhoneInput extends Component {
   }
 
   render() {
-    const { placeholder, error, disabled = '' } = this.props;
+    const { placeholder, error, disabled } = this.props;
     const { country } = this.state;
     const prefix = country ? `+${countryCode(country)}` : '';
 
@@ -99,3 +99,8 @@ export default class PhoneInput extends Component {
     );
   }
 }
+
+PhoneInput.defaultProps = {
+  onChange: () => {},
+  onEnter: () => {},
+};
