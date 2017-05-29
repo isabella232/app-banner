@@ -1,0 +1,14 @@
+{
+  "get_apple": "GET - On the App Store",
+  "get_google": "GET - On Google Play",
+  "view": "View",
+  "get_app": "get the app",
+  "sms_content": "Thanks for downloading our app! Click this link to get it from Apple App store or Google Play: ",
+  "desktop_try": "Try our new app",
+  "desktop_edit": "Edit",
+  "desktop_done": "Done",
+  "desktop_phone": "Save some time? We can text you a download link!",
+  "desktop_phone_placeholder": "Enter your phone number",
+  "desktop_no_thanks": "No thanks",
+  "desktop_send_link": "Send link"
+}
