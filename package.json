@@ -12,7 +12,7 @@
   },
   "main": "index.js",
   "author": "Alexey Guskov",
-  "license": "BSD",
+  "license": "BSD 3-Clause",
   "repository": "ombori/app-banner",
   "devDependencies": {
     "babel-core": "^6.24.1",
