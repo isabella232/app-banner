@@ -110,7 +110,10 @@ export default class DesktopBanner extends Component {
       app = apple;
     }
 
-    const className = `${style.banner} ${style.banner__desktop} ${style[`position__${placement}`]}`;
+    const className = [
+      style.banner,
+      style[placement],
+    ].join(' ');
 
     return (
       <div id={style.AppBanner} className={className}>
