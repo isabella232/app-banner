@@ -2,9 +2,9 @@
 
 ## The lightweight mobile application banner for your website
 
-![Preview](http://next.ombori.com/static/images/preview-desktop.png "App Banner Example")
+![Preview](http://next.ombori.com/static/images/preview-desktop.svg "App Banner Example")
 
-![Mobile](http://next.ombori.com/static/images/mobile.png "Mobile Banner Example")
+![Mobile](http://next.ombori.com/static/images/mobile.svg "Mobile Banner Example")
 
 Easy to use, free, open-source configurable application banner for your website.
 
