@@ -32,17 +32,6 @@ $system-fonts: -apple-system,
   }
 }
 
-@keyframes app-banner-enter {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
 .banner {
   @extend %reset;
   position: fixed;
@@ -57,10 +46,8 @@ $system-fonts: -apple-system,
   border: 0;
   width: auto;
   height: auto;
-  padding: $bannerPadding / 2;
   margin: $bannerPadding * 2;
   max-width: 320px;
-  animation: app-banner-enter .5s normal forwards cubic-bezier(0.175, 0.885, 0.32, 1.27499);
   padding: 0;
 
   *, *:after, *:before {

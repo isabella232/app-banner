@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { CSSTransitionGroup } from 'react-transition-group';
+
+import style from './css/AppBanner.scss';
 
 export default (Wrapped) => {
   class BannerWrapper extends Component {
@@ -63,20 +66,33 @@ export default (Wrapped) => {
     render() {
       const { status } = this.state;
 
-      if (status === 'hidden') {
-        return <div />;
+      let content = null;
+      if (status !== 'hidden') {
+        content = (
+          <Wrapped
+            {...this.props}
+            loading={status === 'loading'}
+            error={status === 'error'}
+            success={status === 'success'}
+            onDismiss={() => this.dismiss()}
+            onSend={value => this.send(value)}
+            onRetry={() => this.retry()}
+          />
+        );
       }
 
       return (
-        <Wrapped
-          {...this.props}
-          loading={status === 'loading'}
-          error={status === 'error'}
-          success={status === 'success'}
-          onDismiss={() => this.dismiss()}
-          onSend={value => this.send(value)}
-          onRetry={() => this.retry()}
-        />
+        <CSSTransitionGroup
+          transitionName={{
+            appear: style.appear,
+            appearActive: style.appearActive,
+            leave: style.leave,
+            leaveActive: style.leaveActive,
+          }}
+          transitionAppear
+        >
+          {content}
+        </CSSTransitionGroup>
       );
     }
   }
