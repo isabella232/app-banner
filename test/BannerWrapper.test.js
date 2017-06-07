@@ -46,7 +46,7 @@ describe('Desktop banner', () => {
     });
 
     it('doesnt render anymore', () => {
-      expect(banner.text()).not.contains('Hello there');
+      expect(banner.html()).to.eql(null);
     });
   });
 

@@ -82,6 +82,10 @@ export default (Wrapped) => {
         );
       }
 
+      if (!transition) {
+        return content;
+      }
+
       return (
         <CSSTransitionGroup
           transitionName={transition}

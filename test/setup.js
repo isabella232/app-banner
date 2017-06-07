@@ -7,6 +7,10 @@ require.extensions['.scss'] = (m) => {
     dismiss: 'dismiss',
     'upside-down': 'upside-down',
     error: 'error',
+    appear: 'appear',
+    appearActive: 'appearActive',
+    leave: 'leave',
+    leaveActive: 'leaveActive',
   };
 };
 
