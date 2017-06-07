@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ElementClass from 'element-class';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import findFixedHeader from '../lib/fixed-header';
 import dismiss from '../images/dismiss.svg';
@@ -27,8 +28,8 @@ export default class MobileBanner extends Component {
     // cannot call show directly -- reveal transition wont work
     setTimeout(() => {
       show();
-      fixHeader();
-    }, 100);
+      fixHeader(); // FIXME: is it broken?
+    }, 1);
   }
 
   dismiss() {

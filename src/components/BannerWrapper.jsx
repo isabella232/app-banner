@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-import style from './css/AppBanner.scss';
 
 export default (Wrapped) => {
   class BannerWrapper extends Component {
@@ -64,13 +63,15 @@ export default (Wrapped) => {
     }
 
     render() {
+      const { transition, ...rest } = this.props;
       const { status } = this.state;
 
       let content = null;
+
       if (status !== 'hidden') {
         content = (
           <Wrapped
-            {...this.props}
+            {...rest}
             loading={status === 'loading'}
             error={status === 'error'}
             success={status === 'success'}
@@ -83,13 +84,11 @@ export default (Wrapped) => {
 
       return (
         <CSSTransitionGroup
-          transitionName={{
-            appear: style.appear,
-            appearActive: style.appearActive,
-            leave: style.leave,
-            leaveActive: style.leaveActive,
-          }}
+          transitionName={transition}
           transitionAppear
+          transitionAppearTimeout={500}
+          transitionLeaveTimeout={500}
+          transitionEnterTimeout={500}
         >
           {content}
         </CSSTransitionGroup>

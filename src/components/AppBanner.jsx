@@ -9,12 +9,15 @@ import BannerWrapper from './BannerWrapper';
 
 import locales from '../lib/locales';
 
+import MobileTransition from './css/MobileTransition.scss';
+import DesktopTransition from './css/DesktopTransition.scss';
+
 const Mobile = BannerWrapper(MobileBanner);
 const Desktop = BannerWrapper(DesktopBanner);
 
 const cookieName = 'AppBanner';
 
-// To add to window
+// Emulating promise for old browsers
 if (!window.Promise) {
   window.Promise = PromisePF;
 }
@@ -234,6 +237,7 @@ export default class AppBanner extends Component {
           country={country}
           placement={placement || p}
           onDismiss={() => onDismiss()}
+          transition={DesktopTransition}
         />
       );
     }
@@ -245,6 +249,7 @@ export default class AppBanner extends Component {
           app={app.apple}
           locale={locale}
           onDismiss={() => onDismiss()}
+          transition={MobileTransition}
         />
       );
     }
@@ -256,6 +261,7 @@ export default class AppBanner extends Component {
           app={app.google}
           locale={locale}
           onDismiss={() => onDismiss()}
+          transition={MobileTransition}
         />
       );
     }

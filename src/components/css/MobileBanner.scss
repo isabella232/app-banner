@@ -28,11 +28,9 @@ html {
 
   &.BannerPresent {
     margin-top: $bannerHeight;
-    #AppBanner {
-      margin-top: 0;
-    }
+
     .FixedHeader {
-      margin-top: $bannerHeight;
+      /*margin-top: $bannerHeight;*/
     }
   }
 }
@@ -47,7 +45,7 @@ html {
   display: block;
   position: fixed;
   z-index: 2147483639;
-  margin-top: $bannerHeight * -1;
+
   top: -1px;
   left: 0;
   right: 0;
@@ -57,7 +55,7 @@ html {
   background-color: #fafafa;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
-  transition: margin $bannerTransition;
+
   box-sizing: border-box;
   font-family: $system-fonts;
 
