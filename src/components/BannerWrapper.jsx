@@ -61,6 +61,10 @@ export default (Wrapped) => {
       this.setState({ status: 'shown' });
       this.removeTimer();
     }
+    
+    show() {
+      this.setState({ status: 'shown' });      
+    }
 
     render() {
       const { transition, ...rest } = this.props;
@@ -72,6 +76,7 @@ export default (Wrapped) => {
         content = (
           <Wrapped
             {...rest}
+            key="shown"
             loading={status === 'loading'}
             error={status === 'error'}
             success={status === 'success'}
@@ -80,6 +85,15 @@ export default (Wrapped) => {
             onRetry={() => this.retry()}
           />
         );
+      } else {
+        content = (
+          <Wrapped 
+            {...rest}
+            key="hidden"
+            minimized
+            onShow={() => this.show()}
+          />
+        )
       }
 
       if (!transition) {
@@ -90,9 +104,9 @@ export default (Wrapped) => {
         <CSSTransitionGroup
           transitionName={transition}
           transitionAppear
-          transitionAppearTimeout={500}
-          transitionLeaveTimeout={500}
-          transitionEnterTimeout={500}
+          transitionAppearTimeout={5000}
+          transitionLeaveTimeout={5000}
+          transitionEnterTimeout={5000}
         >
           {content}
         </CSSTransitionGroup>
@@ -100,8 +114,8 @@ export default (Wrapped) => {
     }
   }
 
-  // FIXME: it's better to use static class properties in class def. above
-  //        however using them makes my eslint crazy, so i'll use this for a while
+  // FIXME: It's better to use static class properties in class def. above.
+  //        However using them makes my eslint crazy, so i'll use this for a while.
   BannerWrapper.defaultProps = {
     timeout: 3000,
     onDismiss: () => {},

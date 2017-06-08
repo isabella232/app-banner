@@ -55,6 +55,15 @@ $system-fonts: -apple-system,
   }
 }
 
+.minimized {
+  margin: 16px;
+  padding: 8px;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .bottom-right {
   top: auto;
   right: 0;
