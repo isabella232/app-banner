@@ -11,6 +11,7 @@ require.extensions['.scss'] = (m) => {
     appearActive: 'appearActive',
     leave: 'leave',
     leaveActive: 'leaveActive',
+    minimized: 'minimized',
   };
 };
 

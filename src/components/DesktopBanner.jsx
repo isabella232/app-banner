@@ -120,7 +120,7 @@ export default class DesktopBanner extends Component {
 
     if (minimized) {
       return (
-        <div className={className} onClick={onShow}>
+        <div className={className} onClick={onShow} role="presentation">
           Show
         </div>
       );

@@ -13,6 +13,8 @@ const MyComponent = props => (
     <button id="dismiss" onClick={props.onDismiss} />
     <button id="send" onClick={props.onSend} />
     <button id="retry" onClick={props.onRetry} />
+    <button id="show" onClick={props.onShow} />
+    {props.minimized ? 'minimized' : 'shown'}
   </div>
 );
 
@@ -126,5 +128,27 @@ describe('Desktop banner', () => {
       expect(banner.find(MyComponent).prop('success')).to.eql(false);
       next();
     }, 200);
+  });
+
+  describe('minimize', () => {
+    it('supports minimizeOnHidden', () => {
+      const banner = mount(<Wrapped minimizeOnDismiss />);
+      banner.find('#dismiss').simulate('click');
+
+      expect(banner.text()).to.contain('minimized');
+    });
+
+    it('supports minimized property', () => {
+      const banner = mount(<Wrapped minimized minimizeOnDismiss />);
+      expect(banner.text()).to.contain('minimized');
+    });
+
+    it('can be shown when minimized', () => {
+      const banner = mount(<Wrapped minimized minimizeOnDismiss />);
+
+      banner.find('#show').simulate('click');
+
+      expect(banner.text()).not.to.contain('minimized');
+    });
   });
 });
