@@ -21,9 +21,15 @@ function getQuery() {
 }
 
 function main() {
-  const query = getQuery();
-  if (query) {
-    init(query);
+  const q = getQuery();
+  if (q) {
+    // shorthands for script parameters
+    q.placement = q.placement || q.p;
+    q.minimizeOnDismiss = q.minimizeOnDismiss || q.m;
+    q.apple = q.apple || q.a;
+    q.google = q.google || q.g;
+
+    init(q);
   }
 }
 

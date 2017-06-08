@@ -4,11 +4,13 @@ import { CSSTransitionGroup } from 'react-transition-group';
 
 export default (Wrapped) => {
   class BannerWrapper extends Component {
-    constructor() {
-      super();
+    constructor(props) {
+      const { minimized } = props;
+
+      super(props);
 
       this.state = {
-        status: 'shown',
+        status: minimized ? 'minimized' : 'shown',
       };
 
       this.timer = undefined;
@@ -38,8 +40,12 @@ export default (Wrapped) => {
 
     dismiss() {
       const { onDismiss } = this.props;
+      const { minimizeOnDismiss } = this.props;
 
-      this.setState({ status: 'hidden' });
+      const status = minimizeOnDismiss ? 'minimized' : 'hidden';
+
+      this.setState({ status });
+      this.removeTimer();
 
       onDismiss();
     }
@@ -61,39 +67,34 @@ export default (Wrapped) => {
       this.setState({ status: 'shown' });
       this.removeTimer();
     }
-    
+
     show() {
-      this.setState({ status: 'shown' });      
+      this.setState({ status: 'shown' });
     }
 
     render() {
-      const { transition, ...rest } = this.props;
+      const { transition, transitionTimeout, ...rest } = this.props;
       const { status } = this.state;
 
       let content = null;
 
-      if (status !== 'hidden') {
+      if (status === 'hidden') {
+        content = null;
+      } else {
         content = (
           <Wrapped
             {...rest}
-            key="shown"
+            key={status}
             loading={status === 'loading'}
             error={status === 'error'}
             success={status === 'success'}
+            minimized={status === 'minimized'}
             onDismiss={() => this.dismiss()}
             onSend={value => this.send(value)}
             onRetry={() => this.retry()}
-          />
-        );
-      } else {
-        content = (
-          <Wrapped 
-            {...rest}
-            key="hidden"
-            minimized
             onShow={() => this.show()}
           />
-        )
+        );
       }
 
       if (!transition) {
@@ -104,9 +105,9 @@ export default (Wrapped) => {
         <CSSTransitionGroup
           transitionName={transition}
           transitionAppear
-          transitionAppearTimeout={5000}
-          transitionLeaveTimeout={5000}
-          transitionEnterTimeout={5000}
+          transitionAppearTimeout={transitionTimeout}
+          transitionLeaveTimeout={transitionTimeout}
+          transitionEnterTimeout={transitionTimeout}
         >
           {content}
         </CSSTransitionGroup>
@@ -118,6 +119,7 @@ export default (Wrapped) => {
   //        However using them makes my eslint crazy, so i'll use this for a while.
   BannerWrapper.defaultProps = {
     timeout: 3000,
+    transitionTimeout: 500,
     onDismiss: () => {},
   };
 

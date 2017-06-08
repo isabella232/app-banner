@@ -103,8 +103,8 @@ function getDismissed() {
 function saveDismissed() {
   const expires = new Date();
   expires.setDate(expires.getDate() + 7);
-  docCookies.setItem(`${cookieName}.Dismissed`, true, expires);
 
+  docCookies.setItem(`${cookieName}.Dismissed`, true, expires);
   window.localStorage.setItem(`${cookieName}.Dismissed`, expires.getTime());
 }
 
@@ -157,7 +157,6 @@ function loadInfo(appleId, googleId) {
     .then(resp => resp.json());
 }
 
-// FIXME this should be the part of main fn
 function onDismiss() {
   saveDismissed();
 }
@@ -175,6 +174,8 @@ export default class AppBanner extends Component {
   }
 
   componentWillMount() {
+    const { minimizeOnDismiss } = this.props;
+
     const os = detectOs();
     this.os = os;
 
@@ -184,7 +185,8 @@ export default class AppBanner extends Component {
     trackView();
     trackReferrer();
 
-    if (getDismissed()) {
+    this.minimized = getDismissed();
+    if (this.minimized && !minimizeOnDismiss) {
       return;
     }
 
@@ -213,8 +215,8 @@ export default class AppBanner extends Component {
 
   render() {
     const { app, country } = this.state;
-    const { os, locale } = this;
-    const { placement, p } = this.props; // props.p is a shorthand for props.placement
+    const { os, locale, minimized } = this;
+    const { placement, minimizeOnDismiss } = this.props;
 
     if (!app) {
       return null;
@@ -230,12 +232,14 @@ export default class AppBanner extends Component {
     if (os.desktop) {
       return (
         <Desktop
+          minimizeOnDismiss={minimizeOnDismiss}
+          minimized={minimized}
           google={app.google}
           apple={app.apple}
           locale={locale}
           sender={number => sendSMS(number, app)}
           country={country}
-          placement={placement || p}
+          placement={placement}
           onDismiss={() => onDismiss()}
           transition={DesktopTransition}
         />

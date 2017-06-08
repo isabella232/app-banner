@@ -58,7 +58,8 @@ $system-fonts: -apple-system,
 .minimized {
   margin: 16px;
   padding: 8px;
-  
+  cursor: pointer;
+
   &:hover {
     opacity: 1;
   }
