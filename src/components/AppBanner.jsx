@@ -250,6 +250,8 @@ export default class AppBanner extends Component {
       locale.cta = locale.get_apple;
       return (
         <Mobile
+          minimizeOnDismiss={minimizeOnDismiss}
+          minimized={minimized}
           app={app.apple}
           locale={locale}
           onDismiss={() => onDismiss()}
@@ -262,6 +264,8 @@ export default class AppBanner extends Component {
       locale.cta = locale.get_google;
       return (
         <Mobile
+          minimizeOnDismiss={minimizeOnDismiss}
+          minimized={minimized}
           app={app.google}
           locale={locale}
           onDismiss={() => onDismiss()}

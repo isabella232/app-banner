@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ElementClass from 'element-class';
-import { CSSTransitionGroup } from 'react-transition-group';
 
 import findFixedHeader from '../lib/fixed-header';
 import dismiss from '../images/dismiss.svg';
@@ -16,6 +15,10 @@ function hide() {
     .remove(style.BannerPresent);
 }
 
+function minimize() {
+  window.scroll(0, 80);
+}
+
 function fixHeader() {
   const header = findFixedHeader();
   if (header) {
@@ -25,11 +28,18 @@ function fixHeader() {
 
 export default class MobileBanner extends Component {
   componentDidMount() {
-    // cannot call show directly -- reveal transition wont work
-    setTimeout(() => {
+    if (this.props.minimized) {
       show();
-      fixHeader(); // FIXME: is it broken?
-    }, 1);
+      setTimeout(() => {
+        minimize();
+      }, 500);
+    } else {
+      // cannot call show() directly -- reveal transition wont work
+      setTimeout(() => {
+        show();
+        fixHeader(); // FIXME: is it broken?
+      }, 1);
+    }
   }
 
   dismiss() {
@@ -39,10 +49,23 @@ export default class MobileBanner extends Component {
     onDismiss();
   }
 
+  documentWillReceiveProps(props) {
+    const { minimized } = this.props;
+    if (!minimized && props.minimized) {
+      minimize();
+    }
+  }
+
   render() {
-    const { app, locale } = this.props;
+    const { app, locale, minimized } = this.props;
+
+    const className = [
+      style.banner,
+      minimized ? style.minimized : '',
+    ].join(' ');
+
     return (
-      <div className={style.banner} id={style.AppBanner}>
+      <div className={className} id={style.AppBanner}>
 
         <div className={style.dismiss} onClick={() => this.dismiss()} role="presentation">
           <img alt="" src={dismiss} />
@@ -65,5 +88,3 @@ export default class MobileBanner extends Component {
     );
   }
 }
-
-// FIXME: add locale to img alt text
