@@ -1,4 +1,5 @@
 $bannerHeight: 80px;
+$bannerHeightMini: 50px;
 $bannerTransition: 0.5s ease-in;
 $bannerPadding: 16px;
 $imgSize: 48px;
@@ -24,17 +25,24 @@ $system-fonts: -apple-system,
   line-height: 1.2;
 }
 
-/*html {
-  transition: margin $bannerTransition;
-
+html {
   &.BannerPresent {
+    transition: margin $bannerTransition;
     margin-top: $bannerHeight;
 
     .FixedHeader {
       margin-top: $bannerHeight;
     }
   }
-}*/
+
+  &.MiniBannerPresent {
+    margin-top: $bannerHeightMini;
+
+    #TheBanner {
+      display: block;
+    }
+  }
+}
 
 .FixedHeader {
   transition: margin $bannerTransition;
@@ -66,13 +74,14 @@ $system-fonts: -apple-system,
     box-sizing: inherit;
   }
 }
-
 .mini {
   @extend .banner;
   padding-left: $bannerPadding;
   padding-top: $bannerPadding / 2;
   padding-bottom: $bannerPadding / 2;
   height: auto;
+  position: absolute;
+  display: none;
 
   &> * {
     &> .img {
