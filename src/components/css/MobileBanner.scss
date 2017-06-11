@@ -2,6 +2,7 @@ $bannerHeight: 80px;
 $bannerTransition: 0.5s ease-in;
 $bannerPadding: 16px;
 $imgSize: 48px;
+$imgSizeMini: 32px;
 $cta-color: #4285f4;
 $system-fonts: -apple-system,
                BlinkMacSystemFont,
@@ -23,17 +24,17 @@ $system-fonts: -apple-system,
   line-height: 1.2;
 }
 
-html {
+/*html {
   transition: margin $bannerTransition;
 
   &.BannerPresent {
     margin-top: $bannerHeight;
 
     .FixedHeader {
-      /*margin-top: $bannerHeight;*/
+      margin-top: $bannerHeight;
     }
   }
-}
+}*/
 
 .FixedHeader {
   transition: margin $bannerTransition;
@@ -59,13 +60,36 @@ html {
   box-sizing: border-box;
   font-family: $system-fonts;
 
+  margin: 0;
+
   *, *:after, *:before {
     box-sizing: inherit;
   }
 }
 
-.minimized {
-  position: absolute;
+.mini {
+  @extend .banner;
+  padding-left: $bannerPadding;
+  padding-top: $bannerPadding / 2;
+  padding-bottom: $bannerPadding / 2;
+  height: auto;
+
+  &> * {
+    &> .img {
+      width: $imgSizeMini;
+      height: $imgSizeMini;
+    }
+
+    &> .info {
+      left: $bannerPadding + $imgSizeMini + 8px;
+    }
+
+    &> .btn {
+      &__fixed {
+        margin-top: -13px;
+      }
+    }
+  }
 }
 
 .container {

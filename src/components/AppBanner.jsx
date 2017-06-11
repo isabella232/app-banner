@@ -3,7 +3,7 @@ import docCookies from 'doc-cookies';
 import Base64 from 'min-base64';
 import PromisePF from 'promise-polyfill';
 
-import MobileBanner from './MobileBanner';
+import MobileBanner from './MobileBannerMini';
 import DesktopBanner from './DesktopBanner';
 import BannerWrapper from './BannerWrapper';
 
