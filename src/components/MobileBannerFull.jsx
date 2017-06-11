@@ -1,30 +1,7 @@
-import React, { Component } from 'react';
-//import ElementClass from 'element-class';
+import React from 'react';
 
-//import findFixedHeader from '../lib/fixed-header';
 import dismiss from '../images/dismiss.svg';
 import style from './css/MobileBanner.scss';
-
-// function show() {
-//   ElementClass(document.querySelector('html'))
-//     .add(style.BannerPresent);
-// }
-
-// function hide() {
-//   ElementClass(document.querySelector('html'))
-//     .remove(style.BannerPresent);
-// }
-
-// function minimize() {
-//   window.scroll(0, 80);
-// }
-
-// function fixHeader() {
-//   const header = findFixedHeader();
-//   if (header) {
-//     ElementClass(header).add(style.FixedHeader);
-//   }
-// }
 
 const MobileBannerFull = ({ app, locale, onDismiss }) => (
   <div className={style.banner} id={style.AppBanner}>

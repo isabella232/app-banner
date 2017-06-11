@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { spy } from 'sinon';
 import { describe, it } from 'mocha';
 
-import MobileBanner from '../src/components/MobileBanner';
+import MobileBanner from '../src/components/MobileBannerFull';
 
 const app = {
   icon: 'http://ya.ru/ya.png',

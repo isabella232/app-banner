@@ -1,19 +1,19 @@
 $bannerHeight: 80px;
 
 .appear {
-/*  margin-top: $bannerHeight * -1; */
+  margin-top: $bannerHeight * -1;
 }
 
 .appearActive {
-/*  margin: 0;
-  transition: margin .5s ease-in; */
+  margin: 0;
+  transition: margin .5s ease-in;
 }
 
 .leave {
-/*  margin: 0; */
+  margin: 0;
 }
 
 .leaveActive {
-/*  margin-top: $bannerHeight * -1;
-  transition: margin .5s ease-in; */
+  margin-top: $bannerHeight * -1;
+  transition: margin .5s ease-in;
 }

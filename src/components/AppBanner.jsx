@@ -3,7 +3,10 @@ import docCookies from 'doc-cookies';
 import Base64 from 'min-base64';
 import PromisePF from 'promise-polyfill';
 
-import MobileBanner from './MobileBannerMini';
+import MobileBanner from './MobileBannerFull';
+import AnimationsMini from './AnimationsMini';
+import AnimationsFull from './AnimationsFull';
+
 import DesktopBanner from './DesktopBanner';
 import BannerWrapper from './BannerWrapper';
 
@@ -12,7 +15,12 @@ import locales from '../lib/locales';
 import MobileTransition from './css/MobileTransition.scss';
 import DesktopTransition from './css/DesktopTransition.scss';
 
-const Mobile = BannerWrapper(MobileBanner);
+const Mobile = BannerWrapper(props => (
+  <AnimationsFull>
+    <MobileBanner {...props} />
+  </AnimationsFull>
+));
+
 const Desktop = BannerWrapper(DesktopBanner);
 
 const cookieName = 'AppBanner';
@@ -250,12 +258,9 @@ export default class AppBanner extends Component {
       locale.cta = locale.get_apple;
       return (
         <Mobile
-          minimizeOnDismiss={minimizeOnDismiss}
-          minimized={minimized}
           app={app.apple}
           locale={locale}
           onDismiss={() => onDismiss()}
-          transition={MobileTransition}
         />
       );
     }
@@ -264,12 +269,9 @@ export default class AppBanner extends Component {
       locale.cta = locale.get_google;
       return (
         <Mobile
-          minimizeOnDismiss={minimizeOnDismiss}
-          minimized={minimized}
           app={app.google}
           locale={locale}
           onDismiss={() => onDismiss()}
-          transition={MobileTransition}
         />
       );
     }
