@@ -26,8 +26,11 @@ $system-fonts: -apple-system,
 }
 
 html {
-  &.BannerPresent {
+  &.Animated {
     transition: margin $bannerTransition;
+  }
+
+  &.BannerPresent {
     margin-top: $bannerHeight;
 
     .FixedHeader {

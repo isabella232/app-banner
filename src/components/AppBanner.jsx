@@ -15,11 +15,7 @@ import locales from '../lib/locales';
 import MobileTransition from './css/MobileTransition.scss';
 import DesktopTransition from './css/DesktopTransition.scss';
 
-const Mobile = BannerWrapper(props => (
-  <AnimationsFull>
-    <MobileBanner {...props} />
-  </AnimationsFull>
-));
+const Mobile = BannerWrapper(AnimationsFull(MobileBanner));
 
 const Desktop = BannerWrapper(DesktopBanner);
 
@@ -261,6 +257,7 @@ export default class AppBanner extends Component {
           app={app.apple}
           locale={locale}
           onDismiss={() => onDismiss()}
+          transition={MobileTransition}
         />
       );
     }
@@ -272,6 +269,7 @@ export default class AppBanner extends Component {
           app={app.google}
           locale={locale}
           onDismiss={() => onDismiss()}
+          transition={MobileTransition}
         />
       );
     }
