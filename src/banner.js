@@ -25,11 +25,9 @@ function main() {
   if (q) {
     // shorthands for script parameters
     q.placement = q.placement || q.p;
-    q.minimizeOnDismiss = q.minimizeOnDismiss || q.m;
+    q.minimizeOnDismiss = (q.minimizeOnDismiss || q.m) === '1';
     q.apple = q.apple || q.a;
     q.google = q.google || q.g;
-
-    console.log('init', q);
 
     init(q);
   }

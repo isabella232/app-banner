@@ -4,7 +4,7 @@ import Base64 from 'min-base64';
 import PromisePF from 'promise-polyfill';
 
 import MobileBanner from './MobileBanner';
-import Animations from './Animations';
+import MobileAnimations from './MobileAnimations';
 
 import DesktopBanner from './DesktopBanner';
 import BannerWrapper from './BannerWrapper';
@@ -14,7 +14,7 @@ import locales from '../lib/locales';
 import MobileTransition from './css/MobileTransition.scss';
 import DesktopTransition from './css/DesktopTransition.scss';
 
-const Mobile = BannerWrapper(Animations(MobileBanner));
+const Mobile = BannerWrapper(MobileAnimations(MobileBanner));
 const Desktop = BannerWrapper(DesktopBanner);
 
 const cookieName = 'AppBanner';
@@ -27,7 +27,6 @@ if (!window.Promise) {
 // FIXME: hide if presencekit is running
 
 // TODO: make cookieName customizeable
-// TODO: check is position works
 // TODO: test for npm pack
 // TODO: test for React component via npm
 // TODO: unit test for this component
