@@ -4,7 +4,7 @@ import dismiss from '../images/dismiss.svg';
 import style from './css/MobileBanner.scss';
 
 const MobileBannerFull = ({ app, locale, onDismiss }) => (
-  <div className={style.banner} id={style.AppBanner}>
+  <div className={style.banner}>
 
     <div className={style.dismiss} onClick={onDismiss} role="presentation">
       <img alt="" src={dismiss} />
@@ -27,7 +27,7 @@ const MobileBannerFull = ({ app, locale, onDismiss }) => (
 );
 
 const MobileBannerMini = ({ app, locale }) => (
-  <div className={style.mini} id={style.TheBanner}>
+  <div className={style.mini}>
     <a href={app.url} className={style.container}>
       <div className={style.img}>
         <img alt={app.name} src={app.icon} role="presentation" />
