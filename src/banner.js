@@ -28,6 +28,7 @@ function main() {
     q.minimize = q.minimize || q.m;
     q.apple = q.apple || q.a;
     q.google = q.google || q.g;
+    q.noTrack = q.noTrack || q.n;
 
     init(q);
   }

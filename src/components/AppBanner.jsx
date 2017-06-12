@@ -175,14 +175,18 @@ export default class AppBanner extends Component {
   }
 
   componentWillMount() {
+    const { noTrack } = this.props;
+
     const os = detectOs();
     this.os = os;
 
     const lang = detectLang();
     this.locale = getLocale(lang);
 
-    trackView();
-    trackReferrer();
+    if (noTrack === false) {
+      trackView();
+      trackReferrer();
+    }
 
     this.minimized = getDismissed();
     this.minimize = this.getMinimize();
@@ -307,4 +311,5 @@ export default class AppBanner extends Component {
 AppBanner.defaultProps = {
   placement: 'bottom-right',
   minimize: 'no',
+  noTrack: false,
 };

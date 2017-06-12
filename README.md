@@ -77,7 +77,8 @@ import AppBanner from 'app-banner/src';
 
   * `apple` or `a` - App Store ID of your application
   * `google` or `g` - Google Play ID of your application
-  * `placement` or `p` - Banner position on screen. Possible values are 'top-left', 'top-right', 'bottom-left' or 'bottom-right'. Default value is 'bottom-right'. Only applies to desktop version of banner.
-  * `minimize` or `m` - Banner behaviour when user clicks 'dismiss' icon. When minimized banner will display smaller version of itself instead of completly dissapear. Possible values are 'yes', 'no' and 'mobile'. When 'mobile' is specified, the banner will be minimized when shown on mobile devices and completely dissapear on desktop. Default value is 'no'.
+  * `placement` or `p` - Banner position on screen. Possible values are `'top-left'`, `'top-right'`, `'bottom-left'` or `'bottom-right'`. Default value is `'bottom-right'`. Only applies to desktop version of banner.
+  * `minimize` or `m` - Banner behaviour when user dismisses the banner. When minimized, banner will display smaller version of itself instead of completly dissapear. Possible values are `'yes'`, `'no'` and `'mobile'`. When `'mobile'` is specified, the banner will be minimized if shown on mobile device and completely dissapear on desktop. Default value is `'no'`.
+  * `noTrack` or `n` - Do not track usage statistics. `false` by default.
 
 Note: shorthand parameters like `a`, `g` or `p` are only supported in script URL when App Banner is used via external script.
