@@ -175,8 +175,6 @@ export default class AppBanner extends Component {
   }
 
   componentWillMount() {
-    const { minimizeOnDismiss } = this.props;
-
     const os = detectOs();
     this.os = os;
 
@@ -187,7 +185,15 @@ export default class AppBanner extends Component {
     trackReferrer();
 
     this.minimized = getDismissed();
-    if (this.minimized && !minimizeOnDismiss) {
+    this.minimize = this.getMinimize();
+
+    // do not show if already dismissed and minimize is disabled
+    if (this.minimized && !this.minimize) {
+      return;
+    }
+
+    // do not show if already dismissed, on desktop and minimize only enabled for mobile
+    if (this.minimized && os.desktop && this.minimize === 'mobile') {
       return;
     }
 
@@ -197,6 +203,22 @@ export default class AppBanner extends Component {
     }
 
     this.load();
+  }
+
+  // NOTE: props.minimize can have true/false (when used as React Component)
+  //       'yes'/'no' and 'mobile' values - so we need to normalize it
+  getMinimize() {
+    const { minimize } = this.props;
+
+    if (minimize === 'yes') {
+      return true;
+    }
+
+    if (minimize === 'no') {
+      return false;
+    }
+
+    return minimize;
   }
 
   load() {
@@ -216,8 +238,11 @@ export default class AppBanner extends Component {
 
   render() {
     const { app, country } = this.state;
-    const { os, locale, minimized } = this;
-    const { placement, minimizeOnDismiss } = this.props;
+    const { os, locale, minimized, minimize } = this;
+    const { placement } = this.props;
+
+    const minimizeOnDesktop = (minimize === true);
+    const minimizeOnMobile = (minimize === true) || (minimize === 'mobile');
 
     if (!app) {
       return null;
@@ -233,8 +258,6 @@ export default class AppBanner extends Component {
     if (os.desktop) {
       return (
         <Desktop
-          minimizeOnDismiss={minimizeOnDismiss}
-          minimized={minimized}
           google={app.google}
           apple={app.apple}
           locale={locale}
@@ -243,6 +266,8 @@ export default class AppBanner extends Component {
           placement={placement}
           onDismiss={onDismiss}
           transition={DesktopTransition}
+          minimize={minimizeOnDesktop}
+          minimized={minimized}
         />
       );
     }
@@ -255,7 +280,7 @@ export default class AppBanner extends Component {
           locale={locale}
           onDismiss={onDismiss}
           transition={MobileTransition}
-          minimizeOnDismiss={minimizeOnDismiss}
+          minimize={minimizeOnMobile}
           minimized={minimized}
         />
       );
@@ -269,7 +294,7 @@ export default class AppBanner extends Component {
           locale={locale}
           onDismiss={onDismiss}
           transition={MobileTransition}
-          minimizeOnDismiss={minimizeOnDismiss}
+          minimize={minimizeOnMobile}
           minimized={minimized}
         />
       );
@@ -281,5 +306,5 @@ export default class AppBanner extends Component {
 
 AppBanner.defaultProps = {
   placement: 'bottom-right',
+  minimize: 'no',
 };
-

@@ -25,7 +25,7 @@ function main() {
   if (q) {
     // shorthands for script parameters
     q.placement = q.placement || q.p;
-    q.minimizeOnDismiss = (q.minimizeOnDismiss || q.m) === '1';
+    q.minimize = q.minimize || q.m;
     q.apple = q.apple || q.a;
     q.google = q.google || q.g;
 

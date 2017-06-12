@@ -11,12 +11,12 @@
       var appleId = 'id1184932325';
       var googleId = 'com.presencekit.eyerim';
       var placement = 'bottom-left';
-      var minimizeOnDismiss = 1;
+      var minimize = 'mobile';
       var s = document.createElement('script');
       s.type = 'text/javascript';
       s.async = true;
       s.id = 'TheAppBanner';
-      s.src = '/main.js?m=' + minimizeOnDismiss + '&p=' + placement + '&a=' + appleId + '&g=' + googleId;
+      s.src = '/main.js?m=' + minimize + '&p=' + placement + '&a=' + appleId + '&g=' + googleId;
       var x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
     })();

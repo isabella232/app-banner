@@ -131,20 +131,20 @@ describe('Desktop banner', () => {
   });
 
   describe('minimize', () => {
-    it('supports minimizeOnHidden', () => {
-      const banner = mount(<Wrapped minimizeOnDismiss />);
+    it('supports minimize property', () => {
+      const banner = mount(<Wrapped minimize />);
       banner.find('#dismiss').simulate('click');
 
       expect(banner.text()).to.contain('minimized');
     });
 
     it('supports minimized property', () => {
-      const banner = mount(<Wrapped minimized minimizeOnDismiss />);
+      const banner = mount(<Wrapped minimized minimize />);
       expect(banner.text()).to.contain('minimized');
     });
 
     it('can be shown when minimized', () => {
-      const banner = mount(<Wrapped minimized minimizeOnDismiss />);
+      const banner = mount(<Wrapped minimized minimize />);
 
       banner.find('#show').simulate('click');
 

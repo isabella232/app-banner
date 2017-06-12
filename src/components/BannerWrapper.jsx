@@ -40,9 +40,9 @@ export default (Wrapped) => {
 
     dismiss() {
       const { onDismiss } = this.props;
-      const { minimizeOnDismiss } = this.props;
+      const { minimize } = this.props;
 
-      const status = minimizeOnDismiss ? 'minimized' : 'hidden';
+      const status = minimize ? 'minimized' : 'hidden';
 
       this.setState({ status });
 
