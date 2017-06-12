@@ -4,8 +4,7 @@ import Base64 from 'min-base64';
 import PromisePF from 'promise-polyfill';
 
 import MobileBanner from './MobileBanner';
-import AnimationsMini from './AnimationsMini';
-import AnimationsFull from './AnimationsFull';
+import Animations from './Animations';
 
 import DesktopBanner from './DesktopBanner';
 import BannerWrapper from './BannerWrapper';
@@ -15,8 +14,7 @@ import locales from '../lib/locales';
 import MobileTransition from './css/MobileTransition.scss';
 import DesktopTransition from './css/DesktopTransition.scss';
 
-const Mobile = BannerWrapper(AnimationsFull(MobileBanner));
-
+const Mobile = BannerWrapper(Animations(MobileBanner));
 const Desktop = BannerWrapper(DesktopBanner);
 
 const cookieName = 'AppBanner';
@@ -244,7 +242,7 @@ export default class AppBanner extends Component {
           sender={number => sendSMS(number, app)}
           country={country}
           placement={placement}
-          onDismiss={() => onDismiss()}
+          onDismiss={onDismiss}
           transition={DesktopTransition}
         />
       );
@@ -256,8 +254,10 @@ export default class AppBanner extends Component {
         <Mobile
           app={app.apple}
           locale={locale}
-          onDismiss={() => onDismiss()}
+          onDismiss={onDismiss}
           transition={MobileTransition}
+          minimizeOnDismiss={minimizeOnDismiss}
+          minimized={minimized}
         />
       );
     }
@@ -268,8 +268,10 @@ export default class AppBanner extends Component {
         <Mobile
           app={app.google}
           locale={locale}
-          onDismiss={() => onDismiss()}
+          onDismiss={onDismiss}
           transition={MobileTransition}
+          minimizeOnDismiss={minimizeOnDismiss}
+          minimized={minimized}
         />
       );
     }
@@ -277,3 +279,8 @@ export default class AppBanner extends Component {
     return null;
   }
 }
+
+AppBanner.defaultProps = {
+  placement: 'bottom-right',
+};
+

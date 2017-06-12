@@ -45,7 +45,6 @@ export default (Wrapped) => {
       const status = minimizeOnDismiss ? 'minimized' : 'hidden';
 
       this.setState({ status });
-      this.removeTimer();
 
       onDismiss();
     }
@@ -103,6 +102,9 @@ export default (Wrapped) => {
         return content;
       }
 
+      // NOTE: we need to use CSSTransitionGroup here, otherwise the CSSTransitionGroup component
+      //       will be recreated on each render and animations wont work
+      //       (or i'm doing something wrong)
       return (
         <CSSTransitionGroup
           transitionName={transition}

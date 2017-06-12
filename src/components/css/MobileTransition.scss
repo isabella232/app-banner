@@ -1,10 +1,10 @@
 $bannerHeight: 80px;
 
-.appear {
+.appear, .enter {
   margin-top: $bannerHeight * -1;
 }
 
-.appearActive {
+.appearActive, .enterActive {
   margin: 0;
   transition: margin .5s ease-in;
 }

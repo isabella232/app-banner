@@ -29,6 +29,8 @@ function main() {
     q.apple = q.apple || q.a;
     q.google = q.google || q.g;
 
+    console.log('init', q);
+
     init(q);
   }
 }

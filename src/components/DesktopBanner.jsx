@@ -99,7 +99,7 @@ export default class DesktopBanner extends Component {
       country,
       loading,
       error,
-      placement = 'bottom-right',
+      placement,
       minimized,
       onShow,
     } = this.props;

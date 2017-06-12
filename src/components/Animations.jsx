@@ -5,7 +5,6 @@ import ElementClass from 'element-class';
 
 import style from './css/MobileBanner.scss';
 
-const revealTimeout = 0;
 const animationTimeout = 500;
 
 // function fixHeader() {
@@ -15,7 +14,7 @@ const animationTimeout = 500;
 //   }
 // }
 
-function show() {
+function showFull() {
   ElementClass(document.querySelector('html'))
     .add(style.Animated);
   // add some space for the banner and show it
@@ -23,7 +22,7 @@ function show() {
     .add(style.BannerPresent);
 }
 
-function hide() {
+function hideFull() {
   ElementClass(document.querySelector('html'))
     .remove(style.BannerPresent);
 
@@ -33,12 +32,35 @@ function hide() {
   }, animationTimeout);
 }
 
-export default Wrapped => class AnimationsFull extends Component {
+const height = 50;
+
+function showMini() {
+  // add some space for the banner and show it
+  ElementClass(document.querySelector('html'))
+    .add(style.MiniBannerPresent);
+
+  // TODO: fix the fixed headers
+
+  // scroll to the start of the page and hide the banner
+  if (window.scrollY === 0) { // not yet scrolled
+    window.scrollTo(0, height);
+  }
+}
+
+function hideMini() {
+
+}
+
+
+export default Wrapped => class MobileAnimations extends Component {
   componentDidMount() {
+    const { minimized } = this.props;
+    const revealTimeout = minimized ? 500 : 0;
+
     this.timeout = setTimeout(() => {
       this.timeout = false;
 
-      show();
+      this.show();
     }, revealTimeout);
   }
 
@@ -47,13 +69,35 @@ export default Wrapped => class AnimationsFull extends Component {
       clearTimeout(this.timeout);
       this.timeout = false;
     }
-    hide();
+
+    this.hide();
   }
 
   onDismiss() {
     const { onDismiss } = this.props;
-    hide();
+
+    this.hide();
     onDismiss();
+  }
+
+  show() {
+    const { minimized } = this.props;
+
+    if (minimized) {
+      showMini();
+    } else {
+      showFull();
+    }
+  }
+
+  hide() {
+    const { minimized } = this.props;
+
+    if (minimized) {
+      hideMini();
+    } else {
+      hideFull();
+    }
   }
 
   render() {
