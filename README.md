@@ -2,9 +2,9 @@
 
 ## The lightweight mobile application banner for your website
 
-![Preview](http://next.ombori.com/static/images/preview-desktop.png "App Banner Example")
+![Preview](http://next.ombori.com/static/images/preview-desktop.svg "App Banner Example")
 
-![Mobile](http://next.ombori.com/static/images/mobile.png "Mobile Banner Example")
+![Mobile](http://next.ombori.com/static/images/mobile.svg "Mobile Banner Example")
 
 Easy to use, free, open-source configurable application banner for your website.
 
@@ -72,3 +72,12 @@ import AppBanner from 'app-banner/src';
   <AppBanner google="com.youcompany.yourapp" apple="id1234567890" position="bottom-left" />
 </div>
 ```
+
+## Parameters
+
+  * `apple` or `a` - App Store ID of your application
+  * `google` or `g` - Google Play ID of your application
+  * `placement` or `p` - Banner position on screen. Possible values are 'top-left', 'top-right', 'bottom-left' or 'bottom-right'. Default value is 'bottom-right'. Only applies to desktop version of banner.
+  * `minimize` or `m` - Banner behaviour when user clicks 'dismiss' icon. When minimized banner will display smaller version of itself instead of completly dissapear. Possible values are 'yes', 'no' and 'mobile'. When 'mobile' is specified, the banner will be minimized when shown on mobile devices and completely dissapear on desktop. Default value is 'no'.
+
+Note: shorthand parameters like `a`, `g` or `p` are only supported in script URL when App Banner is used via external script.
