@@ -78,13 +78,15 @@ export default (Wrapped) => {
 
       let content = null;
 
+      const key = (status === 'minimized') ? 'minimized' : 'shown';
+
       if (status === 'hidden') {
         content = null;
       } else {
         content = (
           <Wrapped
             {...rest}
-            key={status}
+            key={key}
             loading={status === 'loading'}
             error={status === 'error'}
             success={status === 'success'}
