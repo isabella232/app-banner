@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ElementClass from 'element-class';
-
-// import findFixedHeader from '../lib/fixed-header';
-
 import style from './css/MobileBanner.scss';
 
 const animationTimeout = 500;
 
+// TRICKY: Here we detect all existing elements that appear like headers and apply
+//         the FixedHeader style on them. That (with astonishing power of the
+//         html.BannerPresent style) theoretically should make everything on the page
+//         just shift $bannerHeight pixels lower and free some empty space for our banner.
 function fixHeader() {
   const all = document.querySelectorAll('*').values();
   for (const e of all) {
