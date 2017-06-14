@@ -44,12 +44,11 @@ html {
     .mini {
       display: block;
     }
-  }
-}
 
-.FixedHeader {
-  transition: margin $bannerTransition;
-  margin-top: 0;
+    .FixedHeader {
+      margin-top: $bannerHeightMini;
+    }
+  }
 }
 
 .banner {

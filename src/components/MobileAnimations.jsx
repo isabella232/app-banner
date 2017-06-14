@@ -7,16 +7,24 @@ import style from './css/MobileBanner.scss';
 
 const animationTimeout = 500;
 
-// function fixHeader() {
-//   const header = findFixedHeader();
-//   if (header) {
-//     ElementClass(header).add(style.FixedHeader);
-//   }
-// }
+function fixHeader() {
+  const all = document.querySelectorAll('*').values();
+  for (const e of all) {
+    const s = window.getComputedStyle(e);
+    if (s.position === 'fixed') {
+      const classes = ElementClass(e);
+      if (!classes.has(style.banner) && !classes.has(style.mini)) {
+        classes.add(style.FixedHeader);
+      }
+    }
+  }
+}
 
 function showFull() {
   ElementClass(document.querySelector('html'))
     .add(style.Animated);
+
+  fixHeader();
   // add some space for the banner and show it
   ElementClass(document.querySelector('html'))
     .add(style.BannerPresent);
@@ -40,6 +48,7 @@ function showMini() {
     .add(style.MiniBannerPresent);
 
   // TODO: fix the fixed headers
+  fixHeader();
 
   // scroll to the start of the page and hide the banner
   if (window.scrollY === 0) { // not yet scrolled
