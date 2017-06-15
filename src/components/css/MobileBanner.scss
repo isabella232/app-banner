@@ -83,7 +83,8 @@ html {
   padding-top: $bannerPadding / 2;
   padding-bottom: $bannerPadding / 2;
   height: auto;
-  position: absolute;
+  position: fixed;
+  top: -1 * $bannerHeightMini;
   display: none;
 
   &> * {
