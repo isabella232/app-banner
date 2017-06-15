@@ -23,23 +23,22 @@ function addStyleToAllHeaders(cls) {
 }
 
 function showFull() {
-  ElementClass(document.querySelector('html'))
-    .add(style.Animated);
+  const html = document.querySelector('html');
+
+  ElementClass(html).add(style.Animated);
 
   addStyleToAllHeaders(style.FixedHeader);
 
   // add some space for the banner and show it
-  ElementClass(document.querySelector('html'))
-    .add(style.BannerPresent);
+  ElementClass(html).add(style.BannerPresent);
 }
 
 function hideFull() {
-  ElementClass(document.querySelector('html'))
-    .remove(style.BannerPresent);
+  const html = document.querySelector('html');
+  ElementClass(html).remove(style.BannerPresent);
 
   setTimeout(() => {
-    ElementClass(document.querySelector('html'))
-    .remove(style.Animated);
+    ElementClass(html).remove(style.Animated);
   }, animationTimeout);
 }
 
@@ -82,9 +81,9 @@ function addScrollHandler() {
 }
 
 function showMini() {
+  const html = document.querySelector('html');
   // add some space for the banner and show it
-  ElementClass(document.querySelector('html'))
-   .add(style.MiniBannerPresent);
+  ElementClass(html).add(style.MiniBannerPresent);
 
   addStyleToAllHeaders(style.FixedHeader);
   addScrollHandler();
