@@ -5,6 +5,9 @@ import PhoneInput from './PhoneInput';
 import spinner from '../images/spinner.svg';
 import badgeGp from '../images/gp.svg';
 
+import google from '../images/google.svg';
+import apple from '../images/apple.svg';
+
 import style from './css/DesktopBanner.scss';
 
 const BadgeApple = ({ url, locale }) => (
@@ -23,6 +26,17 @@ const BadgeGoogle = ({ url, locale }) => (
       src={badgeGp}
     />
   </a>
+);
+
+const Minimized = ({ className, onShow }) => (
+  <div className={className} onClick={onShow} role="presentation">
+    <div>
+      <img src={apple} />
+    </div>
+    <div>
+      <img src={google} />
+    </div>
+  </div>
 );
 
 export default class DesktopBanner extends Component {
@@ -119,11 +133,7 @@ export default class DesktopBanner extends Component {
     ].join(' ');
 
     if (minimized) {
-      return (
-        <div className={className} onClick={onShow} role="presentation">
-          Show
-        </div>
-      );
+      return <Minimized className={className} onShow={onShow} />;
     }
 
     return (
