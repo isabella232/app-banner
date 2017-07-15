@@ -5,8 +5,8 @@ import PhoneInput from './PhoneInput';
 import spinner from '../images/spinner.svg';
 import badgeGp from '../images/gp.svg';
 
-import google from '../images/google.svg';
-import apple from '../images/apple.svg';
+import googleIcon from '../images/google.svg';
+import appleIcon from '../images/apple.svg';
 
 import style from './css/DesktopBanner.scss';
 
@@ -28,16 +28,20 @@ const BadgeGoogle = ({ url, locale }) => (
   </a>
 );
 
-const Minimized = ({ className, onShow }) => (
-  <div className={className} onClick={onShow} role="presentation">
-    <div>
-      <img src={apple} />
+const Minimized = ({ className, onClick, google, apple }) => {
+  const single = (google ^ apple);
+  const classN = [
+    className,
+    single ? style.single : '',
+  ].join(' ');
+
+  return (
+    <div className={classN} onClick={onClick} role="presentation">
+      {apple ? <div><img src={appleIcon} alt="" /></div> : null}
+      {google ? <div><img src={googleIcon} alt="" /></div> : null}
     </div>
-    <div>
-      <img src={google} />
-    </div>
-  </div>
-);
+  );
+};
 
 export default class DesktopBanner extends Component {
   constructor(props) {
@@ -133,7 +137,14 @@ export default class DesktopBanner extends Component {
     ].join(' ');
 
     if (minimized) {
-      return <Minimized className={className} onShow={onShow} />;
+      return (
+        <Minimized
+          className={className}
+          onClick={onShow}
+          google={!!google}
+          apple={!!apple}
+        />
+      );
     }
 
     return (

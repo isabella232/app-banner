@@ -82,6 +82,17 @@ $system-fonts: -apple-system,
   > div:first-child {
     border-right: 1px solid #ccc;
   }
+
+  &.single {
+    border-radius: 16px;
+    width: 32px;
+    height: 32px;
+    padding-top: 3px;
+
+    > div:first-child {
+      border-right: none;
+    }
+  }
 }
 
 .bottom-right {
