@@ -32,88 +32,69 @@ $system-fonts: -apple-system,
   }
 }
 
-@keyframes app-banner-enter {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
 .banner {
   @extend %reset;
-  display: block;
   position: fixed;
   z-index: 2147483639;
-  margin-top: $bannerHeight * -1;
-  top: -1px;
-  left: 0;
-  right: 0;
-  padding: $bannerPadding;
-  padding-left: $bannerPadding * 2;
-  height: $bannerHeight + 1;
-  background-color: #fafafa;
-  border-top: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
-  transition: margin $bannerTransition;
   box-sizing: border-box;
   font-family: $system-fonts;
 
-  &__desktop {
-    display: inline-block;
-    background-color: #ffffff;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,.12), 0 6px 6px 0 rgba(0,0,0,.24);
-    border-radius: 5px;
-    border: 0;
-    width: auto;
-    height: auto;
-    padding: $bannerPadding / 2;
-    margin: $bannerPadding * 2;
-    max-width: 320px;
-    animation: app-banner-enter .5s normal forwards cubic-bezier(0.175, 0.885, 0.32, 1.27499);
-    padding: 0;
-  }
+  display: inline-block;
+  background-color: #ffffff;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,.12), 0 6px 6px 0 rgba(0,0,0,.24);
+  border-radius: 5px;
+  border: 0;
+  width: auto;
+  height: auto;
+  margin: $bannerPadding * 2;
+  max-width: 320px;
+  padding: 0;
 
   *, *:after, *:before {
     box-sizing: inherit;
   }
 }
 
-.position {
-  &__bottom-right {
-    top: auto;
-    right: 0;
-    bottom: 0;
-    left: auto;
-    transform-origin: bottom right;
-  }
+.minimized {
+  margin: 16px;
+  padding: 8px;
+  cursor: pointer;
 
-  &__bottom-left {
-    top: auto;
-    right: auto;
-    bottom: 0;
-    left: 0;
-    transform-origin: bottom left;
+  &:hover {
+    opacity: 1;
   }
+}
 
-  &__top-right {
-    top: auto;
-    right: 0;
-    top: 0;
-    left: auto;
-    transform-origin: top right;
-  }
+.bottom-right {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  transform-origin: bottom right;
+}
 
-  &__top-left {
-    top: auto;
-    right: auto;
-    top: 0;
-    left: 0;
-    transform-origin: top left;
-  }
+.bottom-left {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom left;
+}
+
+.top-right {
+  top: auto;
+  right: 0;
+  top: 0;
+  left: auto;
+  transform-origin: top right;
+}
+
+.top-left {
+  top: auto;
+  right: auto;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
 }
 
 .body {

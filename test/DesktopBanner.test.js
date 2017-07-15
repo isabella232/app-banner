@@ -177,4 +177,10 @@ describe('DesktopBanner', () => {
 
     expect(bnr.html()).contains('error');
   });
+
+  it('supports minimized property', () => {
+    const bnr = mount(<DesktopBanner minimized />);
+
+    expect(bnr.html()).contains('minimized');
+  });
 });

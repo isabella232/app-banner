@@ -4,17 +4,22 @@ import Base64 from 'min-base64';
 import PromisePF from 'promise-polyfill';
 
 import MobileBanner from './MobileBanner';
+import MobileAnimations from './MobileAnimations';
+
 import DesktopBanner from './DesktopBanner';
 import BannerWrapper from './BannerWrapper';
 
 import locales from '../lib/locales';
 
-const Mobile = BannerWrapper(MobileBanner);
+import MobileTransition from './css/MobileTransition.scss';
+import DesktopTransition from './css/DesktopTransition.scss';
+
+const Mobile = BannerWrapper(MobileAnimations(MobileBanner));
 const Desktop = BannerWrapper(DesktopBanner);
 
 const cookieName = 'AppBanner';
 
-// To add to window
+// Emulating promise for old browsers
 if (!window.Promise) {
   window.Promise = PromisePF;
 }
@@ -22,7 +27,6 @@ if (!window.Promise) {
 // FIXME: hide if presencekit is running
 
 // TODO: make cookieName customizeable
-// TODO: check is position works
 // TODO: test for npm pack
 // TODO: test for React component via npm
 // TODO: unit test for this component
@@ -100,8 +104,8 @@ function getDismissed() {
 function saveDismissed() {
   const expires = new Date();
   expires.setDate(expires.getDate() + 7);
-  docCookies.setItem(`${cookieName}.Dismissed`, true, expires);
 
+  docCookies.setItem(`${cookieName}.Dismissed`, true, expires);
   window.localStorage.setItem(`${cookieName}.Dismissed`, expires.getTime());
 }
 
@@ -154,7 +158,6 @@ function loadInfo(appleId, googleId) {
     .then(resp => resp.json());
 }
 
-// FIXME this should be the part of main fn
 function onDismiss() {
   saveDismissed();
 }
@@ -172,16 +175,29 @@ export default class AppBanner extends Component {
   }
 
   componentWillMount() {
+    const { noTrack } = this.props;
+
     const os = detectOs();
     this.os = os;
 
     const lang = detectLang();
     this.locale = getLocale(lang);
 
-    trackView();
-    trackReferrer();
+    if (noTrack === false) {
+      trackView();
+      trackReferrer();
+    }
 
-    if (getDismissed()) {
+    this.minimized = getDismissed();
+    this.minimize = this.getMinimize();
+
+    // do not show if already dismissed and minimize is disabled
+    if (this.minimized && !this.minimize) {
+      return;
+    }
+
+    // do not show if already dismissed, on desktop and minimize only enabled for mobile
+    if (this.minimized && os.desktop && this.minimize === 'mobile') {
       return;
     }
 
@@ -191,6 +207,22 @@ export default class AppBanner extends Component {
     }
 
     this.load();
+  }
+
+  // NOTE: props.minimize can have true/false (when used as React Component)
+  //       'yes'/'no' and 'mobile' values - so we need to normalize it
+  getMinimize() {
+    const { minimize } = this.props;
+
+    if (minimize === 'yes') {
+      return true;
+    }
+
+    if (minimize === 'no') {
+      return false;
+    }
+
+    return minimize;
   }
 
   load() {
@@ -210,8 +242,11 @@ export default class AppBanner extends Component {
 
   render() {
     const { app, country } = this.state;
-    const { os, locale } = this;
-    const { placement, p } = this.props; // props.p is a shorthand for props.placement
+    const { os, locale, minimized, minimize } = this;
+    const { placement } = this.props;
+
+    const minimizeOnDesktop = (minimize === true);
+    const minimizeOnMobile = (minimize === true) || (minimize === 'mobile');
 
     if (!app) {
       return null;
@@ -232,8 +267,11 @@ export default class AppBanner extends Component {
           locale={locale}
           sender={number => sendSMS(number, app)}
           country={country}
-          placement={placement || p}
-          onDismiss={() => onDismiss()}
+          placement={placement}
+          onDismiss={onDismiss}
+          transition={DesktopTransition}
+          minimize={minimizeOnDesktop}
+          minimized={minimized}
         />
       );
     }
@@ -244,7 +282,10 @@ export default class AppBanner extends Component {
         <Mobile
           app={app.apple}
           locale={locale}
-          onDismiss={() => onDismiss()}
+          onDismiss={onDismiss}
+          transition={MobileTransition}
+          minimize={minimizeOnMobile}
+          minimized={minimized}
         />
       );
     }
@@ -255,7 +296,10 @@ export default class AppBanner extends Component {
         <Mobile
           app={app.google}
           locale={locale}
-          onDismiss={() => onDismiss()}
+          onDismiss={onDismiss}
+          transition={MobileTransition}
+          minimize={minimizeOnMobile}
+          minimized={minimized}
         />
       );
     }
@@ -263,3 +307,9 @@ export default class AppBanner extends Component {
     return null;
   }
 }
+
+AppBanner.defaultProps = {
+  placement: 'bottom-right',
+  minimize: 'no',
+  noTrack: false,
+};

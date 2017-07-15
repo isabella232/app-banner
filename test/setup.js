@@ -5,8 +5,13 @@ require.extensions['.svg'] = () => null;
 require.extensions['.scss'] = (m) => {
   m.exports = {
     dismiss: 'dismiss',
-    'position__upside-down': 'position__upside-down',
+    'upside-down': 'upside-down',
     error: 'error',
+    appear: 'appear',
+    appearActive: 'appearActive',
+    leave: 'leave',
+    leaveActive: 'leaveActive',
+    minimized: 'minimized',
   };
 };
 
