@@ -1,0 +1,19 @@
+$bannerHeight: 80px;
+
+.appear, .enter {
+  margin-top: $bannerHeight * -1;
+}
+
+.appearActive, .enterActive {
+  margin: 0;
+  transition: margin .5s ease-in;
+}
+
+.leave {
+  margin: 0;
+}
+
+.leaveActive {
+  margin-top: $bannerHeight * -1;
+  transition: margin .5s ease-in;
+}

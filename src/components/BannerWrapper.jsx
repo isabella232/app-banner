@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import { CSSTransitionGroup } from 'react-transition-group';
+
 
 export default (Wrapped) => {
   class BannerWrapper extends Component {
-    constructor() {
-      super();
+    constructor(props) {
+      const { minimized } = props;
+
+      super(props);
 
       this.state = {
-        status: 'shown',
+        status: minimized ? 'minimized' : 'shown',
       };
 
       this.timer = undefined;
@@ -36,8 +40,11 @@ export default (Wrapped) => {
 
     dismiss() {
       const { onDismiss } = this.props;
+      const { minimize } = this.props;
 
-      this.setState({ status: 'hidden' });
+      const status = minimize ? 'minimized' : 'hidden';
+
+      this.setState({ status });
 
       onDismiss();
     }
@@ -60,31 +67,63 @@ export default (Wrapped) => {
       this.removeTimer();
     }
 
+    show() {
+      this.setState({ status: 'shown' });
+    }
+
     render() {
+      const { transition, transitionTimeout, ...rest } = this.props;
       const { status } = this.state;
 
+      let content = null;
+
+      const key = (status === 'minimized') ? 'minimized' : 'shown';
+
       if (status === 'hidden') {
-        return <div />;
+        content = null;
+      } else {
+        content = (
+          <Wrapped
+            {...rest}
+            key={key}
+            loading={status === 'loading'}
+            error={status === 'error'}
+            success={status === 'success'}
+            minimized={status === 'minimized'}
+            onDismiss={() => this.dismiss()}
+            onSend={value => this.send(value)}
+            onRetry={() => this.retry()}
+            onShow={() => this.show()}
+          />
+        );
       }
 
+      if (!transition) {
+        return content;
+      }
+
+      // NOTE: we need to use CSSTransitionGroup here, otherwise the CSSTransitionGroup component
+      //       will be recreated on each render and animations wont work
+      //       (or i'm doing something wrong)
       return (
-        <Wrapped
-          {...this.props}
-          loading={status === 'loading'}
-          error={status === 'error'}
-          success={status === 'success'}
-          onDismiss={() => this.dismiss()}
-          onSend={value => this.send(value)}
-          onRetry={() => this.retry()}
-        />
+        <CSSTransitionGroup
+          transitionName={transition}
+          transitionAppear
+          transitionAppearTimeout={transitionTimeout}
+          transitionLeaveTimeout={transitionTimeout}
+          transitionEnterTimeout={transitionTimeout}
+        >
+          {content}
+        </CSSTransitionGroup>
       );
     }
   }
 
-  // FIXME: it's better to use static class properties in class def. above
-  //        however using them makes my eslint crazy, so i'll use this for a while
+  // FIXME: It's better to use static class properties in class def. above.
+  //        However using them makes my eslint crazy, so i'll use this for a while.
   BannerWrapper.defaultProps = {
     timeout: 3000,
+    transitionTimeout: 500,
     onDismiss: () => {},
   };
 

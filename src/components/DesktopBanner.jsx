@@ -99,7 +99,9 @@ export default class DesktopBanner extends Component {
       country,
       loading,
       error,
-      placement = 'bottom-right',
+      placement,
+      minimized,
+      onShow,
     } = this.props;
 
     let app = null;
@@ -110,10 +112,22 @@ export default class DesktopBanner extends Component {
       app = apple;
     }
 
-    const className = `${style.banner} ${style.banner__desktop} ${style[`position__${placement}`]}`;
+    const className = [
+      style.banner,
+      style[placement],
+      (minimized ? style.minimized : ''),
+    ].join(' ');
+
+    if (minimized) {
+      return (
+        <div className={className} onClick={onShow} role="presentation">
+          Show
+        </div>
+      );
+    }
 
     return (
-      <div id={style.AppBanner} className={className}>
+      <div className={className}>
         <div className={style.badge_container}>
           {(google && google.icon) ? <BadgeGoogle url={google.url} locale={locale} /> : null}
           {(apple && apple.icon) ? <BadgeApple url={apple.url} locale={locale} /> : null}

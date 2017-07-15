@@ -50,3 +50,27 @@ describe('MobileBanner', () => {
     expect(handler.calledOnce).to.eql(true);
   });
 });
+
+describe('MobileBanner minimized', () => {
+  const handler = spy();
+  const banner = mount(<MobileBanner minimized app={app} locale={locale} onDismiss={handler} />);
+
+  it('contains an icon and view btn', () => {
+    expect(banner.find('img')).to.have.length.of(1);
+    expect(banner.find('a')).to.have.length.of(1);
+  });
+
+  it('clicking on href will navigate browser', () => {
+    expect(banner.find('a').prop('href')).to.eql(app.url);
+  });
+
+  it('contains app info', () => {
+    expect(banner.find('a').find('img').prop('src')).to.eql(app.icon);
+    expect(banner.text()).to.contain(app.name);
+  });
+
+  it('contains locale data', () => {
+    expect(banner.text()).to.contain(locale.cta);
+    expect(banner.find('a').text()).to.contain(locale.view);
+  });
+});
