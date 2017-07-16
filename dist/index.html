@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html id="thehtml">
 <head>
-	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -16,7 +14,7 @@
       s.type = 'text/javascript';
       s.async = true;
       s.id = 'TheAppBanner';
-      s.src = '/main.js?n=1&m=' + minimize + '&p=' + placement + '&a=' + appleId + '&g=' + googleId;
+      s.src = '/main.js?text[ru]=Hello+world&n=1&m=' + minimize + '&p=' + placement + '&a=' + appleId + '&g=' + googleId;
       var x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
     })();
