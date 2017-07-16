@@ -310,6 +310,6 @@ export default class AppBanner extends Component {
 
 AppBanner.defaultProps = {
   placement: 'bottom-right',
-  minimize: 'no',
+  minimize: 'yes',
   noTrack: false,
 };
