@@ -22,6 +22,17 @@ function getQuery() {
 
 function main() {
   const q = getQuery();
+  const text = {};
+  // parse text[country-code] params
+  Object.keys(q).forEach((key) => {
+    const re = /^t(ext)?\[(..)\]$/.exec(key);
+
+    if (re) {
+      const id = re[2];
+      text[id] = q[key];
+    }
+  });
+
   if (q) {
     // shorthands for script parameters
     q.placement = q.placement || q.p;
@@ -29,6 +40,7 @@ function main() {
     q.apple = q.apple || q.a;
     q.google = q.google || q.g;
     q.noTrack = q.noTrack || q.n;
+    q.text = text;
 
     init(q);
   }

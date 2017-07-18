@@ -180,8 +180,8 @@ export default class AppBanner extends Component {
     const os = detectOs();
     this.os = os;
 
-    const lang = detectLang();
-    this.locale = getLocale(lang);
+    this.lang = detectLang();
+    this.locale = getLocale(this.lang);
 
     if (noTrack === false) {
       trackView();
@@ -242,8 +242,8 @@ export default class AppBanner extends Component {
 
   render() {
     const { app, country } = this.state;
-    const { os, locale, minimized, minimize } = this;
-    const { placement } = this.props;
+    const { os, locale, minimized, minimize, lang } = this;
+    const { placement, text } = this.props;
 
     const minimizeOnDesktop = (minimize === true);
     const minimizeOnMobile = (minimize === true) || (minimize === 'mobile');
@@ -260,6 +260,10 @@ export default class AppBanner extends Component {
     }
 
     if (os.desktop) {
+      if (text[lang]) {
+        locale.desktop_phone = text[lang];
+      }
+
       return (
         <Desktop
           google={app.google}
