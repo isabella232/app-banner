@@ -57,14 +57,14 @@ $system-fonts: -apple-system,
 
 .minimized {
   margin: 16px;
-  padding: 9px 0 0 0;
   cursor: pointer;
 
   background: white;
-  /* border: 1px solid #666; */
-  border-radius: 24px;
-  width: 48px;
-  height: 48px;
+  border-radius: 16px;
+  width: 32px;
+  height: 32px;
+  padding-top: 6px;
+
   box-shadow: 0px 1px 3px rgba(0,0,0,.25);
   text-align: center;
 
@@ -75,22 +75,25 @@ $system-fonts: -apple-system,
   > div {
     width: 50%;
     display: inline-block;
-    height: 32px;
-    padding-top: 6px;
+    height: 20px;
+    padding-top: 2px;
   }
 
   > div:first-child {
     border-right: 1px solid #ccc;
   }
 
-  &.single {
-    border-radius: 16px;
-    width: 32px;
-    height: 32px;
-    padding-top: 3px;
+  > div > img {
+    transform: scale(.7)
+  }
 
+  &.single {
     > div:first-child {
       border-right: none;
+    }
+
+    > div > img {
+      transform: scale(1)
     }
   }
 }
