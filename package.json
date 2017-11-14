@@ -1,6 +1,6 @@
 {
   "name": "app-banner",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A simple mobile application banner for you website",
   "scripts": {
     "test": "mocha --require test/setup.js test/*.test.js",
