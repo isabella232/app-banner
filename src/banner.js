@@ -6,6 +6,7 @@ import AppBanner from './components/AppBanner';
 
 function init(props) {
   const el = document.createElement('div');
+  el.setAttribute('id', 'ombori-app-banner');
   ReactDom.render(<AppBanner {...props} />, el);
   document.body.appendChild(el);
 }
